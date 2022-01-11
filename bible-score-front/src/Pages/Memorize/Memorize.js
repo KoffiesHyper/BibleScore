@@ -9,6 +9,7 @@ import { FaVolumeUp } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 import MemorizeStage1 from "../../Components/MemorizeStages/MemorizeStage1";
 import MemorizeStage2 from "../../Components/MemorizeStages/MemorizeStage2";
+import MemorizeStage3 from "../../Components/MemorizeStages/MemorizeStage3";
 import ProgressBar from "../../Components/MemorizeStages/ProgressBar";
 
 export default function Memorize({ s }) {
@@ -98,9 +99,7 @@ export default function Memorize({ s }) {
             return (
                 <div className="stage-container">
                     <ProgressBar barAnim='toRead' />
-                    <MemorizeStage1 nextStage={() => {
-                        setStage(2)
-                    }} barAnim={barAnim} text={text} setBarAnim={setBarAnim} />
+                    <MemorizeStage1 nextStage={() => setStage(2)} text={text} />
                 </div>
             );
             break;
@@ -108,7 +107,15 @@ export default function Memorize({ s }) {
             return (
                 <div className="stage-container">
                     <ProgressBar barAnim='toFill' />
-                    <MemorizeStage2 text={text} />
+                    <MemorizeStage2 nextStage={() => setStage(3)} text={text} />
+                </div>
+            );
+            break;
+        case 3:
+            return (
+                <div className="stage-container">
+                    <ProgressBar barAnim='toRewrite' />
+                    <MemorizeStage3 nextStage={() => setStage(3)} text={text} />
                 </div>
             );
             break;

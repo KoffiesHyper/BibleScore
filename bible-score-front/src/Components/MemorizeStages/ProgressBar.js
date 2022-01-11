@@ -20,6 +20,11 @@ export default function ProgressBar({ barAnim }) {
                     <p>o</p>
                     <p>o</p>
                 </div>
+                <div className="progress-label">
+                    <h3>Finish</h3>
+                    <p>o</p>
+                    <p>o</p>
+                </div>
             </div>
             <div className="progress-bar">
                 <div className="progress" style={{ animationName: barAnim }} ></div>

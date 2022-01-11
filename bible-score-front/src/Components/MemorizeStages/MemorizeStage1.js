@@ -34,7 +34,6 @@ export default function MemorizeStage1({ text, nextStage }) {
         <div className="memorize-container-inner">
             <div className="passage-info">
                 <h2>Step 1: Read the verse until memorized</h2>
-                <input className="default-btn" type="button" value="Next Stage" onClick={nextStage} />
                 <div className='speak-button' onClick={speakVerse}>
                     <IconContext.Provider value={{ color: "white", className: "global-class-name" }}>
                         <div>
@@ -42,6 +41,7 @@ export default function MemorizeStage1({ text, nextStage }) {
                         </div>
                     </IconContext.Provider>
                 </div>
+                <input className="default-btn" type="button" value="Next Stage" onClick={nextStage} />
             </div>
             <div className="passage-box">
                 <h2>{text.heading}</h2>

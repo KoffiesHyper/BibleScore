@@ -8,14 +8,17 @@
 .blank{
     font-size: 20px;
     outline: none;
-    border: 1px solid rgb(167, 167, 167);
     border-radius: 3px;
+    border: 1px solid var(--tertiary-color);
+    text-align: center;
 }
 
 .correct{
-    background-color: white;
+    background-color: rgba(145, 255, 130, 0.185);
+    border: 1px solid rgb(146, 255, 136);
 }
 
 .incorrect{
-    background-color: rgba(255, 0, 0, 0.575);
+    background-color: rgba(255, 130, 130, 0.185);
+    border: 1px solid rgb(255, 136, 136);
 }

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import './MemorizeStage2.css';
 import '../../App.css';
 
-export default function MemorizeStage2({ text }) {
+export default function MemorizeStage2({ text, nextStage }) {
     const [alteredText, setAlteredText] = useState([]);
     const [blankWords, setBlankWords] = useState([]);
     const [answers, setAnswers] = useState([]);
     const [colors, setColors] = useState([]);
+    const [answered, setAnswered] = useState(false);
 
     useEffect(() => {
         createBlanks();
@@ -49,11 +50,12 @@ export default function MemorizeStage2({ text }) {
         var tempAns = [];
 
         answers.forEach((e, i) => {
-            if(e === blankWords[i].word) tempAns.push(true)
+            if (e === blankWords[i].word) tempAns.push(true)
             else tempAns.push(false)
         });
 
         setColors(tempAns);
+        setAnswered(true);
     }
 
     var x = -1;
@@ -62,7 +64,8 @@ export default function MemorizeStage2({ text }) {
         <div className="memorize-container-inner">
             <div className="passage-info">
                 <h2>Step 2: Fill in the blanks</h2>
-                <input className="default-btn" defaultValue='Next Stage' type='button' onClick={markAnswers} />
+                <input className="black default-btn" defaultValue='Mark' type='button' onClick={markAnswers} />
+                <input className="default-btn" defaultValue='Next Stage' type='button' onClick={nextStage} />
             </div>
             <div className="passage-box">
                 <h2>{text.heading}</h2>
@@ -72,21 +75,38 @@ export default function MemorizeStage2({ text }) {
                         else {
                             x++;
 
-                            return (
-                                <>
-                                    {e}
-                                    <input
-                                        className={colors[x] ? 'blank correct' : 'blank incorrect'}
-                                        type='text'
-                                        style={{ 'width': blankWords[x].word.length * 13 }}
-                                        onChange={(event) => {
-                                            var array = answers;
-                                            array[i] = event.target.value;
-                                            setAnswers(array);
-                                        }}
-                                    />
-                                </>
-                            )
+                            if (answered)
+                                return (
+                                    <>
+                                        {e}
+                                        <input
+                                            className={colors[x] ? 'blank correct' : 'blank incorrect'}
+                                            type='text'
+                                            style={{ 'width': blankWords[x].word.length * 13 }}
+                                            onChange={(event) => {
+                                                var array = answers;
+                                                array[i] = event.target.value;
+                                                setAnswers(array);
+                                            }}
+                                        />
+                                    </>
+                                );
+                            else
+                                return (
+                                    <>
+                                        {e}
+                                        <input
+                                            className={'blank'}
+                                            type='text'
+                                            style={{ 'width': blankWords[x].word.length * 13 }}
+                                            onChange={(event) => {
+                                                var array = answers;
+                                                array[i] = event.target.value;
+                                                setAnswers(array);
+                                            }}
+                                        />
+                                    </>
+                                )
                         }
                     })
                 }

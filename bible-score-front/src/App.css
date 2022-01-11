@@ -102,3 +102,7 @@ body{
   src: url('./Fonts/Quicksand-Bold.ttf') format('truetype');
 }
 
+.black{
+  background-color: black;
+}
+
