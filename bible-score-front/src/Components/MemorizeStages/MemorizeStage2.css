@@ -7,4 +7,15 @@
 
 .blank{
     font-size: 20px;
+    outline: none;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 3px;
+}
+
+.correct{
+    background-color: white;
+}
+
+.incorrect{
+    background-color: rgba(255, 0, 0, 0.575);
 }

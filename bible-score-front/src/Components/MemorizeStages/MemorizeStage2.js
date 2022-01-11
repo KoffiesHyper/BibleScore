@@ -5,10 +5,16 @@ import '../../App.css';
 export default function MemorizeStage2({ text }) {
     const [alteredText, setAlteredText] = useState([]);
     const [blankWords, setBlankWords] = useState([]);
+    const [answers, setAnswers] = useState([]);
+    const [colors, setColors] = useState([]);
 
     useEffect(() => {
         createBlanks();
     }, []);
+
+    useEffect(() => {
+        answers.length = blankWords.length;
+    }, [blankWords]);
 
     const createBlanks = () => {
         var words = text.content.split(" ");
@@ -36,12 +42,27 @@ export default function MemorizeStage2({ text }) {
         setAlteredText(parts);
     }
 
+    const markAnswers = () => {
+        console.log(answers);
+        console.log(blankWords);
+
+        var tempAns = [];
+
+        answers.forEach((e, i) => {
+            if(e === blankWords[i].word) tempAns.push(true)
+            else tempAns.push(false)
+        });
+
+        setColors(tempAns);
+    }
+
     var x = -1;
 
     return (
         <div className="memorize-container-inner">
             <div className="passage-info">
                 <h2>Step 2: Fill in the blanks</h2>
+                <input className="default-btn" defaultValue='Next Stage' type='button' onClick={markAnswers} />
             </div>
             <div className="passage-box">
                 <h2>{text.heading}</h2>
@@ -50,10 +71,20 @@ export default function MemorizeStage2({ text }) {
                         if (i === alteredText.length - 1) return <>{e}</>
                         else {
                             x++;
+
                             return (
                                 <>
                                     {e}
-                                    <input className="blank" type='text' style={{ 'width': blankWords[x].word.length * 13 }} />
+                                    <input
+                                        className={colors[x] ? 'blank correct' : 'blank incorrect'}
+                                        type='text'
+                                        style={{ 'width': blankWords[x].word.length * 13 }}
+                                        onChange={(event) => {
+                                            var array = answers;
+                                            array[i] = event.target.value;
+                                            setAnswers(array);
+                                        }}
+                                    />
                                 </>
                             )
                         }

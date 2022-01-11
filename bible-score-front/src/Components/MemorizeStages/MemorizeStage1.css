@@ -70,3 +70,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
 }
+
+.passage-box input[type = text]{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
