@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './Dashboard.css';
 import ListItems from '../../Components/ListItems/ListItems';
 
@@ -12,7 +12,7 @@ export default function Dashboard() {
     const [toggleHome, setToggleHome] = useState(false);
     const [pickedSort, setPickedSort] = useState('date');
 
-    const navigate = useNavigate();
+    const navigate = useHistory();
 
     useEffect(() => {
         var array = items;
@@ -109,7 +109,7 @@ export default function Dashboard() {
         );
     }
     else if (toggleHome === true) {
-        navigate('/');
+        navigate.push('/');
     }
 
 }

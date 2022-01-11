@@ -13,7 +13,7 @@ import NavBar from './Components/NavBar/NavBar';
 
 function App() {
   return (
-      <Routes>
+      <Router>
         <Route exact path='/' render={() => {
           return (
             <div>
@@ -68,7 +68,7 @@ function App() {
             </div>
           );
         }} />
-      </Routes>
+      </Router>
   );
 }
 

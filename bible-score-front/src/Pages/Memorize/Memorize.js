@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import './Memorize.css';
 import '../../App.css'
 import Options from "../../Components/Options/Options";
@@ -22,7 +22,7 @@ export default function Memorize({ s }) {
     const [text, setText] = useState({});
     const [barAnim, setBarAnim] = useState('toRead');
 
-    const navigate = useNavigate();
+    const navigate = useHistory();
 
     const { value } = useParams();
 
@@ -87,7 +87,7 @@ export default function Memorize({ s }) {
                                 <Options array={verseOptions} />
                             </select>
                             <input className="default-btn" type="button" value="Proceed" onClick={async () => {
-                                navigate(`/memorize/${book}.${chapter}.${verse}`);
+                                navigate.push(`/memorize/${book}.${chapter}.${verse}`);
                             }} />
                         </div>
                     </div>
