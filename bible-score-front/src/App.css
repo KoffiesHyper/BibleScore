@@ -1,0 +1,104 @@
+:root{
+  --primary-color : #fffefa;
+  --secondary-color : #e7e4d8;
+  --tertiary-color : #6b482b;
+}
+
+body{
+  background-color: #fffefa;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.default-btn{
+  font-family: custom2;
+  font-weight: lighter;
+  background-color: var(--tertiary-color);
+  color: white;
+  font-weight: lighter;
+  padding: 12px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.default-btn:hover{
+  animation-name: btnHover;
+  animation-duration: .25s;
+  animation-iteration-count: 1;
+}
+
+@keyframes btnHover {
+  0%   {transform: scale(1)}
+  25%  {transform: scale(1.1)}
+  50%  {transform: scale(.9)}
+  100% {transform: scale(1)}
+}
+
+.default-select{
+  font-size: 20px;
+  font-family: custom2;
+  font-weight: lighter;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--tertiary-color);
+  background-color: var(--secondary-color);
+  color: black;
+  width: 150px;
+}
+
+@font-face {
+  font-family: 'custom1';
+  src: url('./Fonts/Quicksand-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'custom2';
+  src: url('./Fonts/Quicksand-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'custom3';
+  src: url('./Fonts/Quicksand-Bold.ttf') format('truetype');
+}
+
