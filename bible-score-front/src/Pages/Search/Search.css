@@ -1,9 +1,11 @@
 .results-container{
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(95vh, auto);
     justify-items: center;
 }
 
 .results-container h1{
     color: black;
+    text-align: center;
 }

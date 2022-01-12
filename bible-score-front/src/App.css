@@ -115,7 +115,11 @@ body{
   width: 150px;
 }
 
-
+.default-label{
+  font-size: 20px;
+  font-family: custom1;
+  font-weight: lighter;
+}
 
 .black{
   background-color: black;

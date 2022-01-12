@@ -9,7 +9,7 @@ body{
     height: auto;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 100px 10fr;
+    grid-template-rows: 100px minmax(100vh, auto);
     justify-items: center;
     align-items: flex-start;
 }

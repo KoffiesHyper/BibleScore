@@ -16,12 +16,14 @@ export default function Search() {
 
     return (
         <div className="results-container">
-            <h1>{`Results for '${keyword}'`}</h1>
-            {
-                results.map((e, i) => {
-                    return <SearchResultItem key={i} result={e} />
-                })
-            }
+            <div>
+                <h1>{`Results for '${keyword}'`}</h1>
+                {
+                    results.map((e, i) => {
+                        return <SearchResultItem key={i} result={e} />
+                    })
+                }
+            </div>
         </div>
     );
 }

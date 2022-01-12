@@ -10,6 +10,7 @@ import Read from './Pages/Read/Read';
 import Memorize from './Pages/Memorize/Memorize';
 import NavBar from './Components/NavBar/NavBar';
 import Search from './Pages/Search/Search';
+import Login from './Pages/Login/Login';
 
 function App() {
   return (
@@ -52,6 +53,14 @@ function App() {
         return (
           <div>
             <Register />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/login'} render={() => {
+        return (
+          <div>
+            <Login />
           </div>
         );
       }} />

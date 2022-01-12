@@ -16,7 +16,8 @@ export default function Read() {
     const [heading, setHeading] = useState('Genesis 1');
     const [columns, setColumns] = useState(1);
     const [passage, setPassage] = useState('');
-    const [underline, setUnderline] = useState(false)
+    const [underline, setUnderline] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
         updateBookOptions();

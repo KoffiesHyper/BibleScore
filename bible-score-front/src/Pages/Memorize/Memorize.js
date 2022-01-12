@@ -74,7 +74,7 @@ export default function Memorize({ s }) {
 
                     <div className="verse-container-outer">
                         <div className="verse-container-inner">
-                            <h2>Choose a verse</h2>
+                            <h2 className="default-label">Choose a verse</h2>
                             <h3>Book</h3>
                             <select className="default-select" onChange={(event) => setBook(event.target.value)}>
                                 <Options array={bookOptions} />
