@@ -1,27 +1,29 @@
-import { useHistory, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './NavBar.css';
 import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 
 export default function NavBar() {
-    const navigate = useHistory();
-    const { value } = useParams();
+    const [searchInput, setSearchInput] = useState('');
 
     return (
         <div>
             <div className='top-bar'>
                 <div className="top-buttons">
-                    <button onClick={() => navigate.push('/')}>Home</button>
-                    <button onClick={() => navigate.push('/memorize')}>Memorize</button>
-                    <button onClick={() => navigate.push('/dashboard')}>Dashboard</button>
-                    <button>Sign In</button>
-                    <button onClick={() => navigate.push('/register')}>Register</button>
-                    <button onClick={() => navigate.push('/read')}>Read</button>
+                    <Link to='/' ><button>Home</button></Link>
+                    <Link to='/memorize' ><button>Memorize</button></Link>
+                    <Link to='/dashboard' ><button>Dashboard</button></Link>
+                    <Link to='/' ><button>Sign In</button></Link>
+                    <Link to='/register' ><button>Register</button></Link>
+                    <Link to='/read' ><button>Read</button></Link>
                 </div>
                 <div className="top-search">
-                    <input type='text' placeholder="Search"></input>
-                    <div className="search-button">
-                        <FaSearch size='15px' />
-                    </div>
+                    <input type='text' placeholder="Search" onChange={(event) => setSearchInput(event.target.value)}></input>
+                    <Link to={`/search/${searchInput}`}>
+                        <div className="search-button">
+                            <FaSearch size='15px' />
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>
