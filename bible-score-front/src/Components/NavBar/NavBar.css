@@ -22,9 +22,7 @@
 }
 
 .top-bar button:hover{
-    padding-left: 30px;
-    padding-right: 30px;
-    background-color: #5a391d;
+    color: grey;
     transition-duration: .1s;
 }
 

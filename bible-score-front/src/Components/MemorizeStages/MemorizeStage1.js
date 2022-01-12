@@ -5,7 +5,6 @@ import { FaVolumeUp } from "react-icons/fa";
 import '../../App.css';
 
 export default function MemorizeStage1({ text, nextStage }) {
-
     const getVoices = () => {
         return new Promise(
             function (resolve, reject) {

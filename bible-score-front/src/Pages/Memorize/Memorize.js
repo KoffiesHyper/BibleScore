@@ -66,7 +66,7 @@ export default function Memorize({ s }) {
     switch (stage) {
         case 0:
             return (
-                <div>
+                <div className="memorize-form-container">
                     <div className="heading-container">
                         <h1>Scripture Memorization</h1>
                         <h2>An intuative tool to effectively memorize scripture</h2>

@@ -107,6 +107,16 @@ export default class PassageFinder {
         };
     }
 
+    async getKeywordSearch(keyWord) {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/search?query=${keyWord}`, {
+            headers: {
+                'api-key': '4a15a65d498a67ef42058d8428b6f985'
+            }
+        });
+
+        return data.data.data.verses;
+    }
+
     changeVerseNumbers(text) {
         let sup = [
             "⁰",

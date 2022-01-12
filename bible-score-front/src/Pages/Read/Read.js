@@ -15,7 +15,8 @@ export default function Read() {
     const [verseOptions, setVerseOptions] = useState(['All']);
     const [heading, setHeading] = useState('Genesis 1');
     const [columns, setColumns] = useState(1);
-    const [passage, setPassage] = useState('')
+    const [passage, setPassage] = useState('');
+    const [underline, setUnderline] = useState(false)
 
     useEffect(async () => {
         updateBookOptions();
@@ -121,7 +122,7 @@ export default function Read() {
                 </div>
                 <div className='text-container' style={{ 'width': '25vw' }}>
                     <h1>{heading}</h1>
-                    <p>{passage}</p>
+                    <span onClick={() => setUnderline(!underline)}><p style={{textDecoration: underline ? 'underline' : 'none'}}>{passage}</p></span>
                 </div>
             </div>
         );

@@ -1,3 +1,29 @@
+@font-face {
+  font-family: 'custom1';
+  src: url('./Fonts/Quicksand-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'custom2';
+  src: url('./Fonts/Quicksand-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'custom3';
+  src: url('./Fonts/Quicksand-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'bible1';
+  src: url('./Fonts/OldStandardTT-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'bible2';
+  src: url('./Fonts/OldStandardTT-Bold.ttf') format('truetype');
+}
+
+
 :root{
   --primary-color : #fffefa;
   --secondary-color : #e7e4d8;
@@ -5,7 +31,9 @@
 }
 
 body{
-  background-color: #fffefa;
+  background-image: linear-gradient(to bottom right, var(--secondary-color), var(--tertiary-color));
+  background-repeat: space;
+  height: auto;
 }
 
 .App {
@@ -87,20 +115,7 @@ body{
   width: 150px;
 }
 
-@font-face {
-  font-family: 'custom1';
-  src: url('./Fonts/Quicksand-Light.ttf') format('truetype');
-}
 
-@font-face {
-  font-family: 'custom2';
-  src: url('./Fonts/Quicksand-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'custom3';
-  src: url('./Fonts/Quicksand-Bold.ttf') format('truetype');
-}
 
 .black{
   background-color: black;

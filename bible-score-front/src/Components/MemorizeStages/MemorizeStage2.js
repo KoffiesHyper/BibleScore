@@ -6,12 +6,17 @@ export default function MemorizeStage2({ text, nextStage }) {
     const [alteredText, setAlteredText] = useState([]);
     const [blankWords, setBlankWords] = useState([]);
     const [answers, setAnswers] = useState([]);
-    const [colors, setColors] = useState([]);
+    const [results, setResults] = useState([]);
     const [answered, setAnswered] = useState(false);
+    const [rawText, setRawText] = useState('');
 
     useEffect(() => {
         createBlanks();
     }, []);
+
+    useEffect(() => {
+        console.log(rawText)
+    }, [rawText]);
 
     useEffect(() => {
         answers.length = blankWords.length;
@@ -41,6 +46,14 @@ export default function MemorizeStage2({ text, nextStage }) {
 
         const parts = words.join(' ').split('*');
         setAlteredText(parts);
+
+        var temp = text.content.split('');
+        temp.forEach((e, i) => {
+            if (e.toLowerCase() != e.toUpperCase() || e === ' ') return
+            temp[i] = '';
+        });
+        temp = temp.join('');
+        setRawText(temp);
     }
 
     const markAnswers = () => {
@@ -54,7 +67,7 @@ export default function MemorizeStage2({ text, nextStage }) {
             else tempAns.push(false)
         });
 
-        setColors(tempAns);
+        setResults(tempAns);
         setAnswered(true);
     }
 
@@ -71,16 +84,16 @@ export default function MemorizeStage2({ text, nextStage }) {
                 <h2>{text.heading}</h2>
                 {
                     alteredText.map((e, i) => {
-                        if (i === alteredText.length - 1) return <>{e}</>
+                        if (i === alteredText.length - 1) return <span key={i}>{e}</span>
                         else {
                             x++;
 
                             if (answered)
                                 return (
-                                    <>
+                                    <span key={i}>
                                         {e}
                                         <input
-                                            className={colors[x] ? 'blank correct' : 'blank incorrect'}
+                                            className={results[x] ? 'blank correct' : 'blank incorrect'}
                                             type='text'
                                             style={{ 'width': blankWords[x].word.length * 13 }}
                                             onChange={(event) => {
@@ -89,11 +102,11 @@ export default function MemorizeStage2({ text, nextStage }) {
                                                 setAnswers(array);
                                             }}
                                         />
-                                    </>
+                                    </span>
                                 );
                             else
                                 return (
-                                    <>
+                                    <span key={i}>
                                         {e}
                                         <input
                                             className={'blank'}
@@ -105,7 +118,7 @@ export default function MemorizeStage2({ text, nextStage }) {
                                                 setAnswers(array);
                                             }}
                                         />
-                                    </>
+                                    </span>
                                 )
                         }
                     })

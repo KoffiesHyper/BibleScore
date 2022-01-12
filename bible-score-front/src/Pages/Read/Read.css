@@ -1,14 +1,15 @@
 body{
     overflow-y: scroll;
     overflow-x: hidden;
+    height: auto;
 }
 
 .outer-container{
     width: 100vw;
-    height: 90vh;
+    height: auto;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 100px 10fr;
     justify-items: center;
     align-items: flex-start;
 }
@@ -61,17 +62,15 @@ body{
 }
 
 .text-container p{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: lighter;
+    font-family: bible1;
     color: black;
 }
 
 .text-container h1{
-    font-weight: normal;
+    font-family: bible2;
     text-align: center;
     color: rgb(0, 0, 0);
     font-size: 40px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .text-columns{

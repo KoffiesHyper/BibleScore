@@ -27,18 +27,18 @@
 }
 
 @keyframes toRead {
-    0%   {width: 0px}
-    100% {width: 5px}
+    0%   {width: 0%}
+    100% {width: 2%}
 }
 
 @keyframes toFill {
-    0%   {width: 5px}
-    100% {width: 385px}
+    0%   {width: 2%}
+    100% {width: 33%}
 }
 
 @keyframes toRewrite {
-    0%   {width: 385px}
-    100% {width: 775px}
+    0%   {width: 33%}
+    100% {width: 66%}
 }
 
 
