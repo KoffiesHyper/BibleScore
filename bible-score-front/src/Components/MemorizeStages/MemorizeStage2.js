@@ -8,31 +8,36 @@ export default function MemorizeStage2({ text, nextStage }) {
     const [answers, setAnswers] = useState([]);
     const [results, setResults] = useState([]);
     const [answered, setAnswered] = useState(false);
-    const [rawText, setRawText] = useState('');
 
     useEffect(() => {
         createBlanks();
     }, []);
 
     useEffect(() => {
-        console.log(rawText)
-    }, [rawText]);
-
-    useEffect(() => {
         answers.length = blankWords.length;
     }, [blankWords]);
 
     const createBlanks = () => {
-        var words = text.content.split(" ");
+        var words = text.content.split(/([^a-zA-Z0-9])/);
         words.pop();
 
-        const numGaps = Math.floor(words.length / 5);
+        var wordCount = 0;
+
+        words.forEach((e) => {
+            if (e.length > 1) {
+                wordCount += 1;
+            }
+        })
+
+        const numGaps = Math.floor(wordCount / 5);
         const blanks = [];
 
         for (let i = 0; i < numGaps; i++) {
             const random = Math.floor(Math.random() * ((words.length - 1) - 0) + 0);
 
             if (blanks.includes(words[random]) || words[random] === '*') i--
+            else if (words[random].length <= 1) i--
+            else if ((words[random][0]).match(/[^a-zA-Z]/)) i--
             else {
                 blanks.push({ index: random, word: words[random] });
                 words[random] = '*';
@@ -46,26 +51,15 @@ export default function MemorizeStage2({ text, nextStage }) {
 
         const parts = words.join(' ').split('*');
         setAlteredText(parts);
-
-        var temp = text.content.split('');
-        temp.forEach((e, i) => {
-            if (e.toLowerCase() != e.toUpperCase() || e === ' ') return
-            temp[i] = '';
-        });
-        temp = temp.join('');
-        setRawText(temp);
     }
 
     const markAnswers = () => {
-        console.log(answers);
-        console.log(blankWords);
-
         var tempAns = [];
 
-        answers.forEach((e, i) => {
-            if (e === blankWords[i].word) tempAns.push(true)
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === blankWords[i].word) tempAns.push(true)
             else tempAns.push(false)
-        });
+        }
 
         setResults(tempAns);
         setAnswered(true);
