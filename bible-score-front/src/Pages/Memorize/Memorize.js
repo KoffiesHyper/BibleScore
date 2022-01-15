@@ -115,10 +115,18 @@ export default function Memorize({ s }) {
             return (
                 <div className="stage-container">
                     <ProgressBar barAnim='toRewrite' />
-                    <MemorizeStage3 nextStage={() => setStage(3)} text={text} />
+                    <MemorizeStage3 nextStage={() => setStage(4)} text={text} />
                 </div>
             );
             break;
+            case 4:
+                return (
+                    <div className="stage-container">
+                        <ProgressBar barAnim='toFinish' />
+                        <h1>{`${text.heading} - Finished`}</h1>
+                    </div>
+                );
+                break;
         default:
     }
 }

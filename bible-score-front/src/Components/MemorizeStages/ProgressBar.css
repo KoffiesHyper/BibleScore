@@ -41,6 +41,10 @@
     100% {width: 66%}
 }
 
+@keyframes toFinish {
+    0%   {width: 66%}
+    100% {width: 100%}
+}
 
 .progress-labels{
     display: flex;

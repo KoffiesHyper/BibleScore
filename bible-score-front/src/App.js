@@ -1,7 +1,7 @@
 import './App.css';
 import {
   BrowserRouter as Router,
-  Route,
+  Route
 } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage';
 import Dashboard from './Pages/Dashboard/Dashboard';
@@ -12,7 +12,7 @@ import NavBar from './Components/NavBar/NavBar';
 import Search from './Pages/Search/Search';
 import Login from './Pages/Login/Login';
 
-function App() {
+function App() {  
   return (
     <Router>
       <NavBar />
