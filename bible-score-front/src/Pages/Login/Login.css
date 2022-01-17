@@ -7,7 +7,7 @@
 }
 
 .inner-container{
-    background-color: var(--secondary-color);
+    background-color: white;
     width: 600px;
     height: auto;
     border-radius: 3px;

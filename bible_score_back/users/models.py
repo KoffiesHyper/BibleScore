@@ -1,3 +1,4 @@
+from email.policy import default
 from multiprocessing.sharedctypes import Value
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
@@ -35,7 +36,7 @@ class CustomUser(AbstractUser):
 
     objects = UserManager()
 
-    REQUIRED_FIELDS = ['email', 'date_of_birth']
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.email
