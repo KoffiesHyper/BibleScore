@@ -8,7 +8,7 @@ export default class PassageFinder {
     }
 
     async getBooks() {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/books`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/books`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
@@ -26,7 +26,7 @@ export default class PassageFinder {
     }
 
     async getChapters() {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/books/${this.book}/chapters`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/books/${this.book}/chapters`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
@@ -53,7 +53,7 @@ export default class PassageFinder {
             name: 'All'
         };
 
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/chapters/${this.book}.${this.chapter}`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/chapters/${this.book}.${this.chapter}`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
@@ -72,7 +72,7 @@ export default class PassageFinder {
     }
 
     async getChapter() {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/06125adad2d5898a-01/chapters/${this.book}.${this.chapter}`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/chapters/${this.book}.${this.chapter}`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
@@ -90,7 +90,7 @@ export default class PassageFinder {
     }
 
     async getVerse() {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/verses/${this.book}.${this.chapter}.${this.verse}`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/verses/${this.book}.${this.chapter}.${this.verse}`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
@@ -108,7 +108,7 @@ export default class PassageFinder {
     }
 
     async getKeywordSearch(keyWord) {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-01/search?query=${keyWord}`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/search?query=${keyWord}`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }

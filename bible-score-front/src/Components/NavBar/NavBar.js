@@ -4,14 +4,8 @@ import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons/lib";
 
-export default function NavBar({ user }) {
+export default function NavBar({ user, signedIn }) {
     const [searchInput, setSearchInput] = useState('');
-    const [signedIn, setSignedIn] = useState(false);
-    const [username, setUsername] = useState(user.username);
-
-    useEffect(() => {
-        if (user.username) setSignedIn(true)
-    }, [username])
 
     return (
         <div>
