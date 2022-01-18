@@ -11,11 +11,14 @@ import Memorize from './Pages/Memorize/Memorize';
 import NavBar from './Components/NavBar/NavBar';
 import Search from './Pages/Search/Search';
 import Login from './Pages/Login/Login';
+import { useState } from 'react';
 
 function App() {  
+  const [user, setUser] = useState({});
+
   return (
     <Router>
-      <NavBar />
+      <NavBar user={user} />
       <Route exact path='/' render={() => {
         return (
           <div>
@@ -52,7 +55,7 @@ function App() {
       <Route exact path={'/register'} render={() => {
         return (
           <div>
-            <Register />
+            <Register updateUser={setUser} />
           </div>
         );
       }} />
