@@ -58,7 +58,7 @@ export default function NavBar({ user, signedIn }) {
                         </div>
                     </div>
                     <div className="top-right">
-                        <Link to='/login' ><button>{`Hi, ${user.username}`}</button></Link>
+                        <Link to='/login' ><button>{`Hi, ${user.first_name}`}</button></Link>
                         <Link to='/register' ><button>Logout</button></Link>
                     </div>
                 </div>

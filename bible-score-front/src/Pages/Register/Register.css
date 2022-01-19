@@ -29,3 +29,22 @@
     font-size: 18px;
     font-family: custom1;
 }
+
+.input-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: flex-start;
+    align-items: center;
+}
+
+.input-container h2{
+    align-self: flex-end;
+    margin-bottom: 5px;
+}
+
+.input-container input{
+    align-self: flex-start;
+    justify-self: center;
+    width: 200px;
+}

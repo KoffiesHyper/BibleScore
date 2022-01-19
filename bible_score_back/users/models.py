@@ -1,3 +1,4 @@
+import email
 from email.policy import default
 from multiprocessing.sharedctypes import Value
 from django.db import models
@@ -35,3 +36,7 @@ class UserManager(UserManager):
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True)
     objects = UserManager()
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []

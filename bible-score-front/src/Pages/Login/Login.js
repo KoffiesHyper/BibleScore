@@ -1,19 +1,17 @@
 import './Login.css';
 import '../../App.css';
 import { useState } from 'react';
+import JWTManager from '../../Components/JWT/JWT';
 
 export default function Login() {
-    const [name, setName] = useState();
-    const [surname, setSurname] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    const changeEmail = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const changePassword = (event) => {
-        setPassword(event.target.value);
+    const loginUser = async () => {
+        const manager = new JWTManager;
+        const pair = await manager.obtainPair(email, password);
+        localStorage.setItem('accessToken', pair.data.access);
+        localStorage.setItem('refreshToken', pair.data.refresh);
     }
 
     return (
@@ -22,17 +20,17 @@ export default function Login() {
                 <h1 className='default-label'>Login</h1>
                 <div className='input-container'>
                     <h2 className='default-label'>Email</h2>
-                    <input onChange={(e) => {
-                        changeEmail(e);
+                    <input placeholder='Enter Your Email' onChange={(event) => {
+                        setEmail(event.target.value);
                     }} />
                 </div>
                 <div className='input-container'>
                     <h2 className='default-label'>Password</h2>
-                    <input onChange={(e) => {
-                        changePassword(e);
+                    <input placeholder='Enter Your Password' onChange={(event) => {
+                        setPassword(event.target.value);
                     }} />
                 </div>
-                <button className='default-btn'>Enter</button>
+                <button className='default-btn' onClick={loginUser}>Enter</button>
             </div>
         </div>
     );
