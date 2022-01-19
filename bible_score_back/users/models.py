@@ -1,42 +1,37 @@
 from email.policy import default
 from multiprocessing.sharedctypes import Value
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractUser, UserManager, PermissionsMixin
 
 # Create your models here.
 
-class UserManager(BaseUserManager):
+class UserManager(UserManager):
 
-    def create_user(self, email, password, **extra_fields):
-        
+    def create_user(self, **user_fields):
+        email = user_fields.get('email')
+
         if not email:
             raise ValueError('Email is required')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, password=password, **extra_fields)
-        # user.set_password(password)
+        user = self.model(email=email, **user_fields)
+        user.set_password(user.password)
         user.save()
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, **user_fields):
 
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
+        user_fields.setdefault('is_staff', True)
+        user_fields.setdefault('is_superuser', True)
+        user_fields.setdefault('is_active', True)
 
-        if extra_fields.get('is_staff') is not True:
+        if user_fields.get('is_staff') is not True:
             raise ValueError('Value is_staff must be True for a superuser')
-        if extra_fields.get('is_superuser') is not True:
+        if user_fields.get('is_superuser') is not True:
             raise ValueError('Value is_superuser must be True for a superuser')
 
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(**user_fields) 
 
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True)
-
     objects = UserManager()
-
-    REQUIRED_FIELDS = ['email']
-
-    def __str__(self):
-        return self.email
