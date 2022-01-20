@@ -12,10 +12,30 @@ import NavBar from './Components/NavBar/NavBar';
 import Search from './Pages/Search/Search';
 import Login from './Pages/Login/Login';
 import { useEffect, useState } from 'react';
+import JWTManager from './Components/JWT/JWT';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
-function App() {  
-  const [user, setUser] = useState({});
+function App() {
+  const [user, setUser] = useState(null);
   const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(async () => {
+    const manager = new JWTManager()
+    const valid = await manager.testPair();
+    if (valid) {
+      setSignedIn(true)
+    }
+  }, [])
+
+  useEffect(async () => {
+    if (signedIn) {
+      const id = jwt_decode(localStorage.getItem('accessToken')).user_id;
+
+      const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
+      setUser(user.data)
+    }
+  }, [signedIn])
 
   return (
     <Router>
@@ -56,10 +76,7 @@ function App() {
       <Route exact path={'/register'} render={() => {
         return (
           <div>
-            <Register updateUser={(user) => {
-              setUser(user);
-              setSignedIn(true);
-            }} />
+            <Register updateSignedIn={ (b) => setSignedIn(b) } />
           </div>
         );
       }} />
@@ -67,7 +84,7 @@ function App() {
       <Route exact path={'/login'} render={() => {
         return (
           <div>
-            <Login />
+            <Login updateSignedIn={ (b) => setSignedIn(b) } />
           </div>
         );
       }} />

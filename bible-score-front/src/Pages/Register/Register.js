@@ -3,8 +3,9 @@ import '../../App.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import JWTManager from '../../Components/JWT/JWT';
 
-export default function Register({ updateUser }) {
+export default function Register({ updateSignedIn }) {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [firstName, setFirstName] = useState();
@@ -31,8 +32,15 @@ export default function Register({ updateUser }) {
             }
         )
 
-        updateUser(user.data);
-        navigate.push('/');
+        if (user.data.email.length > 1) {
+            const manager = new JWTManager();
+            const pair = await manager.obtainPair(email, password);
+            console.log(pair)
+            localStorage.setItem('accessToken', pair.data.access);
+            localStorage.setItem('refreshToken', pair.data.refresh);
+            updateSignedIn(true);
+            navigate.push('/');
+        }
     }
 
     return (
