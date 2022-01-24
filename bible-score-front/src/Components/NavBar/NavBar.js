@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons/lib";
 
-export default function NavBar({ user, signedIn }) {
+export default function NavBar({ user, signedIn, logOut }) {
     const [searchInput, setSearchInput] = useState('');
 
     return (
@@ -58,8 +58,8 @@ export default function NavBar({ user, signedIn }) {
                         </div>
                     </div>
                     <div className="top-right">
-                        <Link to='/login' ><button>{`Hi, ${user ? user.first_name : ''}`}</button></Link>
-                        <Link to='/register' ><button>Logout</button></Link>
+                        <button>{`Hi, ${user ? user.first_name : ''}`}</button>
+                        <button onClick={logOut}>Logout</button>
                     </div>
                 </div>
             </div>}

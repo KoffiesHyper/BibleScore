@@ -39,7 +39,11 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} signedIn={signedIn} />
+      <NavBar user={user} signedIn={signedIn} logOut={ () => {
+              setUser('');
+              setSignedIn(false);
+              localStorage.clear();
+            } } />
       <Route exact path='/' render={() => {
         return (
           <div>
@@ -84,7 +88,9 @@ function App() {
       <Route exact path={'/login'} render={() => {
         return (
           <div>
-            <Login updateSignedIn={ (b) => setSignedIn(b) } />
+            <Login 
+            updateSignedIn={ (b) => setSignedIn(b) } 
+            />
           </div>
         );
       }} />

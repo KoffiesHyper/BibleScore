@@ -11,8 +11,14 @@ export default class JWTManager {
             })
 
             return true;
-        } catch (err) {
-            return false;
+        } catch {
+            try {
+                const newAccessToken = await this.refresh();
+                localStorage.setItem('accessToken', newAccessToken);
+                return true;
+            } catch {
+                return false;
+            }
         }
     }
 
@@ -31,6 +37,15 @@ export default class JWTManager {
     }
 
     async refresh() {
+        const newAccessToken = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/refresh`, JSON.stringify({
+            refresh: localStorage.getItem('refreshToken')
+        }),
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
 
+        return newAccessToken;
     }
 }
