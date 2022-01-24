@@ -27,7 +27,8 @@ export default function Register({ updateSignedIn }) {
             }),
             {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
                 }
             }
         )

@@ -32,7 +32,11 @@ function App() {
     if (signedIn) {
       const id = jwt_decode(localStorage.getItem('accessToken')).user_id;
 
-      const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`)
+      const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, {
+        headers:{
+          'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+        }
+      })
       setUser(user.data)
     }
   }, [signedIn])

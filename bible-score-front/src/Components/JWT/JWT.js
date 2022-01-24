@@ -6,7 +6,8 @@ export default class JWTManager {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/users/test-pair', {
                 headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
                 }
             })
 
@@ -29,7 +30,8 @@ export default class JWTManager {
         }),
             {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
                 }
             })
 
@@ -42,10 +44,11 @@ export default class JWTManager {
         }),
             {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
                 }
             })
 
-        return newAccessToken;
+        return newAccessToken.data.access;
     }
 }

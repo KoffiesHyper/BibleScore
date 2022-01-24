@@ -8,7 +8,7 @@ export default function NavBar({ user, signedIn, logOut }) {
     const [searchInput, setSearchInput] = useState('');
 
     return (
-        <div>
+        <div className="navbar">
             {!signedIn &&  
             <div>
                 <div className='top-bar'>

@@ -144,4 +144,37 @@ export default class PassageFinder {
 
         return tempPassage;
     }
+
+    splitPassageByVerse(text) {
+        let sup = [
+            "⁰",
+            "¹",
+            "²",
+            "³",
+            "⁴",
+            "⁵",
+            "⁶",
+            "⁷",
+            "⁸",
+            "⁹"
+        ];
+
+        var tempPassage = text;
+        var verses = [];
+        var pastVerseNum = false;
+        var startIndex = 0;
+
+        tempPassage.split('').forEach((e, i) => {
+            if (!(sup.includes(e))) pastVerseNum = true;
+
+            if(pastVerseNum && sup.includes(e)){
+                pastVerseNum = false;
+                var newVerse = tempPassage.slice(startIndex, i);
+                verses.push(newVerse);
+                startIndex = i;
+            }
+        });
+
+        return verses;
+    }
 }

@@ -16,8 +16,8 @@ export default function Read() {
     const [heading, setHeading] = useState('Genesis 1');
     const [columns, setColumns] = useState(1);
     const [passage, setPassage] = useState('');
-    const [underline, setUnderline] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [splitVerses, setSplitVerses] = useState([]);
+    const [verseSelected, setVerseSelected] = useState(false)
 
     useEffect(async () => {
         updateBookOptions();
@@ -25,6 +25,12 @@ export default function Read() {
         updateVerseOptions();
         updatePassage();
     }, [book, chapter, verse]);
+
+    useEffect(() => {
+        const finder = new PassageFinder();
+        const verses = finder.splitPassageByVerse(passage);
+        setSplitVerses(verses);
+    }, [passage]);
 
     const updateBookOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
@@ -44,8 +50,7 @@ export default function Read() {
         setVerseOptions(array3);
     }
 
-    const updatePassage = async() => {
-        setPassage('...Loading')
+    const updatePassage = async () => {
         if (verse === 'All') {
             const finder = new PassageFinder(book, chapter, verse);
             const p = await finder.getChapter();
@@ -91,6 +96,19 @@ export default function Read() {
         }
     }
 
+    const underlineVerse = (i) => {
+        const text = document.getElementById(i);
+
+        if (text.style.textDecoration === 'underline') {
+            text.style.textDecoration = 'none';
+            if(verseSelected) setVerseSelected(false)
+        }
+        else {
+            text.style.textDecoration = 'underline';
+            if(!verseSelected) setVerseSelected(true)
+        }
+    }
+
     if (columns === 1 || verse !== 'All') {
         return (
             <div className='outer-container'>
@@ -123,8 +141,27 @@ export default function Read() {
                 </div>
                 <div className='text-container' style={{ 'width': '25vw' }}>
                     <h1>{heading}</h1>
-                    <span onClick={() => setUnderline(!underline)}><p style={{textDecoration: underline ? 'underline' : 'none'}}>{passage}</p></span>
+                    <div>
+                        {
+                            splitVerses.map((e, i) =>
+                                <span
+                                    key={i}
+                                    id={i}
+                                    className="verse"
+                                    onClick={() => underlineVerse(i)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {e}
+                                </span>)
+                        }
+                    </div>
+
                 </div>
+                {verseSelected &&
+                    <div className="verse-menu">
+
+                    </div>
+                }
             </div>
         );
     }

@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from .permissions import IsFromFrontEnd
 from users.models import CustomUser
 from users.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated

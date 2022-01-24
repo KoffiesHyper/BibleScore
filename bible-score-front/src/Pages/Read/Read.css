@@ -56,12 +56,12 @@ body{
     font-weight: lighter;
     line-height: 45px;
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: 100px auto;
     justify-content: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.text-container p{
+.text-container .verse{
     font-family: bible1;
     color: black;
 }
@@ -99,4 +99,35 @@ option{
 
 p{
     margin: 0px;
+}
+
+.verse-menu{
+    position: fixed;
+    width: 100vw;
+    height: 5vh;
+    background-color: rgb(219, 219, 219);
+    animation-name: popUp;
+    animation-duration: .25s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes popUp {
+    from{
+        top: 100vh;
+    }
+
+    to{
+        top: 95vh;
+    }
+}
+
+@keyframes popDown {
+    from{
+        top: 95vh;
+    }
+
+    to{
+        top: 100vh;
+    }
 }
