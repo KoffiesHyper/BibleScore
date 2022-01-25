@@ -5,6 +5,10 @@ import '../../App.css';
 import axios from "axios";
 import Options from "../../Components/Options/Options";
 import PassageFinder from "../../Components/Passage/Passage";
+import { BiBrain, BiHighlight } from "react-icons/bi";
+import { IconContext } from "react-icons/lib";
+import { IoMdClose } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 
 export default function Read() {
     const [book, setBook] = useState('GEN');
@@ -17,7 +21,11 @@ export default function Read() {
     const [columns, setColumns] = useState(1);
     const [passage, setPassage] = useState('');
     const [splitVerses, setSplitVerses] = useState([]);
-    const [verseSelected, setVerseSelected] = useState(false)
+    const [verseSelected, setVerseSelected] = useState(false);
+    const [selectedVerse, setSelectedVerse] = useState();
+    const [highlightColor, setHighlightColor] = useState('#d2f1ff');
+
+    const navigate = useHistory();
 
     useEffect(async () => {
         updateBookOptions();
@@ -78,35 +86,49 @@ export default function Read() {
     }
 
     const splitPassage = (part) => {
-        var x = Math.floor(passage.length / 2);
-        var spliceIndex = 0;
-
-        for (let i = x; i < passage.length; i++) {
-            if (passage[i] === ' ') {
-                spliceIndex = i;
-                break;
-            }
-        }
+        var x = Math.floor(splitVerses.length / 2);
 
         if (part === 1) {
-            return passage.substring(0, spliceIndex);
+            return splitVerses.slice(0, x);
         }
         else if (part === 2) {
-            return passage.substring(spliceIndex, passage.length - 1);
+            return splitVerses.slice(x, splitVerses.length);
         }
     }
 
     const underlineVerse = (i) => {
         const text = document.getElementById(i);
 
-        if (text.style.textDecoration === 'underline') {
-            text.style.textDecoration = 'none';
-            if(verseSelected) setVerseSelected(false)
+        if (verseSelected) return
+
+        setSelectedVerse(i);
+        if (text.style.textDecoration.includes('underline')) {
+            return;
         }
         else {
-            text.style.textDecoration = 'underline';
-            if(!verseSelected) setVerseSelected(true)
+            text.style.textDecoration = 'underline dotted white';
+            if (!verseSelected) setVerseSelected(true)
         }
+    }
+
+    const cancelVerse = () => {
+        const text = document.getElementById(selectedVerse);
+        text.style.textDecoration = 'none';
+        const verseMenu = document.getElementById('verseMenu');
+        verseMenu.style.animationName = 'popDown';
+
+        setTimeout(() => {
+            setVerseSelected(false);
+        }, 500);
+    }
+
+    const highlightVerse = () => {
+        const text = document.getElementById(selectedVerse);
+        text.style.backgroundColor = highlightColor;
+    }
+
+    const redirectToMemorize = () => {
+        navigate.push(`/memorize/${book}.${chapter}.${selectedVerse + 1}`)
     }
 
     if (columns === 1 || verse !== 'All') {
@@ -158,14 +180,19 @@ export default function Read() {
 
                 </div>
                 {verseSelected &&
-                    <div className="verse-menu">
-
+                    <div id="verseMenu" className="verse-menu">
+                        <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
+                        <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
+                        <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
+                        <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
                     </div>
                 }
             </div>
         );
     }
     else if (columns == 2 && verse === 'All') {
+        const versesInColOne = 0;
+
         return (
             <div className='outer-container'>
                 <div className='options-container'>
@@ -199,12 +226,39 @@ export default function Read() {
                     <h1>{heading}</h1>
                     <div className='text-columns'>
                         <div className='text-column'>
-                            <p>{splitPassage(1)}</p>
+                            <div>
+                                {
+                                    splitPassage(1).map((e, i) =>
+                                        <span
+                                            key={i}
+                                            id={i}
+                                            className="verse"
+                                            onClick={() => underlineVerse(i)}
+                                            onLoad={() => versesInColOne = i}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {e}
+                                        </span>)
+                                }
+                            </div>
                         </div>
                         <div className='line'>
                         </div>
                         <div className='text-column'>
-                            <p>{splitPassage(2)}</p>
+                            <div>
+                                {
+                                    splitPassage(2).map((e, i) =>
+                                        <span
+                                            key={i + versesInColOne}
+                                            id={i + versesInColOne}
+                                            className="verse"
+                                            onClick={() => underlineVerse(i + versesInColOne)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {e}
+                                        </span>)
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
