@@ -10,7 +10,7 @@ import { IconContext } from "react-icons/lib";
 import { IoMdClose } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 
-export default function Read() {
+export default function Read({ user, saveVerse }) {
     const [book, setBook] = useState('GEN');
     const [chapter, setChapter] = useState('1');
     const [verse, setVerse] = useState('All');
@@ -38,6 +38,10 @@ export default function Read() {
         const finder = new PassageFinder();
         const verses = finder.splitPassageByVerse(passage);
         setSplitVerses(verses);
+        
+        setTimeout(() => {
+            highlightSavedVerses();
+        }, 1000)
     }, [passage]);
 
     const updateBookOptions = async () => {
@@ -96,6 +100,26 @@ export default function Read() {
         }
     }
 
+    const highlightSavedVerses = () => {
+        if (user) {
+            const saved_verses = user.saved_verses;
+            for (let i = 0; i < saved_verses.length; i++) {
+                const splitted = saved_verses[i].split('.');
+                const b = splitted[0];
+                const c = splitted[1];
+                const v = splitted[2];
+
+                if (b === book && c === chapter) {
+                    const toBeHighlighted = document.getElementById(v - 1);
+                    toBeHighlighted.style.backgroundColor = highlightColor;
+                }
+            }
+        }
+        else {
+
+        }
+    }
+
     const underlineVerse = (i) => {
         const text = document.getElementById(i);
 
@@ -125,6 +149,8 @@ export default function Read() {
     const highlightVerse = () => {
         const text = document.getElementById(selectedVerse);
         text.style.backgroundColor = highlightColor;
+
+        saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
     }
 
     const redirectToMemorize = () => {
@@ -157,8 +183,8 @@ export default function Read() {
                     </div>
 
                     <div className="column-options">
-                        <input className="default-btn" type='button' value='|' onClick={() => { setColumns(1) ; setVerseSelected(false) }}></input>
-                        <input className="default-btn" type='button' value='||' onClick={() => { setColumns(2) ; setVerseSelected(false) }}></input>
+                        <input className="default-btn" type='button' value='|' onClick={() => { setColumns(1); setVerseSelected(false) }}></input>
+                        <input className="default-btn" type='button' value='||' onClick={() => { setColumns(2); setVerseSelected(false) }}></input>
                     </div>
                 </div>
                 <div className='text-container' style={{ 'width': '25vw' }}>

@@ -1,9 +1,6 @@
-import email
-from email.policy import default
-from multiprocessing.sharedctypes import Value
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager, PermissionsMixin
-from django.forms import JSONField
+from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
@@ -36,7 +33,7 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True)
     objects = UserManager()
     email = models.EmailField(unique=True)
-    saved_verses = JSONField()
+    saved_verses = ArrayField(models.CharField(max_length=10), null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

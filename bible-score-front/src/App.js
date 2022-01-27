@@ -33,21 +33,43 @@ function App() {
       const id = jwt_decode(localStorage.getItem('accessToken')).user_id;
 
       const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, {
-        headers:{
-          'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+        headers: {
+          'Api-Key': process.env.REACT_APP_SERVER_API_KEY,
+          
         }
       })
       setUser(user.data)
     }
   }, [signedIn])
 
+  const saveVerse = async (verse) => {
+    var highlighted = user.saved_verses;
+    
+    if (!highlighted) highlighted = [verse]
+    else highlighted.push(verse)
+
+    const updatedUser = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/users/${user.id}/`, JSON.stringify({
+      username: user.username,
+      password: user.password,
+      email: user.email,
+      saved_verses: highlighted
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Api-Key': process.env.REACT_APP_SERVER_API_KEY,
+      }
+    });
+
+    setUser(updatedUser.data);
+  }
+
   return (
     <Router>
-      <NavBar user={user} signedIn={signedIn} logOut={ () => {
-              setUser('');
-              setSignedIn(false);
-              localStorage.clear();
-            } } />
+      <NavBar user={user} signedIn={signedIn} logOut={() => {
+        setUser('');
+        setSignedIn(false);
+        localStorage.clear();
+      }} />
       <Route exact path='/' render={() => {
         return (
           <div>
@@ -84,7 +106,7 @@ function App() {
       <Route exact path={'/register'} render={() => {
         return (
           <div>
-            <Register updateSignedIn={ (b) => setSignedIn(b) } />
+            <Register updateSignedIn={(b) => setSignedIn(b)} />
           </div>
         );
       }} />
@@ -92,8 +114,8 @@ function App() {
       <Route exact path={'/login'} render={() => {
         return (
           <div>
-            <Login 
-            updateSignedIn={ (b) => setSignedIn(b) } 
+            <Login
+              updateSignedIn={(b) => setSignedIn(b)}
             />
           </div>
         );
@@ -102,7 +124,7 @@ function App() {
       <Route exact path={'/read'} render={() => {
         return (
           <div>
-            <Read />
+            <Read user={user} saveVerse={saveVerse} />
           </div>
         );
       }} />
