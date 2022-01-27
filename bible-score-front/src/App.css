@@ -31,7 +31,7 @@
 }
 
 body{
-  background-image: linear-gradient(to bottom right, var(--secondary-color), var(--tertiary-color));
+  background-image: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
   background-repeat: space;
   height: auto;
 }

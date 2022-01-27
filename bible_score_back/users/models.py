@@ -3,14 +3,13 @@ from email.policy import default
 from multiprocessing.sharedctypes import Value
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager, PermissionsMixin
+from django.forms import JSONField
 
 # Create your models here.
 
 class UserManager(UserManager):
 
-    def create_user(self, **user_fields):
-        email = user_fields.get('email')
-
+    def create_user(self, email, **user_fields):
         if not email:
             raise ValueError('Email is required')
 
@@ -20,7 +19,7 @@ class UserManager(UserManager):
         user.save()
         return user
 
-    def create_superuser(self, **user_fields):
+    def create_superuser(self, email, **user_fields):
 
         user_fields.setdefault('is_staff', True)
         user_fields.setdefault('is_superuser', True)
@@ -31,12 +30,13 @@ class UserManager(UserManager):
         if user_fields.get('is_superuser') is not True:
             raise ValueError('Value is_superuser must be True for a superuser')
 
-        return self.create_user(**user_fields) 
+        return self.create_user(email, **user_fields) 
 
 class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True)
     objects = UserManager()
     email = models.EmailField(unique=True)
+    saved_verses = JSONField()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

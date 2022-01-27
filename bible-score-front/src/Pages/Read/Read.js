@@ -157,8 +157,8 @@ export default function Read() {
                     </div>
 
                     <div className="column-options">
-                        <input className="default-btn" type='button' value='|' onClick={() => setColumns(1)}></input>
-                        <input className="default-btn" type='button' value='||' onClick={() => setColumns(2)}></input>
+                        <input className="default-btn" type='button' value='|' onClick={() => { setColumns(1) ; setVerseSelected(false) }}></input>
+                        <input className="default-btn" type='button' value='||' onClick={() => { setColumns(2) ; setVerseSelected(false) }}></input>
                     </div>
                 </div>
                 <div className='text-container' style={{ 'width': '25vw' }}>
@@ -191,8 +191,7 @@ export default function Read() {
         );
     }
     else if (columns == 2 && verse === 'All') {
-        const versesInColOne = 0;
-
+        const versesInColOne = splitPassage(1).length;
         return (
             <div className='outer-container'>
                 <div className='options-container'>
@@ -234,7 +233,6 @@ export default function Read() {
                                             id={i}
                                             className="verse"
                                             onClick={() => underlineVerse(i)}
-                                            onLoad={() => versesInColOne = i}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             {e}
@@ -260,6 +258,14 @@ export default function Read() {
                                 }
                             </div>
                         </div>
+                        {verseSelected &&
+                            <div id="verseMenu" className="verse-menu">
+                                <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
+                                <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
+                                <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
+                                <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
