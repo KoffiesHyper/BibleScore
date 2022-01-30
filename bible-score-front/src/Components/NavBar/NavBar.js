@@ -15,7 +15,7 @@ export default function NavBar({ user, signedIn, logOut }) {
                     <div className="top-left">
                         <Link to='/' ><button>Home</button></Link>
                         <Link to='/memorize' ><button>Memorize</button></Link>
-                        <Link to='/dashboard' ><button>Dashboard</button></Link>
+                        <Link to='/account-details' ><button>Dashboard</button></Link>
                         <Link to='/read' ><button>Read</button></Link>
                         <div className="top-search">
                             <input type='text' placeholder="Search" onChange={(event) => setSearchInput(event.target.value)}></input>

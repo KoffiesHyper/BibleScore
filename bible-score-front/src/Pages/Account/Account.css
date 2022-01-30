@@ -1,0 +1,44 @@
+.outer-container{
+    height: 95vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+h2{
+    font-size: 25px;
+}
+
+.profile-settings{
+    width: 60%;
+    height: 60vh;
+    border: 1px solid var(--tertiary-color);
+    border-radius: 4px;
+    background-color: transparent;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.profile-setting{
+    border-bottom: 1px solid var(--tertiary-color);
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.profile-setting input{
+    width: 70%;
+    font-family: custom1;
+    font-size: 15px;
+}
+
+.profile-setting .left{
+    margin-left: 25px;
+}
+
+.profile-setting .right{
+    margin-right: 25px;
+}
+
+

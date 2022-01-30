@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import JWTManager from './Components/JWT/JWT';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import Account from './Pages/Account/Account';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,7 +36,7 @@ function App() {
       const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, {
         headers: {
           'Api-Key': process.env.REACT_APP_SERVER_API_KEY,
-          
+
         }
       })
       setUser(user.data)
@@ -44,7 +45,7 @@ function App() {
 
   const saveVerse = async (verse) => {
     var highlighted = user.saved_verses;
-    
+
     if (!highlighted) highlighted = [verse]
     else highlighted.push(verse)
 
@@ -117,6 +118,14 @@ function App() {
             <Login
               updateSignedIn={(b) => setSignedIn(b)}
             />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/account-details'} render={() => {
+        return (
+          <div>
+            <Account />
           </div>
         );
       }} />

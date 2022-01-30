@@ -23,7 +23,7 @@ export default function Read({ user, saveVerse }) {
     const [splitVerses, setSplitVerses] = useState([]);
     const [verseSelected, setVerseSelected] = useState(false);
     const [selectedVerse, setSelectedVerse] = useState();
-    const [highlightColor, setHighlightColor] = useState('#d2f1ff');
+    const [highlightColor, setHighlightColor] = useState('rgb(0,0,0)');
 
     const navigate = useHistory();
 
@@ -38,7 +38,7 @@ export default function Read({ user, saveVerse }) {
         const finder = new PassageFinder();
         const verses = finder.splitPassageByVerse(passage);
         setSplitVerses(verses);
-        
+
         setTimeout(() => {
             highlightSavedVerses();
         }, 1000)
@@ -149,8 +149,33 @@ export default function Read({ user, saveVerse }) {
     const highlightVerse = () => {
         const text = document.getElementById(selectedVerse);
         text.style.backgroundColor = highlightColor;
+        // const color = highlightColor.substring(4, highlightColor.length - 1).split(',');
+        // console.log(color);
 
-        saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
+        function hexToRgbNew(hex) {
+            var arrBuff = new ArrayBuffer(4);
+            var vw = new DataView(arrBuff);
+            vw.setUint32(0, parseInt(hex, 16), false);
+            var arrByte = new Uint8Array(arrBuff);
+
+            return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
+        }
+
+        var c = hexToRgbNew(highlightColor.substring(1, highlightColor.length)).split(',');
+        const r = c[0];
+        const g = c[1];
+        const b = c[2];
+
+        const hsp = Math.sqrt(
+            0.299 * (r * r) +
+            0.587 * (g * g) +
+            0.114 * (b * b)
+        );
+
+        if(hsp > 140) text.style.color = 'black'
+        else text.style.color = 'white'
+
+        // saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
     }
 
     const redirectToMemorize = () => {
