@@ -1,7 +1,8 @@
 import './App.css';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  useHistory
 } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage';
 import Dashboard from './Pages/Dashboard/Dashboard';
@@ -16,10 +17,14 @@ import JWTManager from './Components/JWT/JWT';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import Account from './Pages/Account/Account';
+import PassageFinder from './Components/Passage/Passage';
+import Brethren from './Pages/Brethren/Brethren';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [savedVerses, setSavedVerses] = useState([]);
   const [signedIn, setSignedIn] = useState(false);
+  const [keyword, setKeyword] = useState();
 
   useEffect(async () => {
     const manager = new JWTManager()
@@ -36,12 +41,17 @@ function App() {
       const user = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${id}`, {
         headers: {
           'Api-Key': process.env.REACT_APP_SERVER_API_KEY,
-
         }
       })
       setUser(user.data)
     }
   }, [signedIn])
+
+  useEffect(async () => {
+    if (user) {
+      updateSavedVerses();
+    }
+  }, [user])
 
   const saveVerse = async (verse) => {
     var highlighted = user.saved_verses;
@@ -64,12 +74,36 @@ function App() {
     setUser(updatedUser.data);
   }
 
+  const updateSavedVerses = async () => {
+    const verses = [];
+    user.saved_verses.forEach(async (e, i) => {
+      const splitted = e.split('.');
+      let book = splitted[0];
+      let chapter = splitted[1];
+      let verse = splitted[2];
+
+      const finder = new PassageFinder(book, chapter, verse);
+      const text = await finder.getVerse();
+      verses.push(text);
+
+      if (i === user.saved_verses.length - 1)
+        setTimeout(() => {
+          setSavedVerses(verses);
+        }, 50);
+    });
+  }
+
+  const logOut = () => {
+    setUser('');
+    setSignedIn(false);
+    localStorage.clear();
+    setSavedVerses([]);
+  }
+
   return (
     <Router>
-      <NavBar user={user} signedIn={signedIn} logOut={() => {
-        setUser('');
-        setSignedIn(false);
-        localStorage.clear();
+      <NavBar user={user} signedIn={signedIn} logOut={logOut} keyword={keyword} updateKW={(e) => {
+        setKeyword(e);
       }} />
       <Route exact path='/' render={() => {
         return (
@@ -99,7 +133,15 @@ function App() {
       <Route exact path={'/dashboard'} render={() => {
         return (
           <div>
-            <Dashboard />
+            <Dashboard user={user} savedVerses={savedVerses} />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/brethren'} render={() => {
+        return (
+          <div>
+            <Brethren />
           </div>
         );
       }} />
@@ -125,7 +167,7 @@ function App() {
       <Route exact path={'/account-details'} render={() => {
         return (
           <div>
-            <Account />
+            <Account user={user} />
           </div>
         );
       }} />
@@ -141,7 +183,7 @@ function App() {
       <Route exact path={'/search/:keyword'} render={() => {
         return (
           <div>
-            <Search />
+            <Search keyword={keyword} updateKW={setKeyword} />
           </div>
         );
       }} />

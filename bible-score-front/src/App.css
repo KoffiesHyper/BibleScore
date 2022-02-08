@@ -1,3 +1,21 @@
+body{
+  background-image: linear-gradient(to bottom, var(--primary-color), #997456);
+  background-repeat: space;
+  height: auto;
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb{
+  width: 5px;
+  background-color: #3b230f;
+  border-radius: 3px;
+}
+
 @font-face {
   font-family: 'custom1';
   src: url('./Fonts/Quicksand-Light.ttf') format('truetype');
@@ -28,12 +46,6 @@
   --primary-color : #fffefa;
   --secondary-color : #e7e4d8;
   --tertiary-color : #6b482b;
-}
-
-body{
-  background-image: linear-gradient(to bottom, var(--secondary-color), var(--tertiary-color));
-  background-repeat: space;
-  height: auto;
 }
 
 .App {
@@ -97,6 +109,10 @@ body{
   animation-iteration-count: 1;
 }
 
+.default-btn:disabled{
+  background-color: #4d3b2d6c;
+}
+
 @keyframes btnHover {
   0%   {transform: scale(1)}
   25%  {transform: scale(1.1)}
@@ -120,9 +136,25 @@ body{
   font-size: 20px;
   font-family: custom1;
   font-weight: lighter;
+  color: var(--tertiary-color);
 }
 
 .black{
   background-color: black;
+}
+
+.default-input{
+  background-color: var(--secondary-color);
+  border-radius: 3px;
+  outline: none;
+  font-family: custom1;
+  border: 1px solid #5735029f;
+}
+
+.default-input:focus{
+  background-color: var(--primary-color);
+  border: 2px solid var(--tertiary-color);
+  border-radius: 3px;
+  outline: none;
 }
 

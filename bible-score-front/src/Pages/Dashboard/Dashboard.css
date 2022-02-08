@@ -1,113 +1,82 @@
 .dashboard-container{
+    height: 95vh;
+    width: 100vw;
+    margin-top: 30px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-columns: 400px 1fr 400px;
     justify-items: center;
-    grid-gap: 20px;
+    text-align: center;
+}
+
+.prayer-requests, .saved-verses{
+    background-color: #3d1c01c2;
+    border-radius: 3px;
+    height: 92%;
+    width: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     align-items: flex-start;
-    height: 900px;
+    overflow-y: scroll;
+    justify-items: center;
+    scrollbar-color: red;
 }
 
-.dashboard-container .top-section{
-    display: flex;
-    width: 80%;
-    justify-content: flex-start;
-    margin-top: 50px;
+.saved-verses{
+    grid-column-start: 3;
 }
 
-.add{
-    overflow: hidden;
-    background-color: rgb(219, 88, 88);
-    border: none;
-    font-size: 15px;
-    border-radius: 10px;
-    height: 50px;
-    width: 50px;
-    color: white;
-    white-space: nowrap;
-    word-wrap: normal;
-    text-align: center;
-    transition-duration: .25s; 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
-    margin-left: 50px;
-    justify-self: flex-end;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.add:hover{
-    width: 100px;
-    background-color: rgb(124, 66, 66);
-    transition-duration: .25s;
-}
-
-.add:hover:after{
-    content: ' Add Task';
-}
-
-.home{
-    overflow: hidden;
-    background-color: rgb(219, 88, 88);
-    border: none;
-    font-size: 15px;
-    border-radius: 10px;
-    height: 50px;
-    width: 60px;
-    color: white;
-    text-align: center;
-    transition-duration: .25s; 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.prayer-requests h2, .saved-verses h2{
+    justify-self: center;
     font-weight: normal;
-    margin-left: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: custom1;
+    font-size: 20px;
+    color: var(--primary-color);
 }
 
-.home:hover{
-    width: 100px;
-    background-color: rgb(124, 66, 66);
-    transition-duration: .25s;
-}
-
-.sort-container{
-    display: flex;
-    justify-content: space-evenly;
-    width: 400px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-}
-
-.sort-container button{
-    background-color: transparent;
-    border: none;    
-    font-size: 15px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.sort-container p{
-    background-color: transparent;
-    border: none;
-    color: rgb(196, 196, 196);
-    font-size: 15px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.notes-container{
+.item-container{
+    background-color: #997456;
     width: 80%;
-    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-right: 5%;
+    padding-left: 5%;
+    text-align: start;
+    height: 100px;
+    display: grid;
+    margin-left: 20px;
+    transition-duration: .25s;
+    cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-}
+}   
 
-.color-not-active{
-    color: grey;
-}
+.item-container:hover{
+    background-color: #b69479;
+}   
 
-.color-active{
+.item-container h3{
+    margin: 5px;
+    color:  #573519;
+    font-weight: bolder;
+}   
+
+.item-container p{
+    font-size: 15px;
     color: white;
+}   
+
+.nouser-container{
+    height: 95vh;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    justify-items: center;
 }
 
-.sort-container p{
-    padding-top: 15px;
+.nouser-container h2{
+    align-self: flex-end;
 }
 
-
+.buttons button{
+    width: 150px;
+    margin-left: 10px;
+}

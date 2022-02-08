@@ -1,44 +1,54 @@
-.outer-container{
-    height: 95vh;
+.account-container{
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: 100px 85vh;
+    justify-items: center;
+    text-align: start;
 }
 
-h2{
+.setting-header{
     font-size: 25px;
+    justify-self: center;
+    align-self: flex-end;
+    font-family: custom2;
+    font-weight: lighter;
+    color: var(--tertiary-color);
 }
 
 .profile-settings{
-    width: 60%;
+    width: 700px;
     height: 60vh;
     border: 1px solid var(--tertiary-color);
     border-radius: 4px;
-    background-color: transparent;
+    background-color: #e7e4d881;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .profile-setting{
     border-bottom: 1px solid var(--tertiary-color);
+    color: var(--tertiary-color);
     display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     align-items: center;
     justify-items: center;
+    font-family: custom2;
+    font-size: 16px;
 }
 
 .profile-setting input{
     width: 70%;
-    font-family: custom1;
-    font-size: 15px;
-}
-
-.profile-setting .left{
-    margin-left: 25px;
+    font-family: custom2;
+    font-size: 16px;
+    outline: none;
 }
 
 .profile-setting .right{
-    margin-right: 25px;
+    cursor: pointer;
 }
 
+.profile-setting .right:hover{
+    text-decoration: underline black;
+}
 

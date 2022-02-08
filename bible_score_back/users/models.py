@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.postgres.fields import ArrayField
@@ -34,6 +35,25 @@ class CustomUser(AbstractUser):
     objects = UserManager()
     email = models.EmailField(unique=True)
     saved_verses = ArrayField(models.CharField(max_length=10), null=True)
+    friends = models.ManyToManyField("self", blank=True)
+
+    def __str__(self):
+        return self.email
+
+    def addFriend(self, friend):
+        if friend not in self.friends.all():
+            self.friends.add(friend)
+            self.save()
+
+    def removeFriend(self, friend):
+        if friend in self.friends.all():
+            self.friends.remove(friend)
+            self.save()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+class FriendRequests(models.Model):
+    from_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='from_user', null=False, default=1)
+    to_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='to_user', null=False, default=2)
+    date_sent = models.DateTimeField(null=True)

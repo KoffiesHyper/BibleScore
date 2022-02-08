@@ -102,6 +102,7 @@ export default class PassageFinder {
         var text = this.changeVerseNumbers(content);
 
         return {
+            id: data.data.data.id,
             heading: data.data.data.reference,
             content: text
         };
@@ -163,13 +164,17 @@ export default class PassageFinder {
         var verses = [];
         var pastVerseNum = false;
         var startIndex = 0;
+        var verseNum;
 
         tempPassage.split('').forEach((e, i) => {
-            if (!(sup.includes(e))) pastVerseNum = true;
+            if (!(sup.includes(e)) && !pastVerseNum) {
+                pastVerseNum = true;
+                verseNum = tempPassage.substring(startIndex, i);
+            }
 
             if(pastVerseNum && sup.includes(e)){
                 pastVerseNum = false;
-                var newVerse = tempPassage.slice(startIndex, i);
+                var newVerse = tempPassage.slice(startIndex + verseNum.length, i);
                 verses.push(newVerse);
                 startIndex = i;
             }

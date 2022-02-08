@@ -23,7 +23,7 @@ export default function Read({ user, saveVerse }) {
     const [splitVerses, setSplitVerses] = useState([]);
     const [verseSelected, setVerseSelected] = useState(false);
     const [selectedVerse, setSelectedVerse] = useState();
-    const [highlightColor, setHighlightColor] = useState('rgb(0,0,0)');
+    const [highlightColor, setHighlightColor] = useState('rgb(83, 207, 230)');
 
     const navigate = useHistory();
 
@@ -43,6 +43,10 @@ export default function Read({ user, saveVerse }) {
             highlightSavedVerses();
         }, 1000)
     }, [passage]);
+
+    useEffect(() => {
+        console.log(splitVerses)
+    }, [splitVerses])
 
     const updateBookOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
@@ -102,6 +106,11 @@ export default function Read({ user, saveVerse }) {
 
     const highlightSavedVerses = () => {
         if (user) {
+            for (let i = 0; i < verseOptions.length; i++) {
+                const toBeCleared = document.getElementById(i);
+                if(toBeCleared) toBeCleared.style.backgroundColor = 'transparent'
+            }
+
             const saved_verses = user.saved_verses;
             for (let i = 0; i < saved_verses.length; i++) {
                 const splitted = saved_verses[i].split('.');
@@ -175,7 +184,7 @@ export default function Read({ user, saveVerse }) {
         if(hsp > 140) text.style.color = 'black'
         else text.style.color = 'white'
 
-        // saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
+        saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
     }
 
     const redirectToMemorize = () => {
@@ -286,7 +295,7 @@ export default function Read({ user, saveVerse }) {
                                             onClick={() => underlineVerse(i)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            {e}
+                                            {e.content}
                                         </span>)
                                 }
                             </div>

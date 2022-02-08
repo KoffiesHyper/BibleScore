@@ -1,116 +1,53 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
-import ListItems from '../../Components/ListItems/ListItems';
 
-export default function Dashboard() {
-    const [items, setItems] = useState([]);
-    const [updated, setUpdated] = useState(0);
-    const [newItem, setNewItem] = useState(false);
-    const [newInput, setNewInput] = useState();
-    const [activeSort, setActiveSort] = useState(null);
-    const [toggleHome, setToggleHome] = useState(false);
-    const [pickedSort, setPickedSort] = useState('date');
-
+export default function Dashboard({ user, savedVerses }) {
     const navigate = useHistory();
 
-    useEffect(() => {
-        var array = items;
-        array.push({
-            task: '1',
-            urgency: 'low'
-        },
-            {
-                task: '2',
-                urgency: 'medium'
-            },
-            {
-                task: '3',
-                urgency: 'high'
-            },
-            {
-                task: '4',
-                urgency: 'low'
-            },
-            {
-                task: '5',
-                urgency: 'high'
-            });
-
-        setItems(array);
-    }, []);
-
-    const removeItem = (i) => {
-        var array = items;
-        array[i] = '';
-
-        setItems(array);
-        setUpdated(updated + 1);
-    }
-
-    const changeSort = (x) => {
-        setActiveSort(x);
-    }
-
-    const cancelNewItem = () => {
-        setNewItem(false);
-    }
-
-    const onInputChange = (event) => {
-        setNewInput(event.target.value);
-    }
-
-    const addTask = () => {
-        var array = items;
-        array.push({
-            task: newInput,
-            urgency: 'low'
-        });
-
-        setItems(array);
-        setNewItem(false);
-    }
-
-    if (toggleHome === false) {
-        return (
-            <div className='dashboard-container'>
-                <div className='top-section'>
-                    <div className='sort-container'>
-                        <p>Sort By:</p>
-                        <button className={activeSort ? 'color-active' : 'color-not-active'} onClick={() => {
-                            setActiveSort(true);
-                            setPickedSort('urgency');
-                        }}>Urgency</button>
-                        <button className={activeSort ? 'color-not-active' : 'color-active'} onClick={() => {
-                            setActiveSort(false);
-                            setPickedSort('date');
-                        }}>Date</button>
-                    </div>
-
-                    <div>
-                        <button className='add' onClick={() => setNewItem(true)}>+</button>
-                        <button className='home' onClick={() => setToggleHome(true)}>Home</button>
-                    </div>
-
-                </div>
-
-                <div className='notes-container'>
-                    <ListItems
-                        items={items}
-                        removeItem={removeItem}
-                        newItem={newItem}
-                        onInputChange={onInputChange}
-                        addTask={addTask}
-                        cancelNewItem={cancelNewItem}
-                        pickedSort={pickedSort}
-                    />
-                </div>
+    if (!user) return (
+        <div className='nouser-container'>
+            <h2 className='default-label'>You Must Sign In To Access a Dashbaord</h2>
+            <div className='buttons'>
+                <Link to='/register'><button className='default-btn'>Register</button></Link>
+                <Link to='/login'><button className='default-btn'>Sign In</button></Link>
             </div>
-        );
-    }
-    else if (toggleHome === true) {
-        navigate.push('/');
-    }
+        </div>
+    );
+    return (user &&
+        <div className='dashboard-container'>
+            <div className='prayer-requests'>
+                <h2 className='default-label'>Social</h2>
+            </div>
+            <div className='saved-verses'>
+                <h2 className='default-label'>Saved Verses</h2>
+                {
+                    savedVerses.map((e, i) => {
+                        return <ListItem key={i} heading={e.heading} text={e.content} click={() => navigate.push(`/memorize/${e.id}`)} />
+                    })
+                }
+            </div>
+        </div>
+    );
+}
 
+function ListItem({ heading, text, click }) {
+    var textLength = 100;
+
+    if (text.length > textLength)
+        return (
+            <div className='item-container' onClick={click}>
+                <h3 className='default-label'>{heading}</h3>
+                <p className='default-label'>{text.substring(0, textLength) + '...'}</p>
+            </div>
+        )
+
+    return (
+        <div className='item-container' onClick={click}>
+            <h3 className='default-label'>{heading}</h3>
+            <p className='default-label'>{text}</p>
+        </div>
+    )
 }
 

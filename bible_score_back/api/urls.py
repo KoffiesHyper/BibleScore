@@ -11,5 +11,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/test-pair', views.TestPairView),
     path('users/obtain-pair', TokenObtainPairView.as_view()),
-    path('users/refresh', TokenRefreshView.as_view())
+    path('users/refresh', TokenRefreshView.as_view()),
+    path('users/friends-list/<int:pk>', views.Friends_List),
+    path('users/friends-request/<int:pk>', views.Friend_Requests),
+    path('users/search/<str:usr>', views.UserSearch)
 ]

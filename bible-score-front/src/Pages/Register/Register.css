@@ -7,7 +7,8 @@
 }
 
 .inner-container{
-    background-color: var(--secondary-color);
+    background-color: #e7e4d881;
+    border: 1px solid var(--tertiary-color);
     width: 300px;
     height: 550px;
     border-radius: 3px;
@@ -46,5 +47,5 @@
 .input-container input{
     align-self: flex-start;
     justify-self: center;
-    width: 200px;
+    width: 275px;
 }

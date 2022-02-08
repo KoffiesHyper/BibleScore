@@ -1,0 +1,101 @@
+.brethren-container{
+    width: 100vw;
+    height: 95vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: minmax(250px, 20vh) 1fr;
+}
+
+.search-container{
+    width: 600px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    justify-items: center;
+    border: 1px solid var(--tertiary-color);
+    border-radius: 3px;
+    background-color: #e7e4d881;
+    padding: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.search-container h2{
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+
+.search-settings input{
+    font-size: 16px;
+    width: 200px;
+    border: 1px solid #5735029f;
+}
+
+.search-settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+.search-settings p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.search-settings input{
+    font-size: 16px;
+    width: 200px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.search-settings button{
+    background-color: var(--tertiary-color);
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.user-results{
+    display: block;
+    align-self: flex-start;
+}
+
+.user-result{
+    width: 600px;
+    height: auto;
+    background-color: #e7e4d881;
+    border: 1px solid var(--tertiary-color);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: flex-start;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.user-result h3{
+    font-weight: bold;
+    align-self: flex-end;
+    margin: 0px;
+    padding-right: 20px;
+}
+
+.user-result p{
+    font-size: 18px;
+    align-self: flex-start;
+    grid-row-start: 2;
+}
+
+.user-result button{
+    justify-self: flex-end;
+}

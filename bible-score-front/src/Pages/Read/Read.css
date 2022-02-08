@@ -6,7 +6,6 @@ body{
 
 .outer-container{
     width: 100vw;
-    height: auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 100px minmax(100vh, auto);
@@ -64,6 +63,7 @@ body{
 .text-container .verse{
     font-family: bible1;
     color: black;
+    border-radius:  3px;
 }
 
 .text-container h1{

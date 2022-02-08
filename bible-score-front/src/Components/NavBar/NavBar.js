@@ -4,9 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons/lib";
 
-export default function NavBar({ user, signedIn, logOut }) {
-    const [searchInput, setSearchInput] = useState('');
-
+export default function NavBar({ user, signedIn, logOut, keyword, updateKW }) {
     return (
         <div className="navbar">
             {!signedIn &&  
@@ -15,11 +13,11 @@ export default function NavBar({ user, signedIn, logOut }) {
                     <div className="top-left">
                         <Link to='/' ><button>Home</button></Link>
                         <Link to='/memorize' ><button>Memorize</button></Link>
-                        <Link to='/account-details' ><button>Dashboard</button></Link>
+                        <Link to='/dashboard' ><button>Dashboard</button></Link>
                         <Link to='/read' ><button>Read</button></Link>
                         <div className="top-search">
-                            <input type='text' placeholder="Search" onChange={(event) => setSearchInput(event.target.value)}></input>
-                            <Link to={`/search/${searchInput}`}>
+                            <input type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
+                            <Link to={`/search/${keyword}`}>
                                 <div className="search-button">
                                     <IconContext.Provider value={{ color: "black", className: "global-class-name", size: '3em' }}>
                                         <div>
@@ -45,8 +43,8 @@ export default function NavBar({ user, signedIn, logOut }) {
                         <Link to='/dashboard' ><button>Dashboard</button></Link>
                         <Link to='/read' ><button>Read</button></Link>
                         <div className="top-search">
-                            <input type='text' placeholder="Search" onChange={(event) => setSearchInput(event.target.value)}></input>
-                            <Link to={`/search/${searchInput}`}>
+                            <input type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
+                            <Link to={`/search/${keyword}`}>
                                 <div className="search-button">
                                     <IconContext.Provider value={{ color: "black", className: "global-class-name", size: '3em' }}>
                                         <div>
@@ -58,7 +56,8 @@ export default function NavBar({ user, signedIn, logOut }) {
                         </div>
                     </div>
                     <div className="top-right">
-                        <button>{`Hi, ${user ? user.first_name : ''}`}</button>
+                        <Link to='/account-details' ><button>{`Hi, ${user ? user.first_name : ''}`}</button></Link>
+                        <Link to='/brethren'><button>Brethren</button></Link>
                         <button onClick={logOut}>Logout</button>
                     </div>
                 </div>

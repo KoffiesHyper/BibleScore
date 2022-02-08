@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import JWTManager from '../../Components/JWT/JWT';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Register({ updateSignedIn }) {
     const [username, setUsername] = useState();
@@ -12,6 +13,7 @@ export default function Register({ updateSignedIn }) {
     const [lastName, setLastName] = useState();
     const [dateOfBirth, setDateOfBirth] = useState();
     const [password, setPassword] = useState();
+    const [valid, setValid] = useState(false);
 
     const navigate = useHistory();
 
@@ -52,47 +54,53 @@ export default function Register({ updateSignedIn }) {
 
                 <div className='input-container'>
                     <h2 className='default-label'>Username</h2>
-                    <input placeholder='Enter Your Username' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your Username' onChange={(event) => {
                         setUsername(event.target.value);
                     }} />
                 </div>
 
                 <div className='input-container'>
                     <h2 className='default-label'>Email</h2>
-                    <input placeholder='Enter Your Email' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your Email' onChange={(event) => {
                         setEmail(event.target.value);
                     }} />
                 </div>
 
                 <div className='input-container'>
                     <h2 className='default-label'>First Name</h2>
-                    <input placeholder='Enter Your Surname' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your Surname' onChange={(event) => {
                         setFirstName(event.target.value);
                     }} />
                 </div>
 
                 <div className='input-container'>
                     <h2 className='default-label'>Last Name</h2>
-                    <input placeholder='Enter Your Surname' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your Surname' onChange={(event) => {
                         setLastName(event.target.value);
                     }} />
                 </div>
 
                 <div className='input-container'>
                     <h2 className='default-label'>Birth Date</h2>
-                    <input type='date' placeholder='Enter Your Birth Date' onChange={(event) => {
+                    <input className='default-input' type='date' placeholder='Enter Your Birth Date' onChange={(event) => {
                         setDateOfBirth(event.target.value);
                     }} />
                 </div>
 
                 <div className='input-container'>
                     <h2 className='default-label'>Password</h2>
-                    <input placeholder='Enter Your Password' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your Password' onChange={(event) => {
                         setPassword(event.target.value);
                     }} />
                 </div>
 
-                <button className='default-btn' onClick={registerUser} >Enter</button>
+                <ReCAPTCHA
+                size='compact'
+                sitekey="6Lf3I1keAAAAANA_5YEGuSCE-hUfI9Zvyb-fnXyO"
+                onChange={() => setValid(true)}
+                />
+
+                <button className='default-btn' onClick={registerUser} disabled={valid ? '' : 'disabled'}>Enter</button>
             </div>
         </div>
     );

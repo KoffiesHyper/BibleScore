@@ -7,7 +7,8 @@
 }
 
 .inner-container{
-    background-color: white;
+    background-color: #e7e4d881;
+    border: 1px solid var(--tertiary-color);
     width: 600px;
     height: auto;
     border-radius: 3px;
