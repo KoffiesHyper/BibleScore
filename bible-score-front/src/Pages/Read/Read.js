@@ -44,10 +44,6 @@ export default function Read({ user, saveVerse }) {
         }, 1000)
     }, [passage]);
 
-    useEffect(() => {
-        console.log(splitVerses)
-    }, [splitVerses])
-
     const updateBookOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
         const array1 = await finder.getBooks();
@@ -233,7 +229,8 @@ export default function Read({ user, saveVerse }) {
                                     onClick={() => underlineVerse(i)}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    {e}
+                                    <span className="verse-num">{` ${e.num.trim()}`}</span>
+                                    {e.text}
                                 </span>)
                         }
                     </div>
@@ -295,7 +292,8 @@ export default function Read({ user, saveVerse }) {
                                             onClick={() => underlineVerse(i)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            {e.content}
+                                            <span className="verse-num">{` ${e.num.trim()}`}</span>
+                                            {e.text}
                                         </span>)
                                 }
                             </div>
@@ -313,7 +311,8 @@ export default function Read({ user, saveVerse }) {
                                             onClick={() => underlineVerse(i + versesInColOne)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            {e}
+                                            <span className="verse-num">{` ${e.num.trim()}`}</span>
+                                            {e.text}
                                         </span>)
                                 }
                             </div>

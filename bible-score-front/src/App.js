@@ -26,6 +26,7 @@ function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [keyword, setKeyword] = useState();
   const [friendRequests, setFriendRequests] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   useEffect(async () => {
     const manager = new JWTManager()
@@ -52,6 +53,7 @@ function App() {
     if (user) {
       updateSavedVerses();
       getFriendRequests();
+      getFriendList()
     }
   }, [user])
 
@@ -128,6 +130,16 @@ function App() {
     }
   }
 
+  const getFriendList = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/friends-list/${user.id}`, {
+      headers: { 
+        'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+      }
+    })
+
+    setFriends(response.data);
+  }
+
   const logOut = () => {
     setUser('');
     setSignedIn(false);
@@ -168,7 +180,7 @@ function App() {
       <Route exact path={'/dashboard'} render={() => {
         return (
           <div>
-            <Dashboard user={user} savedVerses={savedVerses} friendRequests={friendRequests} />
+            <Dashboard user={user} savedVerses={savedVerses} friendRequests={friendRequests} friends={friends} />
           </div>
         );
       }} />

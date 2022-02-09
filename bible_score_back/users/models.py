@@ -1,3 +1,4 @@
+from turtle import back
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
@@ -38,7 +39,7 @@ class CustomUser(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
-        return self.email
+        return self.friends
 
     def addFriend(self, friend):
         if friend not in self.friends.all():

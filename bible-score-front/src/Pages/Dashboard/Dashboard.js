@@ -4,9 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
 
-export default function Dashboard({ user, savedVerses, friendRequests }) {
-    const [hasFriendRequests, setHasFriendRequests] = useState(false)
-
+export default function Dashboard({ user, savedVerses, friendRequests, friends }) {
     const navigate = useHistory();
 
     if (!user) return (
@@ -26,6 +24,11 @@ export default function Dashboard({ user, savedVerses, friendRequests }) {
                     {
                         friendRequests.map((e, i) => {
                             return <FriendRequest key={i} from_user={e} to_user={user} />
+                        })
+                    }
+                    {
+                        friends.map((e, i) => {
+                            return <p>{e.email}</p>
                         })
                     }
                 </div>

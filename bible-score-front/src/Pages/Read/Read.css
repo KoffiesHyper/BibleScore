@@ -171,3 +171,10 @@ p{
         top: 100vh;
     }
 }
+
+.verse-num{
+    color: var(--tertiary-color);
+    font-weight: bold;
+    font-family: bible2;
+    font-size: 24px;
+}

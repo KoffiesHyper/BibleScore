@@ -69,13 +69,7 @@ def Friends_List(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
 
     if request.method == 'GET':
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        addedUserId = request.data.get('id')
-        addedUser = CustomUser.objects.get(pk=addedUserId)
-        user.addFriend(addedUser)
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(user.friends.all(), many=True)
         return Response(serializer.data)
 
 @api_view(['GET', 'POST', 'DELETE'])

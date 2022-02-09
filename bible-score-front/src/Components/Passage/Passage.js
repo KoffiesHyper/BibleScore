@@ -175,7 +175,10 @@ export default class PassageFinder {
             if(pastVerseNum && sup.includes(e)){
                 pastVerseNum = false;
                 var newVerse = tempPassage.slice(startIndex + verseNum.length, i);
-                verses.push(newVerse);
+                verses.push({
+                    num: verseNum,
+                    text: newVerse
+                });
                 startIndex = i;
             }
         });
