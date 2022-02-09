@@ -80,3 +80,35 @@
     width: 150px;
     margin-left: 10px;
 }
+
+.request-container{
+    background-color: #b69479;
+    width: 90%;
+    border-radius: 3px;
+    margin-left: 18px;
+    margin-top: 20px;
+    padding-top: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.request-container h3{
+    margin: 5px;
+    color:  #573519;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.request-container p{
+    color: white;
+    font-size: 18px;
+}
+
+
+.request-container button{
+    margin: 10px;
+}
+
+.request-container .decline{
+    background-color: #3d241186;
+}
+

@@ -25,6 +25,7 @@ function App() {
   const [savedVerses, setSavedVerses] = useState([]);
   const [signedIn, setSignedIn] = useState(false);
   const [keyword, setKeyword] = useState();
+  const [friendRequests, setFriendRequests] = useState([]);
 
   useEffect(async () => {
     const manager = new JWTManager()
@@ -50,6 +51,7 @@ function App() {
   useEffect(async () => {
     if (user) {
       updateSavedVerses();
+      getFriendRequests();
     }
   }, [user])
 
@@ -76,6 +78,7 @@ function App() {
 
   const updateSavedVerses = async () => {
     const verses = [];
+
     user.saved_verses.forEach(async (e, i) => {
       const splitted = e.split('.');
       let book = splitted[0];
@@ -91,6 +94,38 @@ function App() {
           setSavedVerses(verses);
         }, 50);
     });
+  }
+
+  const getFriendRequests = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/friends-request/${user.id}`, {
+      headers: {
+        'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+      }
+    })
+
+    const requests = response.data;
+
+    var array = [];
+
+    for (let i = 0; i < requests.length; i++) {
+      const e = requests[i];
+      const response = await getUser(e);
+
+      array.push(response.data)
+      if (i === requests.length - 1)
+        setTimeout(() => {
+          setFriendRequests(array)
+        }, 50)
+    }
+
+    async function getUser(e) {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${e.from_user}`, {
+        headers: {
+          'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+        }
+      })
+      return response
+    }
   }
 
   const logOut = () => {
@@ -133,7 +168,23 @@ function App() {
       <Route exact path={'/dashboard'} render={() => {
         return (
           <div>
-            <Dashboard user={user} savedVerses={savedVerses} />
+            <Dashboard user={user} savedVerses={savedVerses} friendRequests={friendRequests} />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/read'} render={() => {
+        return (
+          <div>
+            <Read user={user} saveVerse={saveVerse} />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/search/:keyword'} render={() => {
+        return (
+          <div>
+            <Search keyword={keyword} updateKW={setKeyword} />
           </div>
         );
       }} />
@@ -141,7 +192,7 @@ function App() {
       <Route exact path={'/brethren'} render={() => {
         return (
           <div>
-            <Brethren />
+            <Brethren user={user} />
           </div>
         );
       }} />
@@ -168,22 +219,6 @@ function App() {
         return (
           <div>
             <Account user={user} />
-          </div>
-        );
-      }} />
-
-      <Route exact path={'/read'} render={() => {
-        return (
-          <div>
-            <Read user={user} saveVerse={saveVerse} />
-          </div>
-        );
-      }} />
-
-      <Route exact path={'/search/:keyword'} render={() => {
-        return (
-          <div>
-            <Search keyword={keyword} updateKW={setKeyword} />
           </div>
         );
       }} />

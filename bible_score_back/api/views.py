@@ -1,5 +1,5 @@
 import datetime
-from tkinter.tix import Tree
+import re
 from django import views
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -89,6 +89,7 @@ def Friend_Requests(request, pk):
 
     elif request.method == 'POST':
         requestedUserId = request.data.get('id')
+        print(requestedUserId)
         requestedUser = CustomUser.objects.get(pk=requestedUserId)
         
         newRequest = FriendRequests(from_user=user, to_user=requestedUser, date_sent=datetime.datetime.now())
@@ -97,9 +98,16 @@ def Friend_Requests(request, pk):
         return Response(status=status.HTTP_201_CREATED)
     
     elif request.method == 'DELETE':
-        deletedRequest_id = request.data.get('request_id');
-        deletedRequest = FriendRequests.objects.get(pk=deletedRequest_id)
+        from_user_id = request.data.get('from_user_id');
+        deletedRequest = FriendRequests.objects.get(from_user=from_user_id, to_user=pk)
         deletedRequest.delete()
+
+        answer = request.data.get('answer')
+
+        if answer == 'accept':
+            from_user = CustomUser.objects.get(pk=from_user_id)
+            user.addFriend(from_user)
+
         return Response(status=status.HTTP_204_NO_CONTENT)
         
 

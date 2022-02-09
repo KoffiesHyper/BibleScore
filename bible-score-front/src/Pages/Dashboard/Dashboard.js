@@ -1,9 +1,12 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
 
-export default function Dashboard({ user, savedVerses }) {
+export default function Dashboard({ user, savedVerses, friendRequests }) {
+    const [hasFriendRequests, setHasFriendRequests] = useState(false)
+
     const navigate = useHistory();
 
     if (!user) return (
@@ -19,6 +22,13 @@ export default function Dashboard({ user, savedVerses }) {
         <div className='dashboard-container'>
             <div className='prayer-requests'>
                 <h2 className='default-label'>Social</h2>
+                <div>
+                    {
+                        friendRequests.map((e, i) => {
+                            return <FriendRequest key={i} from_user={e} to_user={user} />
+                        })
+                    }
+                </div>
             </div>
             <div className='saved-verses'>
                 <h2 className='default-label'>Saved Verses</h2>
@@ -47,6 +57,36 @@ function ListItem({ heading, text, click }) {
         <div className='item-container' onClick={click}>
             <h3 className='default-label'>{heading}</h3>
             <p className='default-label'>{text}</p>
+        </div>
+    )
+}
+
+function FriendRequest({ from_user, to_user }) {
+    const answerRequest = async (answer, from_user) => {
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/users/friends-request/${to_user.id}`,
+            {
+                data: {
+                    "from_user_id": from_user.id,
+                    "answer": answer ? 'accept' : 'decline'
+                },
+                headers: {
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+                }
+            }
+        )
+
+        console.log(response)
+    }
+
+    return (
+        <div className='request-container'>
+            <h3 className='default-label'>Brethren Request From:</h3>
+            <p className='default-label'>{from_user.username}</p>
+
+            <div className='request-buttons'>
+                <button className='default-btn accept' onClick={() => answerRequest(true, from_user)}>Accept</button>
+                <button className='default-btn decline' onClick={() => answerRequest(false, from_user)}>Decline</button>
+            </div>
         </div>
     )
 }
