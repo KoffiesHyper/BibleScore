@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
+import { FaUserFriends } from 'react-icons/fa';
+import { BsFillPersonPlusFill } from 'react-icons/bs';
+import { IconContext } from 'react-icons/lib';
 
 export default function Dashboard({ user, savedVerses, friendRequests, friends }) {
     const navigate = useHistory();
@@ -20,18 +23,33 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends }
         <div className='dashboard-container'>
             <div className='prayer-requests'>
                 <h2 className='default-label'>Social</h2>
+                <div className='heading'>
+                    <IconContext.Provider value={{ color: 'white' }}><FaUserFriends /></IconContext.Provider>
+                    <h3 className='default-label'>Friends</h3>
+                </div>
+                <div>
+                    {
+                        friends.map((e, i) => {
+                            return (
+                                <div className='friend-box'>
+                                    <h3 className='default-label' >{e.username}</h3>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className='heading'>
+                    <IconContext.Provider value={{ color: 'white' }}><BsFillPersonPlusFill /></IconContext.Provider>
+                    <h3 className='default-label'>Friend Requests</h3>
+                </div>
                 <div>
                     {
                         friendRequests.map((e, i) => {
                             return <FriendRequest key={i} from_user={e} to_user={user} />
                         })
                     }
-                    {
-                        friends.map((e, i) => {
-                            return <p>{e.email}</p>
-                        })
-                    }
                 </div>
+
             </div>
             <div className='saved-verses'>
                 <h2 className='default-label'>Saved Verses</h2>

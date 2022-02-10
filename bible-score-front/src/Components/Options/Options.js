@@ -5,7 +5,12 @@ export default function Options({ array }){
         <>
             {
                 array.map((e, i) => {
-                    return <option  key={i} style={{'fontFamily': 'custom1', 'fontWeight': 'bold', 'fontSize': '15px'}} value={e.id}>{e.name}</option>
+                    return <option  key={i} style={{'fontFamily': 'custom1', 
+                    'fontWeight': 'normal', 
+                    'fontSize': '15px',
+                    'backgroundColor': 'var(--tertiary-color)',
+                    'color': 'white'
+                }} value={e.id}>{e.name}</option>
                 })
             }
         </>

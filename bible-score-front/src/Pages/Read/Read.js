@@ -135,7 +135,7 @@ export default function Read({ user, saveVerse }) {
             return;
         }
         else {
-            text.style.textDecoration = 'underline dotted white';
+            text.style.textDecoration = 'underline dotted var(--tertiary-color)';
             if (!verseSelected) setVerseSelected(true)
         }
     }

@@ -20,15 +20,23 @@
     scrollbar-color: red;
 }
 
+.prayer-requests h3{
+    color: var(--primary-color);
+    font-size: 17px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .saved-verses{
     grid-column-start: 3;
 }
 
 .prayer-requests h2, .saved-verses h2{
     justify-self: center;
-    font-weight: normal;
+    font-weight: lighter;
     font-family: custom1;
-    font-size: 20px;
+    letter-spacing: 2px;
+    font-size: 22px;
     color: var(--primary-color);
 }
 
@@ -86,7 +94,7 @@
     width: 90%;
     border-radius: 3px;
     margin-left: 18px;
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding-top: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -110,5 +118,30 @@
 
 .request-container .decline{
     background-color: #3d241186;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+}
+
+.friend-box{
+    background-color: #b69479;
+    width: 90%;
+    margin-left: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+}
+
+.friend-box h3{
+    color:  #573519;
+    font-weight:  bold;
 }
 
