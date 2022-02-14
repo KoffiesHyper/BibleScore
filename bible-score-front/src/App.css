@@ -148,7 +148,7 @@ body{
   border-radius: 3px;
   outline: none;
   font-family: custom1;
-  border: 1px solid #5735029f;
+  border: 2px solid #5735029f;
   padding: 6px;
 }
 
@@ -158,4 +158,3 @@ body{
   border-radius: 3px;
   outline: none;
 }
-

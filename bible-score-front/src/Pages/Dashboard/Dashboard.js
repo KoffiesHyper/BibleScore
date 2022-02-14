@@ -5,6 +5,7 @@ import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
 import { FaUserFriends } from 'react-icons/fa';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
+import { RiSendPlaneFill } from 'react-icons/ri';
 import { IconContext } from 'react-icons/lib';
 
 export default function Dashboard({ user, savedVerses, friendRequests, friends }) {
@@ -21,11 +22,11 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends }
     );
     return (user &&
         <div className='dashboard-container'>
-            <div className='prayer-requests'>
+            <div className='social'>
                 <h2 className='default-label'>Social</h2>
                 <div className='heading'>
                     <IconContext.Provider value={{ color: 'white' }}><FaUserFriends /></IconContext.Provider>
-                    <h3 className='default-label'>Friends</h3>
+                    <h3 className='default-label'>Brethren</h3>
                 </div>
                 <div>
                     {
@@ -40,7 +41,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends }
                 </div>
                 <div className='heading'>
                     <IconContext.Provider value={{ color: 'white' }}><BsFillPersonPlusFill /></IconContext.Provider>
-                    <h3 className='default-label'>Friend Requests</h3>
+                    <h3 className='default-label'>Brethren Requests</h3>
                 </div>
                 <div>
                     {
@@ -51,6 +52,25 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends }
                 </div>
 
             </div>
+
+            <div className='prayer-request'>
+                <h2 className='default-label'>Make a Prayer Request</h2>
+                <div className='yourprayer-title'>
+                    <p className='default-label'>Title</p>
+                    <input className='default-input' />
+                </div>
+                <div className='yourprayer-description'>
+                    <p className='default-label'>Description</p>
+                    <textarea className='default-input' />
+                </div>
+                <button className='default-btn send-btn'>
+                    <div className='send-icon'>
+                        <IconContext.Provider value={{ color: '#573519', size: '14px', marginTop: '10px'}}><RiSendPlaneFill /></IconContext.Provider>
+                    </div>
+                    Send
+                </button>
+            </div>
+
             <div className='saved-verses'>
                 <h2 className='default-label'>Saved Verses</h2>
                 {

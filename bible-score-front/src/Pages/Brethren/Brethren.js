@@ -47,7 +47,7 @@ export default function Brethren({ user, friendRequests }) {
                                         <h3 className="default-label">{e.username}</h3>
                                         <p className="default-label">{`${e.first_name} ${e.last_name}`}</p>
                                     </div>
-                                    <button className="default-btn" onClick={() => sendFriendRequest(e)}>Send Friend Request</button>
+                                    <button className="default-btn" onClick={() => sendFriendRequest(e)}>Send Brethren Request</button>
                                 </div>
                             )
                         })
