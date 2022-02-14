@@ -67,11 +67,6 @@ export default function Memorize({ s }) {
         case 0:
             return (
                 <div className="memorize-form-container">
-                    <div className="heading-container">
-                        <h1>Scripture Memorization</h1>
-                        <h2>An intuative tool to effectively memorize scripture</h2>
-                    </div>
-
                     <div className="verse-container-outer">
                         <div className="verse-container-inner">
                             <h2 className="default-label">Choose a verse</h2>

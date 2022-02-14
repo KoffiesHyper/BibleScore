@@ -68,7 +68,7 @@ export default function Register({ updateSignedIn }) {
 
                 <div className='input-container'>
                     <h2 className='default-label'>First Name</h2>
-                    <input className='default-input' placeholder='Enter Your Surname' onChange={(event) => {
+                    <input className='default-input' placeholder='Enter Your first name' onChange={(event) => {
                         setFirstName(event.target.value);
                     }} />
                 </div>

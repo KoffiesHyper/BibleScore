@@ -45,15 +45,16 @@
 .verse-container-inner h2{
     color: rgb(0, 0, 0);
     margin-top: 10px;
-    font-weight: lighter; 
+    font-weight: bold; 
     font-size: 22px;
 }
 
 .verse-container-inner h3{
     color: rgb(0, 0, 0);
-    font-weight: lighter;
+    font-weight: normal;
     font-size: 15px;
     margin-bottom: 0px;
+    font-family: custom1;
 }
 
 .verse-container-inner select{

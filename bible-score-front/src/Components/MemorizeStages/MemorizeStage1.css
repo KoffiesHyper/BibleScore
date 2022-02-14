@@ -60,9 +60,9 @@
     width: 800px;
     height: auto;
     padding: 20px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(150, 150, 150);
-    border-radius: 4px;
+    background-color: #e7e4d881;
+    border: 1px solid var(--tertiary-color);
+    border-radius: 3px;
     font-size: 20px;
     font-family: bible1;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
