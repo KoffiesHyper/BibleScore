@@ -14,5 +14,6 @@ urlpatterns = [
     path('users/refresh', TokenRefreshView.as_view()),
     path('users/friends-list/<int:pk>', views.Friends_List),
     path('users/friends-request/<int:pk>', views.Friend_Requests),
-    path('users/search/<str:usr>', views.UserSearch)
+    path('users/search/<str:usr>', views.UserSearch),
+    path('users/prayer-request/<int:pk>', views.Prayer_Requests)
 ]

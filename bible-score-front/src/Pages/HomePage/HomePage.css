@@ -45,10 +45,12 @@
     justify-items: center;
     text-align: center;
     margin-bottom: 100px;
-    background-color: var(--primary-color);
+    background-color: #e7e4d881;
+    border: 1px solid var(--tertiary-color);
     width: 70%;
     height: 40%;
     padding-top: 20px;
     border-radius: 6px;
     min-width: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

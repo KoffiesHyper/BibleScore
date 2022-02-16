@@ -3,7 +3,7 @@
     width: 100vw;
     margin-top: 30px;
     display: grid;
-    grid-template-columns: 400px 1fr 400px;
+    grid-template-columns: 500px 1fr 500px;
     justify-items: center;
     text-align: center;
     min-width: 900px;
@@ -36,7 +36,6 @@
     justify-self: center;
     font-weight: lighter;
     font-family: custom1;
-    letter-spacing: 2px;
     font-size: 22px;
     color: var(--primary-color);
 }
@@ -92,7 +91,6 @@
 
 .request-container{
     background-color: #b69479;
-    width: 90%;
     border-radius: 3px;
     margin-left: 18px;
     margin-bottom: 20px;
@@ -148,10 +146,11 @@
 
 .prayer-request{
     background-color: #3d1c01c2;
-    height: 42vh;
+    height: 40vh;
     border-radius: 3px;
     width: 90%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 760px;
 }
 
 .prayer-request p{

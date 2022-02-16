@@ -8,8 +8,25 @@ import { BsFillPersonPlusFill } from 'react-icons/bs';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { IconContext } from 'react-icons/lib';
 
-export default function Dashboard({ user, savedVerses, friendRequests, friends }) {
+export default function Dashboard({ user, savedVerses, friendRequests, friends, prayerRequests }) {
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    
     const navigate = useHistory();
+
+    const sendPrayerRequest = async () => {
+        // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/prayer-request/${user.id}`, {
+        //     "title": title,
+        //     "description": description
+        // }, {
+        //     headers:{
+        //         'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+        //     }
+        // });
+
+        // console.log(response);
+        console.log(prayerRequests)
+    }
 
     if (!user) return (
         <div className='nouser-container'>
@@ -57,13 +74,13 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends }
                 <h2 className='default-label'>Make a Prayer Request</h2>
                 <div className='yourprayer-title'>
                     <p className='default-label'>Title</p>
-                    <input className='default-input' />
+                    <input className='default-input' onChange={(event) => setTitle(event.target.value)} />
                 </div>
                 <div className='yourprayer-description'>
                     <p className='default-label'>Description</p>
-                    <textarea className='default-input' />
+                    <textarea className='default-input' onChange={(event) => setDescription(event.target.value)} />
                 </div>
-                <button className='default-btn send-btn'>
+                <button onClick={sendPrayerRequest} className='default-btn send-btn'>
                     <div className='send-icon'>
                         <IconContext.Provider value={{ color: '#573519', size: '14px', marginTop: '10px'}}><RiSendPlaneFill /></IconContext.Provider>
                     </div>

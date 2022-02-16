@@ -58,3 +58,8 @@ class FriendRequests(models.Model):
     from_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='from_user', null=False, default=1)
     to_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='to_user', null=False, default=2)
     date_sent = models.DateTimeField(null=True)
+
+class PrayerRequests(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user');
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)

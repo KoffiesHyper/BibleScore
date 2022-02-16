@@ -16,7 +16,7 @@ export default function NavBar({ user, signedIn, logOut, keyword, updateKW }) {
                         <Link to='/dashboard' ><button>Dashboard</button></Link>
                         <Link to='/read' ><button>Read</button></Link>
                         <div className="top-search">
-                            <input type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
+                            <input className="default-input" type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
                             <Link to={`/search/${keyword}`}>
                                 <div className="search-button">
                                     <IconContext.Provider value={{ color: "black", className: "global-class-name", size: '3em' }}>
@@ -43,10 +43,10 @@ export default function NavBar({ user, signedIn, logOut, keyword, updateKW }) {
                         <Link to='/dashboard' ><button>Dashboard</button></Link>
                         <Link to='/read' ><button>Read</button></Link>
                         <div className="top-search">
-                            <input type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
+                            <input className="default-input" type='text' placeholder="Search" onChange={(event) => updateKW(event.target.value)}></input>
                             <Link to={`/search/${keyword}`}>
                                 <div className="search-button">
-                                    <IconContext.Provider value={{ color: "black", className: "global-class-name", size: '3em' }}>
+                                    <IconContext.Provider value={{ color: "#5735029f", className: "global-class-name", size: '3em' }}>
                                         <div>
                                             <FaSearch size='15px' />
                                         </div>

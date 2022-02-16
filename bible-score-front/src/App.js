@@ -27,6 +27,7 @@ function App() {
   const [keyword, setKeyword] = useState();
   const [friendRequests, setFriendRequests] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [prayerRequests, setPrayerRequests] = useState([]);
 
   useEffect(async () => {
     const manager = new JWTManager()
@@ -56,6 +57,16 @@ function App() {
       getFriendList()
     }
   }, [user])
+
+  useEffect(async () => {
+    if (friends.length > 0) {
+      getPrayerRequests()
+    }
+  }, [friends])
+
+  useEffect(async () => {
+    console.log(prayerRequests)
+  }, [prayerRequests])
 
   const saveVerse = async (verse) => {
     var highlighted = user.saved_verses;
@@ -132,12 +143,39 @@ function App() {
 
   const getFriendList = async () => {
     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/friends-list/${user.id}`, {
-      headers: { 
+      headers: {
         'Api-Key': process.env.REACT_APP_SERVER_API_KEY
       }
     })
 
     setFriends(response.data);
+  }
+
+  const getPrayerRequests = async () => {
+    var array = [];
+
+    friends.forEach(async (e, i) => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/prayer-request/${e.id}`, {
+          headers: {
+            'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+          }
+        })
+
+        if (response.status !== 200) return;
+
+        array.push(response.data[0])
+        if (i === friends.length - 1)
+          setTimeout(() => {
+            setPrayerRequests(array);
+          }, 50);
+      } catch {
+        if (i === friends.length - 1)
+          setTimeout(() => {
+            setPrayerRequests(array);
+          }, 50);
+      }
+    });
   }
 
   const logOut = () => {
@@ -180,7 +218,13 @@ function App() {
       <Route exact path={'/dashboard'} render={() => {
         return (
           <div>
-            <Dashboard user={user} savedVerses={savedVerses} friendRequests={friendRequests} friends={friends} />
+            <Dashboard
+              user={user}
+              savedVerses={savedVerses}
+              friendRequests={friendRequests}
+              friends={friends}
+              prayerRequests={prayerRequests}
+            />
           </div>
         );
       }} />

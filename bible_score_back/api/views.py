@@ -1,15 +1,12 @@
 import datetime
-import re
-from django import views
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from users.serializers import FriendRequestSerializer
+from users.serializers import FriendRequestSerializer, PrayerRequestSerializer
 from .permissions import IsFromFrontEnd
-from users.models import CustomUser, FriendRequests
+from users.models import CustomUser, FriendRequests, PrayerRequests
 from users.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -103,8 +100,23 @@ def Friend_Requests(request, pk):
             user.addFriend(from_user)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
-        
 
+@api_view(['GET', 'POST', 'DELETE'])
+def Prayer_Requests(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+
+    if request.method == 'GET':
+        requests = get_list_or_404(PrayerRequests, user=user)
+        serializer = PrayerRequestSerializer(requests, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        title = request.data.get('title')
+        description = request.data.get('description')
+        newRequest = PrayerRequests(title=title, description=description, user=user)
+        newRequest.save();    
+        serializer = PrayerRequestSerializer(newRequest)    
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

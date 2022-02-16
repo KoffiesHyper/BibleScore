@@ -1,5 +1,6 @@
+from pyexpat import model
 from rest_framework.serializers import ModelSerializer
-from .models import CustomUser, FriendRequests
+from .models import CustomUser, FriendRequests, PrayerRequests
 
 class UserSerializer(ModelSerializer):
 
@@ -17,3 +18,8 @@ class FriendRequestSerializer(ModelSerializer):
     class Meta:
         model = FriendRequests
         fields = ['date_sent', 'from_user', 'to_user']
+
+class PrayerRequestSerializer(ModelSerializer):
+    class Meta:
+        model = PrayerRequests
+        fields = '__all__'
