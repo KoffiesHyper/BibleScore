@@ -11,21 +11,25 @@ import { IconContext } from 'react-icons/lib';
 export default function Dashboard({ user, savedVerses, friendRequests, friends, prayerRequests }) {
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
-    
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [requestOnOverlay, setRequestOnOverlay] = useState({});
+
     const navigate = useHistory();
 
     const sendPrayerRequest = async () => {
-        // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/prayer-request/${user.id}`, {
-        //     "title": title,
-        //     "description": description
-        // }, {
-        //     headers:{
-        //         'Api-Key': process.env.REACT_APP_SERVER_API_KEY
-        //     }
-        // });
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/prayer-request/${user.id}`, {
+            "title": title,
+            "description": description
+        }, {
+            headers:{
+                'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+            }
+        });
+    }
 
-        // console.log(response);
-        console.log(prayerRequests)
+    const showPrayerInfo = (request) => {
+        setShowOverlay(true)
+        setRequestOnOverlay(request);
     }
 
     if (!user) return (
@@ -39,6 +43,19 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
     );
     return (user &&
         <div className='dashboard-container'>
+            {showOverlay &&
+                <div className='overlay'>
+                    <div className='prayer-request-info'>
+                        <button className='default-btn' onClick={() => setShowOverlay(false)}>Done</button>
+                        <h2 className='default-label'>{requestOnOverlay.from.username}</h2>
+                        <h3 className='default-label'>{`${requestOnOverlay.from.first_name} ${requestOnOverlay.from.last_name}`}</h3>
+                        <div className='prayer-info-text'>
+                            <h3 className='default-label'>{requestOnOverlay.title}</h3>
+                            <p className='default-label'>{requestOnOverlay.description}</p>
+                        </div>
+                    </div>
+                </div>
+            }
             <div className='social'>
                 <h2 className='default-label'>Social</h2>
                 <div className='heading'>
@@ -70,23 +87,37 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
 
             </div>
 
-            <div className='prayer-request'>
-                <h2 className='default-label'>Make a Prayer Request</h2>
-                <div className='yourprayer-title'>
-                    <p className='default-label'>Title</p>
-                    <input className='default-input' onChange={(event) => setTitle(event.target.value)} />
-                </div>
-                <div className='yourprayer-description'>
-                    <p className='default-label'>Description</p>
-                    <textarea className='default-input' onChange={(event) => setDescription(event.target.value)} />
-                </div>
-                <button onClick={sendPrayerRequest} className='default-btn send-btn'>
-                    <div className='send-icon'>
-                        <IconContext.Provider value={{ color: '#573519', size: '14px', marginTop: '10px'}}><RiSendPlaneFill /></IconContext.Provider>
+            <div className='middle-board'>
+                <div className='prayer-request'>
+                    <h2 className='default-label'>Make a Prayer Request</h2>
+                    <div className='yourprayer-title'>
+                        <p className='default-label'>Title</p>
+                        <input className='default-input' onChange={(event) => setTitle(event.target.value)} />
                     </div>
-                    Send
-                </button>
+                    <div className='yourprayer-description'>
+                        <p className='default-label'>Description</p>
+                        <textarea className='default-input' onChange={(event) => setDescription(event.target.value)} />
+                    </div>
+                    <button onClick={sendPrayerRequest} className='default-btn send-btn'>
+                        <div className='send-icon'>
+                            <IconContext.Provider value={{ color: '#573519', size: '14px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
+                        </div>
+                        Send
+                    </button>
+                </div>
+
+                <div className='prayer-requests'>
+                    <h2 className='default-label'>Prayer Requests From Your Brethren</h2>
+                    <div className='their-requests'>
+                        {
+                            prayerRequests.map((e, i) => {
+                                return <PrayerRequest request={e} showPrayerInfo={showPrayerInfo} />
+                            })
+                        }
+                    </div>
+                </div>
             </div>
+
 
             <div className='saved-verses'>
                 <h2 className='default-label'>Saved Verses</h2>
@@ -145,6 +176,35 @@ function FriendRequest({ from_user, to_user }) {
                 <button className='default-btn accept' onClick={() => answerRequest(true, from_user)}>Accept</button>
                 <button className='default-btn decline' onClick={() => answerRequest(false, from_user)}>Decline</button>
             </div>
+        </div>
+    )
+}
+
+function PrayerRequest({ request, showPrayerInfo }) {
+    const [from, setFrom] = useState({});
+
+    useEffect(async () => {
+        const fromUser = await axios(`${process.env.REACT_APP_SERVER_URL}/api/users/${request.user}`, {
+            headers: {
+                'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+            }
+        })
+
+        setFrom(fromUser.data);
+    }, [])
+
+    return (
+        <div className='prayer-container'>
+            <h2 className='default-label'>{from.username}</h2>
+            <h3 className='default-label'>{`${from.first_name} ${from.last_name}`}</h3>
+            <p className='default-label'>{request.title}</p>
+            <button className='default-btn' onClick={() => {
+                showPrayerInfo({
+                    title: request.title,
+                    description: 'asd',
+                    from: from
+                })
+            }}>More</button>
         </div>
     )
 }

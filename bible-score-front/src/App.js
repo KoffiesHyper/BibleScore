@@ -64,9 +64,9 @@ function App() {
     }
   }, [friends])
 
-  useEffect(async () => {
-    console.log(prayerRequests)
-  }, [prayerRequests])
+  // useEffect(async () => {
+  //   console.log(prayerRequests)
+  // }, [prayerRequests])
 
   const saveVerse = async (verse) => {
     var highlighted = user.saved_verses;
@@ -164,7 +164,7 @@ function App() {
 
         if (response.status !== 200) return;
 
-        array.push(response.data[0])
+        array.push(response.data[1])
         if (i === friends.length - 1)
           setTimeout(() => {
             setPrayerRequests(array);

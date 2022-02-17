@@ -151,6 +151,8 @@
     width: 90%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     min-width: 760px;
+    padding-top: 10px;
+    padding-right: 40px;
 }
 
 .prayer-request p{
@@ -190,3 +192,116 @@
     background-color: #b69479;
     color:  #573519;
 }
+
+.middle-board{
+    min-height: 600px;
+}
+
+.prayer-requests{
+    border: 1px solid #5735029f;
+    background-color: #e7e4d881;
+    margin-top: 60px;
+    height: 30vh;
+    border-radius: 3px;
+    overflow-x: scroll;
+}
+
+.their-requests{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 60%;
+    margin-top: 35px;
+    margin-left: 30px;
+}
+
+.prayer-container{
+    background-color: var(--tertiary-color);
+    border-radius: 3px;
+    height: 100%;
+    padding: 15px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 4fr;
+    justify-items: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.prayer-container h3, .prayer-container h2, .prayer-container p{
+    color: white;
+    margin: 0px;
+}
+
+.prayer-container p{
+    font-size: 15px;
+}
+
+.prayer-container button, .overlay button{
+    background-color: #b69479;
+    outline: none;
+    border: none;
+    padding: 5px;
+    font-family: custom1;
+    justify-self: flex-end;
+}
+
+.overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e7e4d881;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prayer-request-info{
+    padding: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: 1fr 1fr .5fr 10fr;
+    background-color: var(--tertiary-color);
+    height: auto;
+    width: 20vw;
+    border-radius: 3px;
+    min-width: 300px;
+}
+
+.prayer-request-info h3, .prayer-request-info h2, .prayer-request-info p{
+    color: white;
+    margin: 0px;
+}
+
+.prayer-container h3, .prayer-request-info h3{
+    color: #b69479;
+    font-size: 16px;
+}
+
+.prayer-info-text{
+    background-color: #b69479;
+    height: 80%;
+    width: 90%;
+    justify-self: center;
+    border-radius: 3px;
+}
+
+.prayer-info-text h3{
+    color: var(--tertiary-color);
+    width: 100%;
+    border-bottom: 1px solid var(--tertiary-color);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.prayer-info-text p{
+    margin-top: 10px;
+    color: white;
+}
+
+

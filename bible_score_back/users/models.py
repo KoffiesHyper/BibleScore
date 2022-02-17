@@ -39,7 +39,7 @@ class CustomUser(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
-        return self.friends
+        return self.username
 
     def addFriend(self, friend):
         if friend not in self.friends.all():
