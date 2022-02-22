@@ -201,7 +201,7 @@ function PrayerRequest({ request, showPrayerInfo }) {
             <button className='default-btn' onClick={() => {
                 showPrayerInfo({
                     title: request.title,
-                    description: 'asd',
+                    description: request.description,
                     from: from
                 })
             }}>More</button>

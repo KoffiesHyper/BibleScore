@@ -23,7 +23,8 @@ export default function Read({ user, saveVerse }) {
     const [splitVerses, setSplitVerses] = useState([]);
     const [verseSelected, setVerseSelected] = useState(false);
     const [selectedVerse, setSelectedVerse] = useState();
-    const [highlightColor, setHighlightColor] = useState('rgb(83, 207, 230)');
+    const [highlightColor, setHighlightColor] = useState('rgb(100, 207, 230)');
+    const [comments, setComments] = useState([{}]);
 
     const navigate = useHistory();
 
@@ -104,7 +105,7 @@ export default function Read({ user, saveVerse }) {
         if (user) {
             for (let i = 0; i < verseOptions.length; i++) {
                 const toBeCleared = document.getElementById(i);
-                if(toBeCleared) toBeCleared.style.backgroundColor = 'transparent'
+                if (toBeCleared) toBeCleared.style.backgroundColor = 'transparent'
             }
 
             const saved_verses = user.saved_verses;
@@ -117,6 +118,7 @@ export default function Read({ user, saveVerse }) {
                 if (b === book && c === chapter) {
                     const toBeHighlighted = document.getElementById(v - 1);
                     toBeHighlighted.style.backgroundColor = highlightColor;
+                    toBeHighlighted.style.color = 'white';
                 }
             }
         }
@@ -154,8 +156,6 @@ export default function Read({ user, saveVerse }) {
     const highlightVerse = () => {
         const text = document.getElementById(selectedVerse);
         text.style.backgroundColor = highlightColor;
-        // const color = highlightColor.substring(4, highlightColor.length - 1).split(',');
-        // console.log(color);
 
         function hexToRgbNew(hex) {
             var arrBuff = new ArrayBuffer(4);
@@ -177,7 +177,7 @@ export default function Read({ user, saveVerse }) {
             0.114 * (b * b)
         );
 
-        if(hsp > 140) text.style.color = 'black'
+        if (hsp > 140) text.style.color = 'black'
         else text.style.color = 'white'
 
         saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
@@ -185,6 +185,20 @@ export default function Read({ user, saveVerse }) {
 
     const redirectToMemorize = () => {
         navigate.push(`/memorize/${book}.${chapter}.${selectedVerse + 1}`)
+    }
+
+    const updateComments = async (v) => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/comments/${book}.${chapter}.${v}`, {
+                headers: {
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+                }
+            })
+
+            setComments(response.data);
+        } catch (err) {
+            setComments([{ comment: 'No comments' }]);
+        }
     }
 
     if (columns === 1 || verse !== 'All') {
@@ -213,8 +227,20 @@ export default function Read({ user, saveVerse }) {
                     </div>
 
                     <div className="column-options">
-                        <input className="default-btn" type='button' value='|' onClick={() => { setColumns(1); setVerseSelected(false) }}></input>
-                        <input className="default-btn" type='button' value='||' onClick={() => { setColumns(2); setVerseSelected(false) }}></input>
+                        <input className="default-btn" type='button' value='|' onClick={() => {
+                            setTimeout(() => {
+                                highlightSavedVerses()
+                            }, 10)
+                            setColumns(1);
+                            setVerseSelected(false)
+                        }}></input>
+                        <input className="default-btn" type='button' value='||' onClick={() => {
+                            setTimeout(() => {
+                                highlightSavedVerses()
+                            }, 10)
+                            setColumns(2);
+                            setVerseSelected(false)
+                        }}></input>
                     </div>
                 </div>
                 <div className='text-container' style={{ 'width': '25vw' }}>
@@ -222,16 +248,14 @@ export default function Read({ user, saveVerse }) {
                     <div>
                         {
                             splitVerses.map((e, i) =>
-                                <span
-                                    key={i}
-                                    id={i}
-                                    className="verse"
-                                    onClick={() => underlineVerse(i)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <span className="verse-num">{` ${e.num.trim()}`}</span>
-                                    {e.text}
-                                </span>)
+                                <Verse
+                                    e={e}
+                                    i={i}
+                                    comments={comments}
+                                    updateComments={updateComments}
+                                    highlightSavedVerses={highlightSavedVerses}
+                                />
+                            )
                         }
                     </div>
 
@@ -274,8 +298,22 @@ export default function Read({ user, saveVerse }) {
                     </div>
 
                     <div className="column-options">
-                        <input className="default-btn" type='button' value='|' onClick={() => setColumns(1)}></input>
-                        <input className="default-btn" type='button' value='||' onClick={() => setColumns(2)}></input>
+                        <div className="column-options">
+                            <input className="default-btn" type='button' value='|' onClick={() => {
+                                setTimeout(() => {
+                                    highlightSavedVerses()
+                                }, 10)
+                                setColumns(1);
+                                setVerseSelected(false)
+                            }}></input>
+                            <input className="default-btn" type='button' value='||' onClick={() => {
+                                setTimeout(() => {
+                                    highlightSavedVerses()
+                                }, 10)
+                                setColumns(2);
+                                setVerseSelected(false)
+                            }}></input>
+                        </div>
                     </div>
                 </div>
                 <div className='text-container' style={{ 'width': '80vw' }}>
@@ -330,4 +368,60 @@ export default function Read({ user, saveVerse }) {
             </div>
         );
     }
+}
+
+function Verse({ e, i, comments, updateComments, highlightSavedVerses }) {
+    const [expand, setExpand] = useState(false)
+
+
+    if (expand)
+        return (
+            <div style={{ paddingBottom: '10px' }} onshow={'alert()'}>
+                <span
+                    onClick={() => {
+                        setTimeout(() => {
+                            highlightSavedVerses()
+                        }, 10)
+                        setExpand(false);
+                    }}
+                    id={i}
+                    key={i}
+                    className="verse"
+                    style={{ cursor: 'pointer' }}
+                >
+                    <span className="verse-num">{` ${e.num.trim()}`}</span>
+                    {e.text}
+                </span>
+                <div>
+                    {comments &&
+                        comments.map((e, i) => {
+                            return (
+                                <div>
+                                    <p style={{ color: 'grey', fontSize: '12px' }}>{e.comment}</p>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        )
+
+    return (
+        <span
+            onClick={() => {
+                updateComments(i + 1)
+                setTimeout(() => {
+                    highlightSavedVerses()
+                }, 10)
+                setExpand(true);
+            }}
+            key={i}
+            id={i}
+            className="verse"
+            style={{ cursor: 'pointer' }}
+        >
+            <span className="verse-num">{` ${e.num.trim()}`}</span>
+            {e.text}
+        </span>
+    );
 }
