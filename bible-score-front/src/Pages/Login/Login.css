@@ -34,3 +34,50 @@
 .inner-container button{
     margin: 20px;
 }
+
+.pop-up-message{
+    position: fixed;
+    left: 40vw;
+    top: 10vh;
+    width: 20vw;
+    height: 5vh;
+    background-color: rgb(146, 70, 70);
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: popUpMessage;
+    animation-fill-mode: forwards;
+    animation-duration: 2s;
+}
+
+.pop-up-message p{
+    font-family: custom2;
+    color: white;
+}
+
+@keyframes popUpMessage {
+    0% {
+        left: 40vw;
+        top: 5vh;
+        opacity: 0;
+    }
+
+    15% {
+        left: 40vw;
+        top: 8vh;
+        opacity: 1;
+    }
+
+    85% {
+        left: 40vw;
+        top: 8vh;
+        opacity: 1;
+    }
+
+    100% {
+        left: 40vw;
+        top: 5vh;
+        opacity: 0;
+    }
+}

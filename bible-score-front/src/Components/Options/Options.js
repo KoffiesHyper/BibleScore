@@ -9,7 +9,7 @@ export default function Options({ array }){
                     'fontWeight': 'normal', 
                     'fontSize': '15px',
                     'backgroundColor': 'var(--tertiary-color)',
-                    'color': 'white'
+                    'color': 'white',
                 }} value={e.id}>{e.name}</option>
                 })
             }

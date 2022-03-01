@@ -1,5 +1,6 @@
 body{
-  background-image: linear-gradient(to bottom, var(--primary-color), #997456);
+  background-color: #e7e4d8;
+  /* background-image: linear-gradient(to bottom, var(--primary-color), #997456); */
   background-repeat: space;
   height: auto;
 }

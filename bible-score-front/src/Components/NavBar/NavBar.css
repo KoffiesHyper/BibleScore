@@ -59,16 +59,18 @@
     font-size: 15px;
     padding: 3px;
     font-family: custom2;
+    border-right: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .top-search .search-button{
-    background-color: var(--secondary-color);
+    background-color: transparent;
     border: 2px solid #5735029f;
-    border-radius: 3px;
+    border-left: none;
     padding: 5px;
     padding-top: 2px;
     padding-bottom: 3px;
     width: 15px;
     height: 20px;
-    margin-left: 5px;
 }

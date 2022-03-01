@@ -9,20 +9,33 @@ export default function Login({ updateSignedIn }) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [valid, setValid] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
 
     const navigate = useHistory();
 
     const loginUser = async () => {
-        const manager = new JWTManager;
-        const pair = await manager.obtainPair(email, password);
-        localStorage.setItem('accessToken', pair.data.access);
-        localStorage.setItem('refreshToken', pair.data.refresh);
-        updateSignedIn(true);
-        navigate.push('/')
+        try {
+            const manager = new JWTManager;
+            const pair = await manager.obtainPair(email, password);
+            localStorage.setItem('accessToken', pair.data.access);
+            localStorage.setItem('refreshToken', pair.data.refresh);
+            updateSignedIn(true);
+            navigate.push('/')
+        } catch{
+            setShowMessage(true);
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 2000);
+        }
     }
 
     return (
         <div className='container'>
+            {showMessage &&
+                <div className='pop-up-message'>
+                    <p>Failed Login Attempt</p>
+                </div>
+            }
             <div className='inner-container'>
                 <h1 className='default-label'>Login</h1>
                 <div className='input-container'>
@@ -38,11 +51,11 @@ export default function Login({ updateSignedIn }) {
                     }} />
                 </div>
                 <ReCAPTCHA
-                size='compact'
-                sitekey="6Lf3I1keAAAAANA_5YEGuSCE-hUfI9Zvyb-fnXyO"
-                onChange={() => setValid(true)}
+                    size='compact'
+                    sitekey="6Lf3I1keAAAAANA_5YEGuSCE-hUfI9Zvyb-fnXyO"
+                    onChange={() => setValid(true)}
                 />
-                <button className='default-btn' onClick={loginUser}disabled={valid ? '' : 'disabled'} >Enter</button>
+                <button className='default-btn' onClick={loginUser} disabled={valid ? '' : 'disabled'} >Enter</button>
             </div>
         </div>
     );

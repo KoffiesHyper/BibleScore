@@ -58,12 +58,17 @@ body{
     grid-template-rows: 100px auto;
     justify-content: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    min-width: 350px;
 }
 
 .text-container .verse{
     font-family: bible1;
     color: black;
-    border-radius:  3px;
+    transition-duration: .1s;
+}
+
+.text-container .verse:hover{
+    background-color: rgba(102, 46, 0, 0.1);
 }
 
 .text-container h1{
@@ -177,4 +182,27 @@ p{
     font-weight: bold;
     font-family: bible2;
     font-size: 24px;
+}
+
+.verse-actions{
+    padding: 3px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--tertiary-color);
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: none;
+}
+
+.verse-comments{
+    border-left: 1px solid black;
+    padding: 0px;
+    margin: 0px;
+}
+
+.verse-comments p{
+    font-size: 12px;
+    color: var(--tertiary-color);
+    margin-left: 10px;
 }

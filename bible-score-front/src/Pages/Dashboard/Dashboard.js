@@ -21,7 +21,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
             "title": title,
             "description": description
         }, {
-            headers:{
+            headers: {
                 'Api-Key': process.env.REACT_APP_SERVER_API_KEY
             }
         });
@@ -195,16 +195,19 @@ function PrayerRequest({ request, showPrayerInfo }) {
 
     return (
         <div className='prayer-container'>
-            <h2 className='default-label'>{from.username}</h2>
-            <h3 className='default-label'>{`${from.first_name} ${from.last_name}`}</h3>
-            <p className='default-label'>{request.title}</p>
-            <button className='default-btn' onClick={() => {
-                showPrayerInfo({
-                    title: request.title,
-                    description: request.description,
-                    from: from
-                })
-            }}>More</button>
+            {request && <>
+                <h2 className='default-label'>{from.username}</h2>
+                <h3 className='default-label'>{`${from.first_name} ${from.last_name}`}</h3>
+                <p className='default-label'>{request.title}</p>
+                <button className='default-btn' onClick={() => {
+                    showPrayerInfo({
+                        title: request.title,
+                        description: request.description,
+                        from: from
+                    })
+                }}>More</button>
+            </>
+            }
         </div>
     )
 }

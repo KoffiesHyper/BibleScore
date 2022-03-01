@@ -6,6 +6,7 @@ import axios from "axios";
 import Options from "../../Components/Options/Options";
 import PassageFinder from "../../Components/Passage/Passage";
 import { BiBrain, BiHighlight } from "react-icons/bi";
+import { FiMoreHorizontal } from "react-icons/fi";
 import { IconContext } from "react-icons/lib";
 import { IoMdClose } from "react-icons/io";
 import { useHistory } from "react-router-dom";
@@ -42,7 +43,7 @@ export default function Read({ user, saveVerse }) {
 
         setTimeout(() => {
             highlightSavedVerses();
-        }, 1000)
+        }, 100)
     }, [passage]);
 
     const updateBookOptions = async () => {
@@ -105,7 +106,10 @@ export default function Read({ user, saveVerse }) {
         if (user) {
             for (let i = 0; i < verseOptions.length; i++) {
                 const toBeCleared = document.getElementById(i);
-                if (toBeCleared) toBeCleared.style.backgroundColor = 'transparent'
+                if (toBeCleared) {
+                    toBeCleared.style.backgroundColor = '';
+                    toBeCleared.style.color = '';
+                }
             }
 
             const saved_verses = user.saved_verses;
@@ -254,6 +258,7 @@ export default function Read({ user, saveVerse }) {
                                     comments={comments}
                                     updateComments={updateComments}
                                     highlightSavedVerses={highlightSavedVerses}
+                                    underlineVerse={underlineVerse}
                                 />
                             )
                         }
@@ -370,34 +375,39 @@ export default function Read({ user, saveVerse }) {
     }
 }
 
-function Verse({ e, i, comments, updateComments, highlightSavedVerses }) {
+function Verse({ e, i, comments, updateComments, highlightSavedVerses, underlineVerse }) {
     const [expand, setExpand] = useState(false)
 
 
     if (expand)
         return (
-            <div style={{ paddingBottom: '10px' }} onshow={'alert()'}>
+            <div style={{ paddingBottom: '10px' }}>
                 <span
-                    onClick={() => {
+                    key={i}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <span className="verse-num">{` ${e.num.trim()}`}</span>
+                    <span id={i} className="verse" onClick={() => underlineVerse(i)}>{e.text}</span>
+                    <button className="verse-actions default-btn" onClick={() => {
                         setTimeout(() => {
                             highlightSavedVerses()
                         }, 10)
                         setExpand(false);
-                    }}
-                    id={i}
-                    key={i}
-                    className="verse"
-                    style={{ cursor: 'pointer' }}
-                >
-                    <span className="verse-num">{` ${e.num.trim()}`}</span>
-                    {e.text}
+                    }}>
+                        <div className="verse-actions-icon">
+                            <IconContext.Provider value={{ size: '10px', color: 'white' }}>
+                                <FiMoreHorizontal />
+                            </IconContext.Provider>
+                        </div>
+                    </button>
                 </span>
-                <div>
+                <div className="verse-comments">
                     {comments &&
                         comments.map((e, i) => {
                             return (
                                 <div>
-                                    <p style={{ color: 'grey', fontSize: '12px' }}>{e.comment}</p>
+                                    <h3>{}</h3>
+                                    <p>{e.comment}</p>
                                 </div>
                             )
                         })
@@ -408,20 +418,26 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses }) {
 
     return (
         <span
-            onClick={() => {
-                updateComments(i + 1)
-                setTimeout(() => {
-                    highlightSavedVerses()
-                }, 10)
-                setExpand(true);
-            }}
             key={i}
-            id={i}
-            className="verse"
+
+            
             style={{ cursor: 'pointer' }}
         >
             <span className="verse-num">{` ${e.num.trim()}`}</span>
-            {e.text}
+            <span id={i} className="verse" onClick={() => underlineVerse(i)}>{e.text}</span>
+            <button className="verse-actions default-btn" onClick={() => {
+                updateComments(i + 1)
+                setTimeout(() => {
+                    highlightSavedVerses()
+                }, 20)
+                setExpand(true);
+            }}>
+                <div className="verse-actions-icon">
+                    <IconContext.Provider value={{ size: '10px', color: 'white' }}>
+                        <FiMoreHorizontal />
+                    </IconContext.Provider>
+                </div>
+            </button>
         </span>
     );
 }

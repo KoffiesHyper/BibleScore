@@ -22,6 +22,7 @@ export default function Memorize({ s }) {
     const [verseOptions, setVerseOptions] = useState([]);
     const [text, setText] = useState({});
     const [barAnim, setBarAnim] = useState('toRead');
+    const [loading, setLoading] = useState(true);
 
     const navigate = useHistory();
 
@@ -41,6 +42,12 @@ export default function Memorize({ s }) {
             updateVerseOptions();
         }
     }, [book, chapter, verse]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+    }, [bookOptions, chapter, verseOptions])
 
     const updateBookOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
@@ -68,24 +75,31 @@ export default function Memorize({ s }) {
             return (
                 <div className="memorize-form-container">
                     <div className="verse-container-outer">
-                        <div className="verse-container-inner">
-                            <h2 className="default-label">Choose a verse</h2>
-                            <h3>Book</h3>
-                            <select className="default-select" onChange={(event) => setBook(event.target.value)}>
-                                <Options array={bookOptions} />
-                            </select>
-                            <h3>Chapter</h3>
-                            <select className="default-select" onChange={(event) => setChapter(event.target.value)}>
-                                <Options array={chapterOptions} />
-                            </select>
-                            <h3>Verse</h3>
-                            <select className="default-select" onChange={(event) => setVerse(event.target.value)}>
-                                <Options array={verseOptions} />
-                            </select>
-                            <input className="default-btn" type="button" value="Proceed" onClick={async () => {
-                                navigate.push(`/memorize/${book}.${chapter}.${verse}`);
-                            }} />
-                        </div>
+                        {loading &&
+                            <div className="loading-indicator">
+                                
+                            </div>
+                        }
+                        {!loading &&
+                            <div className="verse-container-inner">
+                                <h2 className="default-label">Choose a verse</h2>
+                                <h3>Book</h3>
+                                <select className="default-select" onChange={(event) => setBook(event.target.value)}>
+                                    <Options array={bookOptions} />
+                                </select>
+                                <h3>Chapter</h3>
+                                <select className="default-select" onChange={(event) => setChapter(event.target.value)}>
+                                    <Options array={chapterOptions} />
+                                </select>
+                                <h3>Verse</h3>
+                                <select className="default-select" onChange={(event) => setVerse(event.target.value)}>
+                                    <Options array={verseOptions} />
+                                </select>
+                                <input className="default-btn" type="button" value="Proceed" onClick={async () => {
+                                    navigate.push(`/memorize/${book}.${chapter}.${verse}`);
+                                }} />
+                            </div>
+                        }
                     </div>
                 </div>
             );
@@ -114,14 +128,14 @@ export default function Memorize({ s }) {
                 </div>
             );
             break;
-            case 4:
-                return (
-                    <div className="stage-container">
-                        <ProgressBar barAnim='toFinish' />
-                        <h1>{`${text.heading} - Finished`}</h1>
-                    </div>
-                );
-                break;
+        case 4:
+            return (
+                <div className="stage-container">
+                    <ProgressBar barAnim='toFinish' />
+                    <h1>{`${text.heading} - Finished`}</h1>
+                </div>
+            );
+            break;
         default:
     }
 }
