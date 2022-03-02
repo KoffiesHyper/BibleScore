@@ -34,7 +34,7 @@ export default function Register({ updateSignedIn }) {
                 }
             }
         )
-
+        
         if (user.data.email.length > 1) {
             const manager = new JWTManager();
             const pair = await manager.obtainPair(email, password);

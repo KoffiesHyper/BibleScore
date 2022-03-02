@@ -88,7 +88,7 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'postgres',
+        'NAME': 'bible-score',
 
         'USER': 'postgres',
 

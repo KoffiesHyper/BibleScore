@@ -26,6 +26,7 @@ export default function Read({ user, saveVerse }) {
     const [selectedVerse, setSelectedVerse] = useState();
     const [highlightColor, setHighlightColor] = useState('rgb(100, 207, 230)');
     const [comments, setComments] = useState([{}]);
+    const [loading, setLoading] = useState(true);
 
     const navigate = useHistory();
 
@@ -45,6 +46,12 @@ export default function Read({ user, saveVerse }) {
             highlightSavedVerses();
         }, 100)
     }, [passage]);
+
+    useEffect(async () => {
+        if (bookOptions.length > 1 && chapterOptions.length > 1 && verseOptions.length > 1) {
+            setLoading(false);
+        }
+    }, [bookOptions, chapterOptions, verseOptions]);
 
     const updateBookOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
@@ -207,7 +214,10 @@ export default function Read({ user, saveVerse }) {
 
     if (columns === 1 || verse !== 'All') {
         return (
+
             <div className='outer-container'>
+
+
                 <div className='options-container'>
                     <div>
                         <h2>Book</h2>
@@ -406,7 +416,7 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                         comments.map((e, i) => {
                             return (
                                 <div>
-                                    <h3>{}</h3>
+                                    <h3>{ }</h3>
                                     <p>{e.comment}</p>
                                 </div>
                             )
@@ -420,7 +430,7 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
         <span
             key={i}
 
-            
+
             style={{ cursor: 'pointer' }}
         >
             <span className="verse-num">{` ${e.num.trim()}`}</span>
