@@ -187,12 +187,13 @@ p{
 .verse-actions{
     padding: 3px;
     border: none;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: var(--tertiary-color);
     margin-left: 10px;
     padding-left: 5px;
     padding-right: 5px;
     box-shadow: none;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
 .verse-comments{
@@ -201,26 +202,71 @@ p{
     padding: 0px;
     margin: 0px;
     display: grid;
+    justify-items: flex-start;
+}
+
+.verse-comments input{
+    width: 60%;
+    margin-left: 5%;
+    font-family: custom2;
+    background: transparent;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0px;
+}
+
+.verse-comments input:focus{
+    background: transparent;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0px;
 }
 
 .verse-comments h2{
     margin: 0px;
     font-size: 18px;
-    margin-left: 10px;
     color: var(--tertiary-color);
     font-family: custom1;
 }
 
-.verse-comments p{
+.verse-comment p{
     font-size: 14px;
     color: var(--tertiary-color);
     margin: 0px;
-    margin-left: 10px;
     font-family: custom2;
+    border-left: 2px solid var(--tertiary-color);
+    padding-left: 8px;
 }
 
 .verse-comment{
     display: grid;
     grid-template-rows: 1fr 1fr;
+    margin-left: 5%;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.verse-comments-own{
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(102, 46, 0, 0.1);
+    margin-left: 5%;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    border-radius: 3px;
+}
+
+.verse-comments-own button{
+    width: 10%;
+    padding: 0px;
+    padding-top: 7px;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: none;
 }

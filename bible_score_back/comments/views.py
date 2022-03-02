@@ -1,4 +1,4 @@
-from os import stat
+from datetime import datetime
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -18,14 +18,17 @@ def CommentByVerse(request, verse):
         return Response(serializer.data)
 
     if request.method == 'POST':
-        commentedBy = get_object_or_404(CustomUser, id=request.data.get('commentedBy'))
+        print(request.data)
+        return Response('nice')
+        # commentedBy = get_object_or_404(CustomUser, id=request.data.get('commentedBy'))
         
-        newComment = VerseComments(
-        commentedBy=commentedBy, 
-        verse=request.data.get('verse'), 
-        comment=request.data.get('comment')
-        )
+        # newComment = VerseComments(
+        #     commentedBy=commentedBy, 
+        #     verse=request.data.get('verse'), 
+        #     comment=request.data.get('comment'),
+        #     comment_date=datetime.now()
+        # )
 
-        newComment.save()
-        serializer = CommentSerializer(newComment)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # newComment.save()
+        # serializer = CommentSerializer(newComment)
+        # return Response(serializer.data, status=status.HTTP_201_CREATED)

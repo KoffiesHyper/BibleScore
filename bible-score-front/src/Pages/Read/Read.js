@@ -7,6 +7,7 @@ import Options from "../../Components/Options/Options";
 import PassageFinder from "../../Components/Passage/Passage";
 import { BiBrain, BiHighlight } from "react-icons/bi";
 import { FiMoreHorizontal } from "react-icons/fi";
+import { RiSendPlaneFill } from "react-icons/ri";
 import { IconContext } from "react-icons/lib";
 import { IoMdClose } from "react-icons/io";
 import { useHistory } from "react-router-dom";
@@ -130,7 +131,7 @@ export default function Read({ user, saveVerse }) {
 
                 if (b === book && c === chapter) {
                     const toBeHighlighted = document.getElementById(v - 1);
-                    if(!toBeHighlighted) return
+                    if (!toBeHighlighted) return
                     toBeHighlighted.style.backgroundColor = highlightColor;
                     toBeHighlighted.style.color = 'white';
                 }
@@ -391,8 +392,22 @@ export default function Read({ user, saveVerse }) {
 }
 
 function Verse({ e, i, comments, updateComments, highlightSavedVerses, underlineVerse }) {
-    const [expand, setExpand] = useState(false)
+    const [expand, setExpand] = useState(false);
+    const [newComment, setNewComment] = useState('');
 
+    const writeComment = async (i) => {
+        const verseNum = i + 1;
+
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/comments/GEN.1.1`, 
+        {
+            comment: newComment
+        },
+        {
+            headers: {
+                'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+            }
+        })
+    }
 
     if (expand)
         return (
@@ -417,8 +432,16 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                     </button>
                 </span>
                 <div className="verse-comments">
+                    <div className="verse-comments-own">
+                        <input onChange={(event) => setNewComment(event.target.value)} className="default-input" placeholder="Add Your Own Comment" ></input>
+                        <button className='default-btn send-btn' onClick={() => writeComment(i)}>
+                            <div className='send-icon'>
+                                <IconContext.Provider value={{ color: '#573519', size: '17px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
+                            </div>
+                        </button>
+                    </div>
                     {comments &&
-                        comments.map((e, i) => {    
+                        comments.map((e, i) => {
                             return (
                                 <div className="verse-comment">
                                     <h2>{e.user ? e.user.username : ''}</h2>
@@ -434,8 +457,6 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
     return (
         <span
             key={i}
-
-
             style={{ cursor: 'pointer' }}
         >
             <span className="verse-num">{` ${e.num.trim()}`}</span>

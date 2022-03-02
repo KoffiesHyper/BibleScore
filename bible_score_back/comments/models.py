@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 from users.models import CustomUser
@@ -8,3 +9,4 @@ class VerseComments(models.Model):
     commentedBy = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='commentedBy')
     verse = models.CharField(max_length=10)
     comment = models.CharField(max_length=500)
+    comment_date = models.DateTimeField(default=datetime.now())
