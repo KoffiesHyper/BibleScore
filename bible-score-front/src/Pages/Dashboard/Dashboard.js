@@ -111,7 +111,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                     <div className='their-requests'>
                         {
                             prayerRequests.map((e, i) => {
-                                return <PrayerRequest request={e} showPrayerInfo={showPrayerInfo} />
+                                return <PrayerRequest request={e} key={i} showPrayerInfo={showPrayerInfo} />
                             })
                         }
                     </div>

@@ -44,12 +44,14 @@ export default function Read({ user, saveVerse }) {
 
         setTimeout(() => {
             highlightSavedVerses();
-        }, 100)
+        }, 300)
     }, [passage]);
 
     useEffect(async () => {
         if (bookOptions.length > 1 && chapterOptions.length > 1 && verseOptions.length > 1) {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 100)
         }
     }, [bookOptions, chapterOptions, verseOptions]);
 
@@ -128,6 +130,7 @@ export default function Read({ user, saveVerse }) {
 
                 if (b === book && c === chapter) {
                     const toBeHighlighted = document.getElementById(v - 1);
+                    if(!toBeHighlighted) return
                     toBeHighlighted.style.backgroundColor = highlightColor;
                     toBeHighlighted.style.color = 'white';
                 }
@@ -206,7 +209,18 @@ export default function Read({ user, saveVerse }) {
                 }
             })
 
-            setComments(response.data);
+            const data = response.data;
+
+            for await (const e of data) {
+                const commentedBy = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/${e.commentedBy}`, {
+                    headers: {
+                        'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+                    }
+                })
+                e.user = commentedBy.data;
+            }
+
+            setComments(data);
         } catch (err) {
             setComments([{ comment: 'No comments' }]);
         }
@@ -214,73 +228,71 @@ export default function Read({ user, saveVerse }) {
 
     if (columns === 1 || verse !== 'All') {
         return (
-
-            <div className='outer-container'>
-
-
-                <div className='options-container'>
-                    <div>
-                        <h2>Book</h2>
-                        <select className="default-select" onChange={changeBook}>
-                            <Options array={bookOptions} />
-                        </select>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {loading &&
+                    <div className="loading-indicator">
                     </div>
+                }
+                {!loading &&
+                    <div className='outer-container'>
+                        <div className='options-container'>
+                            <div>
+                                <h2>Book</h2>
+                                <select className="default-select" onChange={changeBook}>
+                                    <Options array={bookOptions} />
+                                </select>
+                            </div>
 
-                    <div>
-                        <h2>Chapter</h2>
-                        <select className="default-select" onChange={changeChapter}>
-                            <Options array={chapterOptions} />
-                        </select>
-                    </div>
+                            <div>
+                                <h2>Chapter</h2>
+                                <select className="default-select" onChange={changeChapter}>
+                                    <Options array={chapterOptions} />
+                                </select>
+                            </div>
 
-                    <div>
-                        <h2>Verse</h2>
-                        <select className="default-select" onChange={changeVerse}>
-                            <Options array={verseOptions} />
-                        </select>
-                    </div>
+                            <div className="column-options">
+                                <input className="default-btn" type='button' value='|' onClick={() => {
+                                    setTimeout(() => {
+                                        highlightSavedVerses()
+                                    }, 10)
+                                    setColumns(1);
+                                    setVerseSelected(false)
+                                }}></input>
+                                <input className="default-btn" type='button' value='||' onClick={() => {
+                                    setTimeout(() => {
+                                        highlightSavedVerses()
+                                    }, 10)
+                                    setColumns(2);
+                                    setVerseSelected(false)
+                                }}></input>
+                            </div>
+                        </div>
+                        <div className='text-container' style={{ 'width': '25vw' }}>
+                            <h1>{heading}</h1>
+                            <div>
+                                {
+                                    splitVerses.map((e, i) =>
+                                        <Verse
+                                            e={e}
+                                            i={i}
+                                            comments={comments}
+                                            updateComments={updateComments}
+                                            highlightSavedVerses={highlightSavedVerses}
+                                            underlineVerse={underlineVerse}
+                                        />
+                                    )
+                                }
+                            </div>
 
-                    <div className="column-options">
-                        <input className="default-btn" type='button' value='|' onClick={() => {
-                            setTimeout(() => {
-                                highlightSavedVerses()
-                            }, 10)
-                            setColumns(1);
-                            setVerseSelected(false)
-                        }}></input>
-                        <input className="default-btn" type='button' value='||' onClick={() => {
-                            setTimeout(() => {
-                                highlightSavedVerses()
-                            }, 10)
-                            setColumns(2);
-                            setVerseSelected(false)
-                        }}></input>
-                    </div>
-                </div>
-                <div className='text-container' style={{ 'width': '25vw' }}>
-                    <h1>{heading}</h1>
-                    <div>
-                        {
-                            splitVerses.map((e, i) =>
-                                <Verse
-                                    e={e}
-                                    i={i}
-                                    comments={comments}
-                                    updateComments={updateComments}
-                                    highlightSavedVerses={highlightSavedVerses}
-                                    underlineVerse={underlineVerse}
-                                />
-                            )
+                        </div>
+                        {verseSelected &&
+                            <div id="verseMenu" className="verse-menu">
+                                <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
+                                <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
+                                <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
+                                <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
+                            </div>
                         }
-                    </div>
-
-                </div>
-                {verseSelected &&
-                    <div id="verseMenu" className="verse-menu">
-                        <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
-                        <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
-                        <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
-                        <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
                     </div>
                 }
             </div>
@@ -302,13 +314,6 @@ export default function Read({ user, saveVerse }) {
                         <h2>Chapter</h2>
                         <select className="default-select" onChange={changeChapter}>
                             <Options array={chapterOptions} />
-                        </select>
-                    </div>
-
-                    <div>
-                        <h2>Verse</h2>
-                        <select className="default-select" onChange={changeVerse}>
-                            <Options array={verseOptions} />
                         </select>
                     </div>
 
@@ -413,10 +418,10 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                 </span>
                 <div className="verse-comments">
                     {comments &&
-                        comments.map((e, i) => {
+                        comments.map((e, i) => {    
                             return (
-                                <div>
-                                    <h3>{ }</h3>
+                                <div className="verse-comment">
+                                    <h2>{e.user ? e.user.username : ''}</h2>
                                     <p>{e.comment}</p>
                                 </div>
                             )
