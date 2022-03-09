@@ -10,7 +10,11 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { IconContext } from "react-icons/lib";
 import { IoMdClose } from "react-icons/io";
+import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import VerseComment from "../../Components/VerseComment/VerseComment";
+import VerseMenu from "../../Components/VerseMenu/VerseMenu";
+import ReadOptions from "../../Components/ReadOptions/ReadOptions";
 
 export default function Read({ user, saveVerse }) {
     const [book, setBook] = useState('GEN');
@@ -220,10 +224,10 @@ export default function Read({ user, saveVerse }) {
                 })
                 e.user = commentedBy.data;
             }
-
+            
             setComments(data);
         } catch (err) {
-            setComments([{ comment: 'No comments' }]);
+            setComments([]);
         }
     }
 
@@ -236,38 +240,15 @@ export default function Read({ user, saveVerse }) {
                 }
                 {!loading &&
                     <div className='outer-container'>
-                        <div className='options-container'>
-                            <div>
-                                <h2>Book</h2>
-                                <select className="default-select" onChange={changeBook}>
-                                    <Options array={bookOptions} />
-                                </select>
-                            </div>
-
-                            <div>
-                                <h2>Chapter</h2>
-                                <select className="default-select" onChange={changeChapter}>
-                                    <Options array={chapterOptions} />
-                                </select>
-                            </div>
-
-                            <div className="column-options">
-                                <input className="default-btn" type='button' value='|' onClick={() => {
-                                    setTimeout(() => {
-                                        highlightSavedVerses()
-                                    }, 10)
-                                    setColumns(1);
-                                    setVerseSelected(false)
-                                }}></input>
-                                <input className="default-btn" type='button' value='||' onClick={() => {
-                                    setTimeout(() => {
-                                        highlightSavedVerses()
-                                    }, 10)
-                                    setColumns(2);
-                                    setVerseSelected(false)
-                                }}></input>
-                            </div>
-                        </div>
+                        <ReadOptions 
+                        bookOptions={bookOptions}
+                        chapterOptions={chapterOptions}
+                        changeBook={changeBook}
+                        changeChapter={changeChapter}
+                        highlightSavedVerses={highlightSavedVerses}
+                        setColumns={setColumns}
+                        setVerseSelected={setVerseSelected}
+                        />
                         <div className='text-container' style={{ 'width': '25vw' }}>
                             <h1>{heading}</h1>
                             <div>
@@ -280,6 +261,10 @@ export default function Read({ user, saveVerse }) {
                                             updateComments={updateComments}
                                             highlightSavedVerses={highlightSavedVerses}
                                             underlineVerse={underlineVerse}
+                                            book={book}
+                                            chapter={chapter}
+                                            user={user}
+                                            setComments={setComments}
                                         />
                                     )
                                 }
@@ -287,12 +272,7 @@ export default function Read({ user, saveVerse }) {
 
                         </div>
                         {verseSelected &&
-                            <div id="verseMenu" className="verse-menu">
-                                <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
-                                <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
-                                <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
-                                <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
-                            </div>
+                            <VerseMenu highlightColor={highlightColor} highlightVerse={highlightVerse} setHighlightColor={setHighlightColor} redirectToMemorize={redirectToMemorize} cancelVerse={cancelVerse} />
                         }
                     </div>
                 }
@@ -303,40 +283,15 @@ export default function Read({ user, saveVerse }) {
         const versesInColOne = splitPassage(1).length;
         return (
             <div className='outer-container'>
-                <div className='options-container'>
-                    <div>
-                        <h2>Book</h2>
-                        <select className="default-select" onChange={changeBook}>
-                            <Options array={bookOptions} />
-                        </select>
-                    </div>
-
-                    <div>
-                        <h2>Chapter</h2>
-                        <select className="default-select" onChange={changeChapter}>
-                            <Options array={chapterOptions} />
-                        </select>
-                    </div>
-
-                    <div className="column-options">
-                        <div className="column-options">
-                            <input className="default-btn" type='button' value='|' onClick={() => {
-                                setTimeout(() => {
-                                    highlightSavedVerses()
-                                }, 10)
-                                setColumns(1);
-                                setVerseSelected(false)
-                            }}></input>
-                            <input className="default-btn" type='button' value='||' onClick={() => {
-                                setTimeout(() => {
-                                    highlightSavedVerses()
-                                }, 10)
-                                setColumns(2);
-                                setVerseSelected(false)
-                            }}></input>
-                        </div>
-                    </div>
-                </div>
+                <ReadOptions 
+                        bookOptions={bookOptions}
+                        chapterOptions={chapterOptions}
+                        changeBook={changeBook}
+                        changeChapter={changeChapter}
+                        highlightSavedVerses={highlightSavedVerses}
+                        setColumns={setColumns}
+                        setVerseSelected={setVerseSelected}
+                        />
                 <div className='text-container' style={{ 'width': '80vw' }}>
                     <h1>{heading}</h1>
                     <div className='text-columns'>
@@ -344,16 +299,18 @@ export default function Read({ user, saveVerse }) {
                             <div>
                                 {
                                     splitPassage(1).map((e, i) =>
-                                        <span
-                                            key={i}
-                                            id={i}
-                                            className="verse"
-                                            onClick={() => underlineVerse(i)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <span className="verse-num">{` ${e.num.trim()}`}</span>
-                                            {e.text}
-                                        </span>)
+                                        <Verse
+                                            e={e}
+                                            i={i}
+                                            comments={comments}
+                                            updateComments={updateComments}
+                                            highlightSavedVerses={highlightSavedVerses}
+                                            underlineVerse={underlineVerse}
+                                            book={book}
+                                            chapter={chapter}
+                                            user={user}
+                                            setComments={setComments}
+                                        />)
                                 }
                             </div>
                         </div>
@@ -363,26 +320,23 @@ export default function Read({ user, saveVerse }) {
                             <div>
                                 {
                                     splitPassage(2).map((e, i) =>
-                                        <span
-                                            key={i + versesInColOne}
-                                            id={i + versesInColOne}
-                                            className="verse"
-                                            onClick={() => underlineVerse(i + versesInColOne)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <span className="verse-num">{` ${e.num.trim()}`}</span>
-                                            {e.text}
-                                        </span>)
+                                        <Verse
+                                            e={e}
+                                            i={i + versesInColOne}
+                                            comments={comments}
+                                            updateComments={updateComments}
+                                            highlightSavedVerses={highlightSavedVerses}
+                                            underlineVerse={underlineVerse}
+                                            book={book}
+                                            chapter={chapter}
+                                            user={user}
+                                            setComments={setComments}
+                                        />)
                                 }
                             </div>
                         </div>
                         {verseSelected &&
-                            <div id="verseMenu" className="verse-menu">
-                                <input type='color' value={highlightColor} onChange={(event) => setHighlightColor(event.target.value)}></input>
-                                <button className="default-btn" onClick={highlightVerse}><IconContext.Provider value={{ color: 'white' }}><BiHighlight size='15px' className="icon" /></IconContext.Provider><span>Highlight</span></button>
-                                <button className="default-btn" onClick={redirectToMemorize}><IconContext.Provider value={{ color: 'white' }}><BiBrain size='15px' className="icon" /></IconContext.Provider><span>Memorize</span></button>
-                                <button className="cancel-btn" onClick={cancelVerse}><IconContext.Provider value={{ color: 'red' }}><IoMdClose size='26px' /></IconContext.Provider></button>
-                            </div>
+                            <VerseMenu highlightColor={highlightColor} highlightVerse={highlightVerse} setHighlightColor={setHighlightColor} redirectToMemorize={redirectToMemorize} cancelVerse={cancelVerse} />
                         }
                     </div>
                 </div>
@@ -391,31 +345,34 @@ export default function Read({ user, saveVerse }) {
     }
 }
 
-function Verse({ e, i, comments, updateComments, highlightSavedVerses, underlineVerse }) {
+function Verse({ e, i, comments, updateComments, highlightSavedVerses, underlineVerse, book, chapter, user, setComments }) {
     const [expand, setExpand] = useState(false);
     const [newComment, setNewComment] = useState('');
 
     const writeComment = async (i) => {
         const verseNum = i + 1;
 
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/comments/GEN.1.1`, 
-        {
-            comment: newComment
-        },
-        {
-            headers: {
-                'Api-Key': process.env.REACT_APP_SERVER_API_KEY
-            }
-        })
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/comments/${book}.${chapter}.${verseNum}`,
+            {
+                commentedBy: user.id,
+                comment: newComment,
+            },
+            {
+                headers: {
+                    'Api-Key': process.env.REACT_APP_SERVER_API_KEY
+                }
+            })
+
+        let yourComment = response.data;
+        yourComment.user = user;
+
+        setComments([yourComment, ...comments]);
     }
 
     if (expand)
         return (
             <div style={{ paddingBottom: '10px' }}>
-                <span
-                    key={i}
-                    style={{ cursor: 'pointer' }}
-                >
+                <span key={i} style={{ cursor: 'pointer' }}>
                     <span className="verse-num">{` ${e.num.trim()}`}</span>
                     <span id={i} className="verse" onClick={() => underlineVerse(i)}>{e.text}</span>
                     <button className="verse-actions default-btn" onClick={() => {
@@ -443,10 +400,7 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                     {comments &&
                         comments.map((e, i) => {
                             return (
-                                <div className="verse-comment">
-                                    <h2>{e.user ? e.user.username : ''}</h2>
-                                    <p>{e.comment}</p>
-                                </div>
+                                <VerseComment comment={e} />
                             )
                         })
                     }
@@ -465,8 +419,8 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                 updateComments(i + 1)
                 setTimeout(() => {
                     highlightSavedVerses()
-                }, 20)
-                setExpand(true);
+                    setExpand(true);
+                }, 200)
             }}>
                 <div className="verse-actions-icon">
                     <IconContext.Provider value={{ size: '10px', color: 'white' }}>

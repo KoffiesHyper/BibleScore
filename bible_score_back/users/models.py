@@ -1,8 +1,9 @@
-from turtle import back
-from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.contrib.postgres.fields import ArrayField
+
+# from comments.models import VerseComments
+
 
 # Create your models here.
 
@@ -37,6 +38,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     saved_verses = ArrayField(models.CharField(max_length=10), null=True)
     friends = models.ManyToManyField("self", blank=True)
+    # liked_comments = ArrayField(models.ForeignKey(VerseComments, on_delete=models.CASCADE, related_name='liked_comments'))
 
     def __str__(self):
         return self.username

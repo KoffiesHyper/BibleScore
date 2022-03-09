@@ -71,8 +71,8 @@
 }
 
 .loading-indicator{
+    width: 10px;
     height: 10px;
-    border-radius: 30px;
     background-color: var(--tertiary-color);
     animation-name: loading;
     animation-duration: 1s;
@@ -81,23 +81,29 @@
     align-self: center;
     margin-top: 25vh;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
-    opacity: 0;
+    opacity: 1;
 }
 
 @keyframes loading{
-    5% {
-        width: 1%;
-        opacity: 0;
+    0% {
+        transform: scaleY(1);
+    }
+
+    25% {
+        transform: scaleY(5);
     }
 
     50% {
-        width: 5%;
-        opacity: 1;
+        transform: scaleY(1);
+        transform: scaleX(1);
+    }
+
+    75% {
+        transform: scaleX(7);
     }
 
     100% {
-        width: 1%;
-        opacity: 0;
+        transform: scaleX(1);
     }
 }
 

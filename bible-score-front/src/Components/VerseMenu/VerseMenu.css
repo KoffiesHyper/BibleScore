@@ -1,0 +1,70 @@
+.verse-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 5vh;
+    background-color: #f0f0f0c9;
+    animation-name: popUp;
+    animation-duration: .25s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.verse-menu input[type=color]{
+    width: 30px;
+}
+
+.verse-menu button{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 20px;
+    transition-duration: .15s;
+    padding-bottom: 5px;
+    border: none;
+}
+
+.verse-menu .icon{
+    margin-bottom: 5px;
+    padding-right: 10px;
+}
+
+.verse-menu span{
+    margin-bottom: 6px;
+    color: white;
+}
+
+.verse-menu .cancel-btn{
+    background-color: transparent;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    padding-left: 2px;
+    border-radius: 3px;
+}
+
+@keyframes popUp {
+    from{
+        top: 100vh;
+    }
+
+    to{
+        top: 95vh;
+    }
+}
+
+@keyframes popDown {
+    from{
+        top: 95vh;
+    }
+
+    to{
+        top: 100vh;
+    }
+}
