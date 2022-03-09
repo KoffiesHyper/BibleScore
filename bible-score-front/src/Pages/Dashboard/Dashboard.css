@@ -92,8 +92,9 @@
 .request-container{
     background-color: #b69479;
     border-radius: 3px;
-    margin-left: 18px;
     margin-bottom: 20px;
+    margin-left: 18px;
+    margin-right: 13px;
     padding-top: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -129,7 +130,7 @@
 .friend-box{
     background-color: #b69479;
     width: 90%;
-    margin-left: 20px;
+    margin-left: 5%;
     padding-top: 1px;
     padding-bottom: 1px;
     border-radius: 3px;
@@ -148,11 +149,11 @@
     background-color: #3d1c01c2;
     height: 40vh;
     border-radius: 3px;
-    width: 90%;
+    width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    min-width: 760px;
+    min-width: 675px;
     padding-top: 10px;
-    padding-right: 40px;
+    margin-right: 100px;
 }
 
 .prayer-request p{
@@ -204,6 +205,8 @@
     height: 30vh;
     border-radius: 3px;
     overflow-x: scroll;
+    width: 100%;
+    min-width: 675px;
 }
 
 .their-requests{
@@ -269,7 +272,7 @@
     height: auto;
     width: 20vw;
     border-radius: 3px;
-    min-width: 300px;
+    min-width: 200px;
 }
 
 .prayer-request-info h3, .prayer-request-info h2, .prayer-request-info p{
@@ -307,4 +310,36 @@
     margin-right: 35px;
 }
 
+@media (max-width: 105rem){
+    .dashboard-container{
+        grid-template-columns: 300px .9fr 300px;
+    }
+
+    .social, .saved-verses{
+        width: 275px;
+    }
+}
+
+@media (max-width: 60rem){
+    .dashboard-container{
+        grid-template-columns: 225px 1fr 225px;
+    }
+
+    .social, .saved-verses{
+        width: 200px;
+    }
+
+    .prayer-request{
+        min-height: 450px;
+        min-width: 200px;
+    }
+
+    .yourprayer-title{
+        display: block;
+    }
+
+    .yourprayer-description{
+        display: block;
+    }
+}
 
