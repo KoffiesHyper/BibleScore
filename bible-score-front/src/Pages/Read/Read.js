@@ -128,7 +128,9 @@ export default function Read({ user, saveVerse }) {
 
             const saved_verses = user.saved_verses;
             for (let i = 0; i < saved_verses.length; i++) {
-                const splitted = saved_verses[i].split('.');
+                const splittedData = saved_verses[i].split('#');
+                const verseData = splittedData[0];
+                const splitted = verseData.split('.');
                 const b = splitted[0];
                 const c = splitted[1];
                 const v = splitted[2];
@@ -136,8 +138,8 @@ export default function Read({ user, saveVerse }) {
                 if (b === book && c === chapter) {
                     const toBeHighlighted = document.getElementById(v - 1);
                     if (!toBeHighlighted) return
-                    toBeHighlighted.style.backgroundColor = highlightColor;
-                    toBeHighlighted.style.color = 'white';
+                    toBeHighlighted.style.backgroundColor = `#${splittedData[1]}`;
+                    toBeHighlighted.style.color = determineFontColor(splittedData[1]);
                 }
             }
         }
@@ -176,6 +178,12 @@ export default function Read({ user, saveVerse }) {
         const text = document.getElementById(selectedVerse);
         text.style.backgroundColor = highlightColor;
 
+        text.style.color = determineFontColor(highlightColor);
+
+        saveVerse(`${book}.${chapter}.${selectedVerse + 1}${highlightColor}`)
+    }
+
+    const determineFontColor = (background) => {
         function hexToRgbNew(hex) {
             var arrBuff = new ArrayBuffer(4);
             var vw = new DataView(arrBuff);
@@ -185,7 +193,7 @@ export default function Read({ user, saveVerse }) {
             return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
         }
 
-        var c = hexToRgbNew(highlightColor.substring(1, highlightColor.length)).split(',');
+        var c = hexToRgbNew(background.substring(1, background.length)).split(',');
         const r = c[0];
         const g = c[1];
         const b = c[2];
@@ -196,10 +204,8 @@ export default function Read({ user, saveVerse }) {
             0.114 * (b * b)
         );
 
-        if (hsp > 140) text.style.color = 'black'
-        else text.style.color = 'white'
-
-        saveVerse(`${book}.${chapter}.${selectedVerse + 1}`)
+        if (hsp > 140) return 'black'
+        else return 'white'
     }
 
     const redirectToMemorize = () => {
@@ -393,7 +399,7 @@ function Verse({ e, i, comments, updateComments, highlightSavedVerses, underline
                         <input onChange={(event) => setNewComment(event.target.value)} className="default-input" placeholder="Add Your Own Comment" ></input>
                         <button className='default-btn send-btn' onClick={() => writeComment(i)}>
                             <div className='send-icon'>
-                                <IconContext.Provider value={{ color: '#573519', size: '17px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
+                                <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '17px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
                             </div>
                         </button>
                     </div>

@@ -11,8 +11,9 @@ import MemorizeStage1 from "../../Components/MemorizeStages/MemorizeStage1";
 import MemorizeStage2 from "../../Components/MemorizeStages/MemorizeStage2";
 import MemorizeStage3 from "../../Components/MemorizeStages/MemorizeStage3";
 import ProgressBar from "../../Components/MemorizeStages/ProgressBar";
+import MemorizeResult from "../../Components/MemorizeStages/MemorizeResult";
 
-export default function Memorize({ s }) {
+export default function Memorize({ s, saveVerse }) {
     const [stage, setStage] = useState(s)
     const [book, setBook] = useState('GEN')
     const [chapter, setChapter] = useState('1')
@@ -21,8 +22,8 @@ export default function Memorize({ s }) {
     const [chapterOptions, setChapterOptions] = useState([]);
     const [verseOptions, setVerseOptions] = useState([]);
     const [text, setText] = useState({});
-    const [barAnim, setBarAnim] = useState('toRead');
     const [loading, setLoading] = useState(true);
+    const [finalAttempt, setFinalAttempt] = useState({});
 
     const navigate = useHistory();
 
@@ -124,16 +125,13 @@ export default function Memorize({ s }) {
             return (
                 <div className="stage-container">
                     <ProgressBar barAnim='toRewrite' />
-                    <MemorizeStage3 nextStage={() => setStage(4)} text={text} />
+                    <MemorizeStage3 nextStage={() => setStage(4)} text={text}  updateFinalAttempt={setFinalAttempt} />
                 </div>
             );
             break;
         case 4:
             return (
-                <div className="stage-container">
-                    <ProgressBar barAnim='toFinish' />
-                    <h1>{`${text.heading} - Finished`}</h1>
-                </div>
+                <MemorizeResult text={text} finalAttempt={finalAttempt} saveVerse={saveVerse} />
             );
             break;
         default:

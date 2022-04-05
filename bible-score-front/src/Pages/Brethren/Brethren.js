@@ -6,17 +6,24 @@ import axios from "axios";
 
 export default function Brethren({ user, friendRequests }) {
     const [input, setInput] = useState('Nice');
-    const [results, setResults] = useState([{}]);    
+    const [results, setResults] = useState([{}]); 
+    const [noResult, setNoResult] = useState(true);    
 
     const searchUser = async () => {
-        const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/search/${input}`,
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users/search/${input}`,
             {
                 headers: {
                     'Api-Key': process.env.REACT_APP_SERVER_API_KEY
                 }
             })
 
-        setResults(data.data);
+        if(response.data.length == 0){
+            setNoResult(true);
+        }
+        else{
+            setResults(response.data);
+            setNoResult(false);
+        }
     }
 
     const sendFriendRequest = async (to_user) => {
@@ -37,12 +44,12 @@ export default function Brethren({ user, friendRequests }) {
                     <button className="default-btn" onClick={searchUser} ><IconContext.Provider value={{ color: 'white' }}><FaSearch /></IconContext.Provider></button>
                 </div>
             </div>
-            {results[0].username &&
+            {!noResult &&
                 <div className="user-results">
                     {
                         results.map((e, i) => {
                             return (
-                                <div className="user-result">
+                                <div className="user-result" key={i}>
                                     <div className="user-labels">
                                         <h3 className="default-label">{e.username}</h3>
                                         <p className="default-label">{`${e.first_name} ${e.last_name}`}</p>
@@ -53,6 +60,9 @@ export default function Brethren({ user, friendRequests }) {
                         })
                     }
                 </div>
+            }
+            {noResult &&
+                <h2 className="default-label">No brethren found</h2>
             }
         </div>
     );

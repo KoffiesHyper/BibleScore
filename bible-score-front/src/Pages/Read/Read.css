@@ -39,7 +39,7 @@ body{
 }
 
 .text-container .verse:hover{
-    background-color: rgba(102, 46, 0, 0.1);
+    background-color: rgba(0, 10, 102, 0.1);
 }
 
 .text-container h1{
@@ -157,7 +157,7 @@ p{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgba(102, 46, 0, 0.1);
+    background-color: rgba(0, 10, 102, 0.1);
     margin-left: 5%;
     padding-top: 7px;
     padding-bottom: 10px;

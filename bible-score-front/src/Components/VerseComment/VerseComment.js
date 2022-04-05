@@ -21,12 +21,12 @@ export default function VerseComment({ comment }) {
             <div className="verse-comment-votes">
                 <button className='default-btn' >
                     <div className='send-icon'>
-                        <IconContext.Provider value={{ color: '#573519', size: '15px', marginTop: '10px' }}><MdThumbUp /></IconContext.Provider>
+                        <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px', marginTop: '10px' }}><MdThumbUp /></IconContext.Provider>
                     </div>
                 </button>
                 <button className='default-btn'>
                     <div className='send-icon'>
-                        <IconContext.Provider value={{ color: '#573519', size: '15px', marginTop: '10px' }}><MdThumbDown /></IconContext.Provider>
+                        <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px', marginTop: '10px' }}><MdThumbDown /></IconContext.Provider>
                     </div>
                 </button>
             </div>

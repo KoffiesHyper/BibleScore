@@ -8,4 +8,6 @@
 .results-container h1{
     color: black;
     text-align: center;
+    font-family: custom1;
+    font-weight: lighter;
 }

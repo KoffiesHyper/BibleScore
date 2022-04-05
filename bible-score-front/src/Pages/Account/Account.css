@@ -17,39 +17,39 @@
 }
 
 .profile-settings{
-    width: 700px;
-    height: 60vh;
-    border: 1px solid var(--tertiary-color);
-    border-radius: 4px;
-    background-color: #e7e4d881;
+    width: 80%;
+    height: 50%;
+    background-color: transparent;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    justify-items: center;
 }
 
 .profile-setting{
-    border-bottom: 1px solid var(--tertiary-color);
+    width: 75%;
     color: var(--tertiary-color);
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-items: center;
     font-family: custom2;
     font-size: 16px;
+    justify-self: center;
+    max-width: 550px;
+    min-width: 500px;
+}
+
+.profile-setting p{
+    justify-self: flex-end;
 }
 
 .profile-setting input{
-    width: 70%;
+    width: 400px;
     font-family: custom2;
     font-size: 16px;
     outline: none;
+    justify-self: flex-start;
 }
 
-.profile-setting .right{
-    cursor: pointer;
+.profile-settings button{
+    margin-top: 30px;
 }
-
-.profile-setting .right:hover{
-    text-decoration: underline black;
-}
-

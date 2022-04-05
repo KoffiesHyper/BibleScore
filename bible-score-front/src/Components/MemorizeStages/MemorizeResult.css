@@ -1,0 +1,78 @@
+.result-box{
+    border: 1px solid var(--tertiary-color);
+    width: 42vw;
+    border-radius: 2px;
+    display: grid;
+    justify-items: center;
+    padding-bottom: 30px;
+    background-color: rgba(0, 10, 102, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 30px;
+}
+
+.result-box .passage-box{
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    color: white;
+    background-color: var(--tertiary-color);
+}
+
+.result-box h1{
+    font-size: 25px;
+    font-family: custom1;
+    color: white;
+    background-color: var(--tertiary-color);
+    width: 100%;
+    text-align: center;
+    height: auto;
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.result-box h2{
+    font-size: 21px;
+    font-family: custom2;
+    justify-self: flex-start;
+    margin-left: 10%;
+    color: var(--tertiary-color);
+    margin-bottom: 0px;
+    margin-bottom: 1%;
+}
+
+.vertical-line{
+    height: 1px;
+    width: 100%;
+    background-color: var(--tertiary-color);
+}
+
+.result-box p{
+    margin-left: 10%;
+    font-size: 15px;
+    font-weight: bold;
+    justify-self: flex-start;
+    margin-bottom: 2%;
+}
+
+.result-buttons{
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    justify-items: flex-end;
+    align-items: center;
+}
+
+.result-buttons .left-btn{
+    margin-right: 25px;
+    background-color: rgba(0, 10, 102, 0.1);
+}
+
+.result-buttons button{
+    background-color: rgba(0, 10, 102, 0.1);
+    color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--tertiary-color);
+}

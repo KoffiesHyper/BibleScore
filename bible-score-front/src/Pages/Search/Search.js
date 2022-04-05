@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import PassageFinder from "../../Components/Passage/Passage";
 import SearchResultItem from "../../Components/SearchResultItem/SearchResultItem";
 
-export default function Search() {
+export default function Search({ keyword }) {
     const [results, setResults] = useState([]);
 
     const params = useParams();
@@ -12,8 +12,9 @@ export default function Search() {
     useEffect(async () => {
         const finder = new PassageFinder();
         const response = await finder.getKeywordSearch(params.keyword);
+        console.log(keyword);
         setResults(response)
-    }, [])
+    }, [keyword])
 
     return (
         <div className="results-container">

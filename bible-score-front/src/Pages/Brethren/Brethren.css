@@ -14,24 +14,26 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr;
     justify-items: center;
-    border: 1px solid var(--tertiary-color);
-    border-radius: 3px;
-    background-color: #e7e4d881;
     padding: 20px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
+
+.brethren-container h2{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0px;
+    align-self: flex-start;
+}
+
 
 .search-container h2{
     font-size: 25px;
     font-weight: bold;
     margin-top: 0px;
-    padding-left: 10px;
 }
 
 .search-settings input{
     font-size: 16px;
     width: 200px;
-    border: 1px solid #5735029f;
 }
 
 .search-settings{
@@ -71,7 +73,7 @@
 .user-result{
     width: 600px;
     height: auto;
-    background-color: #e7e4d881;
+    background-color: var(--secondary-color);
     border: 1px solid var(--tertiary-color);
     border-radius: 3px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);

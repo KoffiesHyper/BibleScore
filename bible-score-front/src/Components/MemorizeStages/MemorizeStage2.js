@@ -29,7 +29,7 @@ export default function MemorizeStage2({ text, nextStage }) {
             }
         })
 
-        const numGaps = Math.floor(wordCount / 5);
+        const numGaps = Math.floor(wordCount / 2);
         const blanks = [];
 
         for (let i = 0; i < numGaps; i++) {

@@ -24,7 +24,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [savedVerses, setSavedVerses] = useState([]);
   const [signedIn, setSignedIn] = useState(false);
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
   const [friendRequests, setFriendRequests] = useState([]);
   const [friends, setFriends] = useState([]);
   const [prayerRequests, setPrayerRequests] = useState([]);
@@ -64,12 +64,14 @@ function App() {
     }
   }, [friends])
 
-  // useEffect(async () => {
-  //   console.log(prayerRequests)
-  // }, [prayerRequests])
-
   const saveVerse = async (verse) => {
     var highlighted = user.saved_verses;
+
+    const verseId = verse.split('#')[0];
+
+    highlighted.forEach((e, i) => {
+      if(e.startsWith(verseId)) alert()
+    })  
 
     if (!highlighted) highlighted = [verse]
     else highlighted.push(verse)
@@ -187,9 +189,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} signedIn={signedIn} logOut={logOut} keyword={keyword} updateKW={(e) => {
-        setKeyword(e);
-      }} />
+      <NavBar user={user} signedIn={signedIn} logOut={logOut} keyword={keyword} updateKW={setKeyword} />
       <Route exact path='/' render={() => {
         return (
           <div>
@@ -201,7 +201,7 @@ function App() {
       <Route exact path={'/memorize'} render={() => {
         return (
           <div>
-            <Memorize s={0} />
+            <Memorize s={0} saveVerse={saveVerse} />
           </div>
         );
       }} />
@@ -209,7 +209,7 @@ function App() {
       <Route exact path={'/memorize/:value'} render={() => {
         return (
           <div>
-            <Memorize s={1} />
+            <Memorize s={1} saveVerse={saveVerse} />
           </div>
         );
       }} />

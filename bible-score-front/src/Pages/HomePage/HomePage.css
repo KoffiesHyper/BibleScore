@@ -1,14 +1,12 @@
 .guest-body{
-    width: 70vw;
+    width: 50%;
     height: 95vh;
-    left: 15vw;
-    top: 5vw;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
-    margin-left: 15vw;
-    grid-gap: 30px;
+    margin-left: 25%;
+    grid-gap: 10px;
 }
 
 .guest-body h2{
@@ -31,8 +29,6 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 0px;
     align-self: flex-end;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
 }
 
 .card-container button:hover{
@@ -45,12 +41,20 @@
     justify-items: center;
     text-align: center;
     margin-bottom: 100px;
-    background-color: #e7e4d881;
-    border: 1px solid var(--tertiary-color);
+    background-color: tra;
     width: 70%;
     height: 40%;
     padding-top: 20px;
-    border-radius: 6px;
     min-width: 250px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition-duration: .75s;
+    cursor: pointer;
+}
+
+.card-container:hover{
+    transform: scale(1.05);
+}
+
+.card-container img{
+    background-size: 5%
 }

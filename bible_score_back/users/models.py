@@ -36,7 +36,7 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True)
     objects = UserManager()
     email = models.EmailField(unique=True)
-    saved_verses = ArrayField(models.CharField(max_length=10), null=True)
+    saved_verses = ArrayField(models.CharField(max_length=20), null=True)
     friends = models.ManyToManyField("self", blank=True)
     # liked_comments = ArrayField(models.ForeignKey(VerseComments, on_delete=models.CASCADE, related_name='liked_comments'))
 
