@@ -111,7 +111,7 @@ body{
 }
 
 .default-btn:disabled{
-  background-color: #4d3b2d6c;
+  background-color: #03192e7a;
 }
 
 @keyframes btnHover {

@@ -7,17 +7,16 @@
 }
 
 .inner-container{
-    background-color: #e7e4d881;
-    border: 1px solid var(--tertiary-color);
+    /* border: 1px solid var(--tertiary-color); */
     width: 300px;
     height: 550px;
-    border-radius: 3px;
+    /* border-radius: 3px; */
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
     margin-top: 10vh;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .inner-container h1{

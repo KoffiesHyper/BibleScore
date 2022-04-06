@@ -109,12 +109,13 @@ export default class PassageFinder {
     }
 
     async getKeywordSearch(keyWord) {
-        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/search?query=${keyWord}`, {
+        var data = await axios.get(`https://api.scripture.api.bible/v1/bibles/9879dbb7cfe39e4d-01/search?query=${keyWord}&limit=15&fuzziness=0`, {
             headers: {
                 'api-key': '4a15a65d498a67ef42058d8428b6f985'
             }
         });
 
+        console.log(data);
         return data.data.data.verses;
     }
 

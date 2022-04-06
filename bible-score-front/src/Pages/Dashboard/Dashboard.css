@@ -10,19 +10,19 @@
 }
 
 .social, .saved-verses{
-    background-color: #3d1c01c2;
-    border-radius: 3px;
     height: 92%;
     width: 350px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 32px rgb(16 11 0 / 6%);
     align-items: flex-start;
     overflow-y: scroll;
     justify-items: center;
     scrollbar-color: red;
+    border: 1px solid var(--tertiary-color);
 }
 
 .social h3{
-    color: var(--primary-color);
+    color: var(--tertiary-color);
     font-size: 17px;
     margin-left: 5px;
     margin-right: 5px;
@@ -37,13 +37,13 @@
     font-weight: lighter;
     font-family: custom1;
     font-size: 22px;
-    color: var(--primary-color);
+    color: var(--tertiary-color);
 }
 
 .item-container{
-    background-color: #997456;
+    background-color: var(--primary-color);
     width: 80%;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -55,16 +55,16 @@
     margin-left: 20px;
     transition-duration: .25s;
     cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.048), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }   
 
 .item-container:hover{
-    background-color: #b69479;
+    background-color: #5c82a581;
 }   
 
 .item-container h3{
     margin: 5px;
-    color:  #573519;
+    color: var(--tertiary-color);
     font-weight: bolder;
 }   
 
@@ -128,36 +128,42 @@
 }
 
 .friend-box{
-    background-color: #b69479;
+    background-color: var(--primary-color);
     width: 90%;
     margin-left: 5%;
     padding-top: 1px;
     padding-bottom: 1px;
     border-radius: 3px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.048), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 20px;
+    transition-duration: .25s;
+}
+
+.friend-box:hover{
+    margin-left: 10%;
+    cursor: pointer;
 }
 
 .friend-box h3{
-    color:  #573519;
+    color: var(--tertiary-color);
     font-weight:  bold;
 }
 
 .prayer-request{
-    background-color: #3d1c01c2;
     height: 40vh;
-    border-radius: 3px;
     width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     min-width: 675px;
     padding-top: 10px;
     margin-right: 100px;
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 32px rgb(16 11 0 / 6%);
+    border: 1px solid var(--tertiary-color);
 }
 
 .prayer-request p{
-    color: white;
+    color: var(--tertiary-color);
     justify-self: flex-end;
 }
 
@@ -171,27 +177,17 @@
 
 .yourprayer-description textarea{
     width: 500px;
-    border: 2px solid transparent;
     font-size: 17px;
 }
 
 .yourprayer-title input{
     width: 500px;
     font-size: 17px;
-    border: 2px solid transparent;
-}
-
-.yourprayer-title input:focus{
-    border: 2px solid #b69479;
-}
-
-.yourprayer-description textarea:focus{
-    border: 2px solid #b69479;
 }
 
 .send-btn{
-    background-color: #b69479;
-    color:  #573519;
+    background-color: var(--primary-color);
+    color:  var(--tertiary-color);
 }
 
 .middle-board{
@@ -199,14 +195,14 @@
 }
 
 .prayer-requests{
-    border: 1px solid #5735029f;
-    background-color: #e7e4d881;
     margin-top: 60px;
     height: 30vh;
-    border-radius: 3px;
     overflow-x: scroll;
     width: 100%;
     min-width: 675px;
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 32px rgb(16 11 0 / 6%);
+    border: 1px solid var(--tertiary-color);
 }
 
 .their-requests{
@@ -219,8 +215,9 @@
 }
 
 .prayer-container{
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     border-radius: 3px;
+    width: 20%;
     height: 100%;
     padding: 15px;
     display: grid;
@@ -240,7 +237,7 @@
 }
 
 .prayer-container button, .overlay button{
-    background-color: #b69479;
+    background-color: var(--tertiary-color);
     outline: none;
     border: none;
     padding: 5px;
@@ -254,7 +251,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #e7e4d881;
+    background-color: #3f4a5398;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,17 +259,17 @@
 
 .prayer-request-info{
     padding: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
     display: grid;
     justify-items: center;
     align-items: center;
     grid-template-rows: 1fr 1fr .5fr 10fr;
-    background-color: var(--tertiary-color);
+    background-color: #5b6a79;
+    border: 1px solid var(--tertiary-color);
     height: auto;
-    width: 20vw;
-    border-radius: 3px;
+    width: 35%;
+    border-radius: 2px;
     min-width: 200px;
+    text-align: start;
 }
 
 .prayer-request-info h3, .prayer-request-info h2, .prayer-request-info p{
@@ -281,33 +278,37 @@
 }
 
 .prayer-container h3, .prayer-request-info h3{
-    color: #b69479;
+    color: var(--tertiary-color);
+    font-weight: bold;
     font-size: 16px;
+    font-family: custom2;
 }
 
 .prayer-info-text{
-    background-color: #b69479;
     height: 80%;
-    width: 90%;
-    justify-self: center;
-    border-radius: 3px;
+    width: 100%;
+    justify-self: flex-start;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.158);
+    padding-bottom: 5px;
 }
 
 .prayer-info-text h3{
     color: var(--tertiary-color);
     width: 100%;
-    border-bottom: 1px solid var(--tertiary-color);
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: bolder;
     padding: 10px;
+    font-family: custom1;
 }
 
 .prayer-info-text p{
     margin-top: 10px;
     color: white;
     font-size: 14px;
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: normal;
 }
 
 @media (max-width: 105rem){

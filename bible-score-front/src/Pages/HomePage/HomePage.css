@@ -1,12 +1,51 @@
-.guest-body{
-    width: 50%;
-    height: 95vh;
+.verse-of-day{
+    width: 40%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-    margin-left: 25%;
-    grid-gap: 10px;
+    justify-items: flex-start;
+    margin-left: 10%;
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.verse-of-day h1{
+    font-family: bible2;
+    font-size: 80px;
+    color: var(--tertiary-color);
+    margin: 0px;
+    text-shadow: 2px 2px var(--primary-color);
+}
+.verse-of-day h2{
+    font-family: bible2;
+    font-size: 35px;
+    font-weight: bolder;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+.verse-of-day p{
+    font-family: bible1;
+    font-size: 22px;
+    font-weight: lighter;
+    width: 100%;
+    color: var(--tertiary-color)
+}
+
+.head-line{
+    height: 1px;
+    width: 100%;
+    background-color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.guest-body{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    background-color: #08478331;
+    margin: 0px;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .guest-body h2{
@@ -40,15 +79,17 @@
     display: grid;
     justify-items: center;
     text-align: center;
-    margin-bottom: 100px;
-    background-color: tra;
-    width: 70%;
-    height: 40%;
+    background-color: white;
+    height: 90%;
     padding-top: 20px;
     min-width: 250px;
+    max-width: 250px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition-duration: .75s;
+    transition-duration: .25s;
     cursor: pointer;
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+    margin-left: 2.5%;
+    margin-right: 2.5%;
 }
 
 .card-container:hover{
@@ -57,4 +98,76 @@
 
 .card-container img{
     background-size: 5%
+}
+
+.grad1{
+    width: 250px;
+    height: 156px;
+    background: linear-gradient(to bottom left, var(--primary-color), rgba(151, 141, 0, 0.45));
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+}
+
+.grad2{
+    width: 250px;
+    height: 156px;
+    background: linear-gradient(to bottom left, var(--primary-color), rgba(158, 0, 40, 0.45));
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+}
+
+.grad3{
+    width: 250px;
+    height: 156px;
+    background: linear-gradient(to bottom left, var(--primary-color), rgba(151, 68, 0, 0.45));
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+}
+
+.more-info{
+    width: 100%;
+    height: 40vh;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 900px;
+}
+
+.info-section{
+    width: 25%;
+}
+
+.more-info .numbered{
+    background-color: white;
+    color: var(--tertiary-color);
+    border-radius: 50%;
+    width: 30px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: custom3;
+    margin-right: 5px;
+}
+
+.more-info h2{
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 8vh;
+}
+
+.more-info p{
+    color: white;
+    font-size: 14px;
+    width: 80%;
+    word-wrap: break-word;
+}
+
+.more-info .info-line{
+    width: 1px;
+    height: 70%;
+    background-color: white;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 5vh;
 }
