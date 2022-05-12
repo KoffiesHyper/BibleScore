@@ -12,7 +12,7 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'date_of_birth', 'saved_verses', 'friends']
+        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'date_of_birth', 'saved_verses', 'friends', 'testimony']
 
 class FriendRequestSerializer(ModelSerializer):
     class Meta:

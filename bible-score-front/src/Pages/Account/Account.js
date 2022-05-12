@@ -24,7 +24,6 @@ export default function Account({ user }) {
                 }
             });
 
-        console.log(response);
     }
 
     return (

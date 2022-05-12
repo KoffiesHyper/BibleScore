@@ -11,7 +11,7 @@
     height: 75px;
     border-radius: 2px;
     display: grid;
-    grid-template-columns: 1fr 1fr 5fr;
+    grid-template-columns: 1fr 1.5fr 5fr;
     justify-content: flex-start;
     align-items: center;
     margin-top: 75px;
@@ -21,9 +21,18 @@
 }
 
 .top-section h2{
-    margin-left: 10px;
     color: var(--tertiary-color);
     font-size: 1.5em;
+    margin: 0px;
+    margin-left: 10px;
+}
+
+.top-section h3{
+    color: var(--tertiary-color);
+    font-size: 1em;
+    white-space: nowrap;
+    margin: 0px;
+    margin-left: 10px;
 }
 
 .top-section img{

@@ -165,9 +165,12 @@ function App() {
           }
         })
 
-        if (response.status !== 200) return;
+        const newRequests = response.data;
 
-        array.push(response.data[1])
+        newRequests.forEach((e, i) => {
+          array.push(e)
+        })
+
         if (i === friends.length - 1)
           setTimeout(() => {
             setPrayerRequests(array);

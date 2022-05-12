@@ -177,7 +177,9 @@
 
 .yourprayer-description textarea{
     width: 500px;
+    height: 150px;
     font-size: 17px;
+    resize: none;
 }
 
 .yourprayer-title input{

@@ -82,7 +82,7 @@
     font-family: bible1;
 }
 
-textarea{
+.passage-box textarea{
     resize: none;
     width: 99%;
     height: 150px;

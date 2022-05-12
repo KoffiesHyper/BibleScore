@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import PassageFinder from '../../Components/Passage/Passage';
 import './Dashboard.css';
 import { FaUserFriends } from 'react-icons/fa';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
@@ -15,6 +14,10 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
     const [requestOnOverlay, setRequestOnOverlay] = useState({});
 
     const navigate = useHistory();
+
+    useEffect(() => {
+        console.log(prayerRequests);
+    }, [prayerRequests])
 
     const sendPrayerRequest = async () => {
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/prayer-request/${user.id}`, {
@@ -66,7 +69,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                     {
                         friends.map((e, i) => {
                             return (
-                                <div className='friend-box'>
+                                <div className='friend-box' onClick={() => navigate.push(`/profile/${e.id}`)}>
                                     <h3 className='default-label' >{e.username}</h3>
                                 </div>
                             )

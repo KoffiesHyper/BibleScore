@@ -13,6 +13,7 @@ export default function Register({ updateSignedIn }) {
     const [lastName, setLastName] = useState();
     const [dateOfBirth, setDateOfBirth] = useState();
     const [password, setPassword] = useState();
+    const [testimony, setTestimony] = useState();
     const [valid, setValid] = useState(false);
 
     const navigate = useHistory();
@@ -25,7 +26,8 @@ export default function Register({ updateSignedIn }) {
                 first_name: firstName,
                 last_name: lastName,
                 date_of_birth: dateOfBirth,
-                password: password
+                password: password,
+                testimony: testimony
             }),
             {
                 headers: {
@@ -91,6 +93,13 @@ export default function Register({ updateSignedIn }) {
                     <h2 className='default-label'>Password</h2>
                     <input className='default-input' placeholder='Enter Your Password' onChange={(event) => {
                         setPassword(event.target.value);
+                    }} />
+                </div>
+
+                <div className='input-container testimony'>
+                    <h2 className='default-label'>Your Testimony</h2>
+                    <textarea className='default-input' placeholder='Enter Your Password' onChange={(event) => {
+                        setTestimony(event.target.value);
                     }} />
                 </div>
 
