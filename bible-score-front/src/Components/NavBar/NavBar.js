@@ -58,7 +58,7 @@ export default function NavBar({ user, signedIn, logOut, keyword, updateKW }) {
                         </div>
                     </div>
                     <div className="top-right">
-                        <Link to='/account-details' ><button>{`Hi, ${user ? user.first_name : ''}`}</button></Link>
+                        <Link to={`/profile/${user ? user.username : ''}`} ><button>{`Hi, ${user ? user.first_name : ''}`}</button></Link>
                         <Link to='/brethren'><button>Brethren</button></Link>
                         <button onClick={logOut}>Logout</button>
                     </div>

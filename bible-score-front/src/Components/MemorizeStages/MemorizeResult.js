@@ -51,20 +51,20 @@ export default function MemorizeResult({ text, finalAttempt, saveVerse }) {
                 <div className="result-buttons">
                     <button className='default-btn left-btn' onClick={() => saveVerse(`${text.id}#64cee6`)}>
                         Save Verse
-                        <div style={{marginLeft: '4px', marginTop: '1px'}}>
-                        <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><RiSendPlaneFill /></IconContext.Provider>
+                        <div style={{ marginLeft: '4px', marginTop: '1px' }}>
+                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><RiSendPlaneFill /></IconContext.Provider>
                         </div>
                     </button>
                     <button className='default-btn left-btn' onClick={() => window.location.reload()}>
                         Try Again
-                        <div style={{marginLeft: '4px', marginTop: '1px'}}>
-                        <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BsArrowCounterclockwise /></IconContext.Provider>
+                        <div style={{ marginLeft: '4px', marginTop: '1px' }}>
+                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BsArrowCounterclockwise /></IconContext.Provider>
                         </div>
                     </button>
                     <button className='default-btn right-btn' onClick={() => history.push('/memorize')}>
                         Choose Another Verse
-                        <div style={{marginLeft: '4px', marginTop: '1px'}}>
-                        <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BiBible /></IconContext.Provider>
+                        <div style={{ marginLeft: '4px', marginTop: '1px' }}>
+                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BiBible /></IconContext.Provider>
                         </div>
                     </button>
                 </div>

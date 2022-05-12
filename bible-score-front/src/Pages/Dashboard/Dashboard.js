@@ -106,6 +106,8 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                     </button>
                 </div>
 
+                <div className='vertical-line'></div>
+
                 <div className='prayer-requests'>
                     <h2 className='default-label'>Prayer Requests From Your Brethren</h2>
                     <div className='their-requests'>
@@ -116,6 +118,8 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                         }
                     </div>
                 </div>
+
+                <div className='vertical-line'></div>
             </div>
 
 
@@ -173,8 +177,8 @@ function FriendRequest({ from_user, to_user }) {
             <p className='default-label'>{from_user.username}</p>
 
             <div className='request-buttons'>
-                <button className='default-btn accept' onClick={() => answerRequest(true, from_user)}>Accept</button>
-                <button className='default-btn decline' onClick={() => answerRequest(false, from_user)}>Decline</button>
+                <button className='default-btn accept' onClick={() => { answerRequest(true, from_user); window.location.reload(false); }}>Accept</button>
+                <button className='default-btn decline' onClick={() => { answerRequest(false, from_user); window.location.reload(false); }}>Decline</button>
             </div>
         </div>
     )

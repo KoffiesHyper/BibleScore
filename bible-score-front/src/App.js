@@ -19,6 +19,7 @@ import jwt_decode from "jwt-decode";
 import Account from './Pages/Account/Account';
 import PassageFinder from './Components/Passage/Passage';
 import Brethren from './Pages/Brethren/Brethren';
+import Profile from './Pages/Profile/Profile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,8 +71,8 @@ function App() {
     const verseId = verse.split('#')[0];
 
     highlighted.forEach((e, i) => {
-      if(e.startsWith(verseId)) alert()
-    })  
+      if (e.startsWith(verseId)) alert()
+    })
 
     if (!highlighted) highlighted = [verse]
     else highlighted.push(verse)
@@ -267,6 +268,14 @@ function App() {
             <Login
               updateSignedIn={(b) => setSignedIn(b)}
             />
+          </div>
+        );
+      }} />
+
+      <Route exact path={'/profile/:user'} render={() => {
+        return (
+          <div>
+            <Profile user={user} />
           </div>
         );
       }} />

@@ -1,0 +1,62 @@
+.outer{
+    display: grid;
+    justify-items: center;
+    width: 100%;
+}
+
+.top-section{
+    background-color: var(--secondary-color);
+    border: 1px solid var(--tertiary-color);
+    width: 35%;
+    height: 75px;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 5fr;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 75px;
+    padding: 2%;
+    min-width: 300px;
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+}
+
+.top-section h2{
+    margin-left: 10px;
+    color: var(--tertiary-color);
+    font-size: 1.5em;
+}
+
+.top-section img{
+    border-radius: 50%;
+}
+
+.top-section button{
+    justify-self: flex-end;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+    border-radius: 2px;
+    padding: 5px;
+    padding-bottom: 2px;
+}
+
+.testimony-section{
+    background-color: var(--secondary-color);
+    border: 1px solid var(--tertiary-color);
+    width: 35%;
+    padding: 2%;
+    text-align: center;
+    min-width: 300px;
+    margin-top: 20px;
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
+}
+
+.testimony-section h2{
+    margin-top: 0px;
+    color: var(--tertiary-color);
+    font-family: bible2;
+}
+
+.testimony-section p{
+    font-size: 1.1em;
+}
+

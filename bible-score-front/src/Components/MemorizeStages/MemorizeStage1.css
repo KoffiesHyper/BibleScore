@@ -89,4 +89,7 @@ textarea{
     outline: none;
     font-size: 20px;
     font-family: bible1;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
 }
