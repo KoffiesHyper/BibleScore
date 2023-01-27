@@ -12,6 +12,7 @@ import MemorizeStage2 from "../../Components/MemorizeStages/MemorizeStage2";
 import MemorizeStage3 from "../../Components/MemorizeStages/MemorizeStage3";
 import ProgressBar from "../../Components/MemorizeStages/ProgressBar";
 import MemorizeResult from "../../Components/MemorizeStages/MemorizeResult";
+import Dropdown from "../../Components/Dropdown/Dropdown";
 
 export default function Memorize({ s, saveVerse }) {
     const [stage, setStage] = useState(s)
@@ -59,6 +60,7 @@ export default function Memorize({ s, saveVerse }) {
     const updateChapterOptions = async () => {
         const finder = new PassageFinder(book, chapter, verse);
         const array2 = await finder.getChapters();
+        array2.shift();
         setChapterOptions(array2);
     }
 
@@ -78,24 +80,18 @@ export default function Memorize({ s, saveVerse }) {
                     <div className="verse-container-outer">
                         {loading &&
                             <div className="loading-indicator">
-                                
+
                             </div>
                         }
                         {!loading &&
                             <div className="verse-container-inner">
                                 <h2 className="default-label">Choose a verse</h2>
                                 <h3>Book</h3>
-                                <select className="default-select" onChange={(event) => setBook(event.target.value)}>
-                                    <Options array={bookOptions} />
-                                </select>
+                                <Dropdown items={bookOptions} updateVal={setBook} />
                                 <h3>Chapter</h3>
-                                <select className="default-select" onChange={(event) => setChapter(event.target.value)}>
-                                    <Options array={chapterOptions} />
-                                </select>
+                                <Dropdown items={chapterOptions} updateVal={setChapter} />
                                 <h3>Verse</h3>
-                                <select className="default-select" onChange={(event) => setVerse(event.target.value)}>
-                                    <Options array={verseOptions} />
-                                </select>
+                                <Dropdown items={verseOptions} updateVal={setVerse} />
                                 <input className="default-btn" type="button" value="Proceed" onClick={async () => {
                                     navigate.push(`/memorize/${book}.${chapter}.${verse}`);
                                 }} />
@@ -125,7 +121,7 @@ export default function Memorize({ s, saveVerse }) {
             return (
                 <div className="stage-container">
                     <ProgressBar barAnim='toRewrite' />
-                    <MemorizeStage3 nextStage={() => setStage(4)} text={text}  updateFinalAttempt={setFinalAttempt} />
+                    <MemorizeStage3 nextStage={() => setStage(4)} text={text} updateFinalAttempt={setFinalAttempt} />
                 </div>
             );
             break;

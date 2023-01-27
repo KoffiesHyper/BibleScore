@@ -14,7 +14,7 @@ export default function HomePage() {
         <div className='landing-page'>
             <div className='home-heading'>
                 <h1 className='first-line'>Bible</h1>
-                <h1 className='second-line'>Score</h1>
+                <h1 className='second-line'>Score.</h1>
                 <p>A Platform to study The Bible and connect with other Christians. Scroll down for more information.</p>
             </div>
             <div className='verse-of-day'>

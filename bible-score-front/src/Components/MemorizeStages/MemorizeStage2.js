@@ -71,7 +71,7 @@ export default function MemorizeStage2({ text, nextStage }) {
         <div className="memorize-container-inner">
             <div className="passage-info">
                 <h2>Step 2: Fill in the blanks</h2>
-                <input className="black default-btn" defaultValue='Mark' type='button' onClick={markAnswers} />
+                <input className="default-btn black" defaultValue='Mark' type='button' onClick={markAnswers} />
                 <input className="default-btn" defaultValue='Next Stage' type='button' onClick={nextStage} />
             </div>
             <div className="passage-box">

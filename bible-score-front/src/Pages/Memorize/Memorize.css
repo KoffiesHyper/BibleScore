@@ -30,7 +30,7 @@
 }
 
 .verse-container-inner{
-    width: 300px;
+    width: 500px;
     height: 500px;
     /* background-color: rgba(0, 10, 102, 0.1); */
     /* border: 1px solid var(--tertiary-color); */
@@ -45,7 +45,8 @@
     color: rgb(0, 0, 0);
     margin-top: 10px;
     font-weight: bold; 
-    font-size: 22px;
+    font-size: 2rem;
+    font-family: custom4;
 }
 
 .verse-container-inner h3{
@@ -53,13 +54,8 @@
     font-weight: normal;
     font-size: 15px;
     margin-bottom: 0px;
-    font-family: custom1;
+    font-family: custom2;
 }
-
-.verse-container-inner select{
-    align-self: flex-start;
-}
-
 
 .stage-container{
     display: grid;

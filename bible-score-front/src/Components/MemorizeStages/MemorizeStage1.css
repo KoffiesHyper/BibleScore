@@ -33,7 +33,7 @@
 }
 
 .passage-info h2{
-    font-family: custom2;
+    font-family: custom1;
     font-weight: lighter;
 }
 
@@ -57,25 +57,23 @@
 }
 
 .passage-box{
-    width: 800px;
+    width: 100%;
     height: auto;
     padding: 20px;
-    background-color: rgba(0, 10, 102, 0.1);
-    border: 1px solid var(--tertiary-color);
-    border-radius: 3px;
-    font-size: 20px;
-    font-family: bible1;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.19);
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: custom1;
     line-height: 30px;
-
 }
 
 .passage-box h2{
-    font-family: bible2;
-    font-size: 20px;
+    font-family: custom2;
+    font-size: 1.2rem;
     margin: 5px;
     margin-top: 0px;
-    text-align: center;
+    text-align: start;
 }
 
 .passage-box input[type = text]{
