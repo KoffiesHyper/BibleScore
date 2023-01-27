@@ -12,31 +12,23 @@ export default function HomePage() {
 
     return (
         <div className='landing-page'>
+            <div className='home-heading'>
+                <h1 className='first-line'>Bible</h1>
+                <h1 className='second-line'>Score</h1>
+                <p>A Platform to study The Bible and connect with other Christians. Scroll down for more information.</p>
+            </div>
             <div className='verse-of-day'>
                 <h1>Verse of the Day</h1>
                 <div className='head-line'></div>
-                <h2>Romans 8:28</h2>
-                <p>And we know that for those who love God all things work together for good, for those who are called according to His purpose.</p>
+                <div className='verse'>
+                    <h2>Romans 8:28</h2>
+                    <p>And we know that for those who love God all things work together for good, for those who are called according to His purpose.</p>
+                </div>
             </div>
             <div className='guest-body'>
-                <div className='card-container' onClick={() => navigate.push('/read')}>
-                    <IconContext.Provider value={{ 'color': 'var(--tertiary-color)' }}><BiBible size='50px' /></IconContext.Provider>
-                    <h2 className='default-label'>Read all chapters of the American Standard Version Bible</h2>
-                    <div className='grad1'></div>
-                    {/* <img height="100%" width="100%" src='https://wallpapercave.com/wp/wp5987658.jpg' /> */}
-                </div>
-                <div className='card-container' onClick={() => navigate.push('/memorize')}>
-                    <IconContext.Provider value={{ 'color': 'var(--tertiary-color)' }}><BiBrain size='50px' /></IconContext.Provider>
-                    <h2 className='default-label'>Learn and Memorize Scipture In A More Intuitive, Enjoyable Way</h2>
-                    <div className='grad2'></div>
-                    {/* <img height="100%" width="100%" src='https://i.pinimg.com/564x/0d/05/b8/0d05b85945200d058b814d2ab6d80c0e.jpg' /> */}
-                </div>
-                <div className='card-container' onClick={() => navigate.push('/brethren')}>
-                    <IconContext.Provider value={{ 'color': 'var(--tertiary-color)' }}><FaUserFriends size='50px' /></IconContext.Provider>
-                    <h2 className='default-label'>Have Fellowship With Other Bible-Believing Christians</h2>
-                    <div className='grad3'></div>
-                    {/* <img height="100%" width="100%" src='https://swall.teahub.io/photos/small/95-958253_2560x1600-simple-and-minimalist-wallpapers-data.jpg' /> */}
-                </div>
+                <Card text='Read all chapters of the American Standard Version Bible.' icon='book' />
+                <Card text='Learn and Memorize Scipture In A More Intuitive, Enjoyable Way.' icon='brain' />
+                <Card text='Have Fellowship With Other Bible-Believing Christians.' icon='people' />
             </div>
             <div className='more-info'>
                 <div className='info-section'>
@@ -51,16 +43,46 @@ export default function HomePage() {
                 <div className='info-line'></div>
                 <div className='info-section'>
                     <h2 className='default-label'><span className='numbered'>3</span>Share your Testimony</h2>
-                    <p className='default-label'>Mark 5:19 says: “Go home to your friends and tell them how much the Lord has done for you, and how he has had mercy on you.” 
-                    Dear Brethren, we must also share our testimony. One way of doing this, is by going to your <span style={{
-                        fontStyle: 'italic', 
-                        textDecorationLine: "underline",
-                        cursor: "pointer"
-                    }}>Profile</span> and sharing your story there.</p>
+                    <p className='default-label'>Mark 5:19 says: “Go home to your friends and tell them how much the Lord has done for you, and how he has had mercy on you.”
+                        Dear Brethren, we must also share our testimony. One way of doing this, is by going to your <span style={{
+                            fontStyle: 'italic',
+                            textDecorationLine: "underline",
+                            cursor: "pointer"
+                        }}>Profile</span> and sharing your story there.</p>
                 </div>
             </div>
         </div>
     );
+
+    function Card({ text, icon }) {
+
+        let iconElement = <></>
+        let linkRoute = '/';
+
+        switch (icon) {
+            case 'book':
+                iconElement = <BiBible size='50px' />;
+                linkRoute = '/read';
+                break;
+            case 'brain':
+                iconElement = <BiBrain size='50px' />
+                linkRoute = '/memorize';
+                break;
+            case 'people':
+                iconElement = <FaUserFriends size='50px' />
+                linkRoute = '/brethren';
+                break;
+        }
+
+        return (
+            <div className='card-container' onClick={() => navigate.push(linkRoute)}>
+                <IconContext.Provider value={{ 'color': 'white' }}>{iconElement}</IconContext.Provider>
+                <h2 className='default-label'>{text}</h2>
+                <p>See More</p>
+            </div>
+        )
+    }
 }
+
 
 

@@ -1,63 +1,109 @@
-.verse-of-day{
-    width: 40%;
+.home-heading {
+    width: 100%;
     display: grid;
-    justify-items: flex-start;
-    margin-left: 10%;
+    grid-template-columns: 1;
+    justify-items: center;
     padding-top: 75px;
     padding-bottom: 75px;
 }
 
-.verse-of-day h1{
-    font-family: bible2;
-    font-size: 80px;
-    color: var(--tertiary-color);
+.home-heading h1 {
+    font-family: custom4;
+    font-size: 8rem;
+    color: black;
     margin: 0px;
-    text-shadow: 2px 2px var(--primary-color);
 }
-.verse-of-day h2{
-    font-family: bible2;
+
+.home-heading .first-line{
+    padding-right: 10rem;
+}
+
+.home-heading .second-line{
+    padding-left: 10rem;
+    color: var(--primary-color);
+}
+
+.home-heading p {
+    font-family: custom3;
+    font-size: 1.5rem;
+    width: 40%;
+    min-width: 350px;
+    color: black;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.verse-of-day {
+    width: 100%;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    background-color: var(--primary-color);
+    color: white;
+    height: auto;
+    display: grid;
+    grid-template-columns: 10fr 1fr 10fr;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 0 0 1rem rgba(0, 4, 255, 0.5);
+}
+
+.verse-of-day h1 {
+    font-family: custom4;
+    font-size: 5rem;
+    margin: 0px;
+    justify-self: center;
+    text-align: center;
+    width: 80%;
+}
+
+.verse-of-day h2 {
+    font-family: custom2;
     font-size: 35px;
     font-weight: bolder;
     margin: 0px;
     margin-bottom: 15px;
 }
-.verse-of-day p{
-    font-family: bible1;
+
+.verse-of-day p {
+    font-family: custom1;
     font-size: 22px;
-    font-weight: lighter;
     width: 100%;
-    color: var(--tertiary-color)
+    letter-spacing: 1px;
 }
 
-.head-line{
-    height: 1px;
-    width: 100%;
-    background-color: var(--primary-color);
-    margin-top: 20px;
-    margin-bottom: 20px;
+.verse-of-day .verse {
+    align-self: center;
+    width: 80%;
 }
 
-.guest-body{
+.head-line {
+    width: 1px;
+    height: 100%;
+    background-color: white;
+
+}
+
+.guest-body {
     width: 100%;
-    height: auto;
+    height: 40vh;
     display: flex;
     justify-content: center;
-    background-color: #08478331;
+    background-color: rgb(0, 0, 0);
     margin: 0px;
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
 
-.guest-body h2{
+.guest-body h2 {
     font-family: custom2;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    margin: 0%;
-    margin-bottom: 20px;
-    width: 70%;
+    color: white;
+    width: calc(100% - 3rem);
+    padding: 1.5rem;
+    
 }
 
-.card-container button{
+.card-container button {
     width: 100%;
     height: 75px;
     font-size: 18px;
@@ -70,104 +116,142 @@
     align-self: flex-end;
 }
 
-.card-container button:hover{
+.card-container button:hover {
     animation: none;
     background-color: #4e2d12;
 }
 
-.card-container{
+.card-container p {
+    color: rgb(177, 178, 255);
+    font-family: custom3;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0px;
+}
+
+.card-container p:hover {
+    text-decoration: underline;
+}
+
+.card-container {
     display: grid;
     justify-items: center;
     text-align: center;
-    background-color: white;
+    background-color: transparent;
     height: 90%;
     padding-top: 20px;
     min-width: 250px;
     max-width: 250px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition-duration: .25s;
-    cursor: pointer;
-    box-shadow: 0 0 32px rgb(16 11 0 / 10%);
     margin-left: 2.5%;
     margin-right: 2.5%;
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.25), inset 0 0 0.5rem rgba(255, 255, 255, 0.25);
 }
 
-.card-container:hover{
-    transform: scale(1.05);
-}
-
-.card-container img{
-    background-size: 5%
-}
-
-.grad1{
+.grad1 {
     width: 250px;
     height: 156px;
     background: linear-gradient(to bottom left, var(--primary-color), rgba(151, 141, 0, 0.45));
     box-shadow: 0 0 32px rgb(16 11 0 / 10%);
 }
 
-.grad2{
+.grad2 {
     width: 250px;
     height: 156px;
     background: linear-gradient(to bottom left, var(--primary-color), rgba(158, 0, 40, 0.45));
     box-shadow: 0 0 32px rgb(16 11 0 / 10%);
 }
 
-.grad3{
+.grad3 {
     width: 250px;
     height: 156px;
     background: linear-gradient(to bottom left, var(--primary-color), rgba(151, 68, 0, 0.45));
     box-shadow: 0 0 32px rgb(16 11 0 / 10%);
 }
 
-.more-info{
+.more-info {
     width: 100%;
     height: 40vh;
-    background-color: var(--tertiary-color);
+    background-color: white;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-width: 900px;
+    color: black
 }
 
-.info-section{
+.info-section {
     width: 25%;
 }
 
-.more-info .numbered{
+.more-info .numbered {
     background-color: white;
-    color: var(--tertiary-color);
     border-radius: 50%;
     width: 30px;
     padding-left: 6px;
     padding-right: 6px;
     padding-bottom: 2px;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: custom3;
+    font-size: 1.25rem;
+    font-family: custom4;
     margin-right: 5px;
 }
 
-.more-info h2{
-    color: white;
-    font-size: 16px;
-    font-weight: normal;
-    margin-top: 8vh;
+.more-info h2 {
+    font-size: 1.25rem;
+    font-family: custom4;
+    color: black;
 }
 
-.more-info p{
-    color: white;
+.more-info p {
     font-size: 14px;
     width: 80%;
     word-wrap: break-word;
+    line-height: 1.5rem;
+    font-family: custom2;
 }
 
-.more-info .info-line{
+.more-info .info-line {
     width: 1px;
-    height: 70%;
-    background-color: white;
-    margin-left: 3%;
-    margin-right: 3%;
-    margin-top: 5vh;
+    height: 50%;
+    background-color: black;
+    margin-inline: 3%;
+}
+
+@media (max-width: 700px) {
+    .home-heading .first-line{
+        padding-right: 0px;
+        font-size: 100px;
+    }
+
+    .home-heading .second-line{
+        padding-left: 0px;
+        font-size: 100px;
+    }
+
+    .verse-of-day{
+        grid-template-columns: 1fr;
+        grid-template-rows: 10fr 1fr 10fr;
+        height: 300px;
+    }
+
+    .verse-of-day .head-line{
+        height: 1px;
+        width: 90%;
+        margin-block: 20px;
+    }
+
+    .verse-of-day h1{
+        font-size: 3rem;
+        width: 70%;
+    }
+
+    .verse-of-day h2{
+        font-size: 1.5rem;
+    }
+
+    .verse-of-day p{
+        font-size: 1rem;
+    }
 }

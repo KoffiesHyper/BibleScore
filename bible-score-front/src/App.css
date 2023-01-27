@@ -13,23 +13,27 @@ body{
 
 ::-webkit-scrollbar-thumb{
   width: 5px;
-  background-color: #3b230f;
-  border-radius: 3px;
+  background-color: black;
 }
 
 @font-face {
   font-family: 'custom1';
-  src: url('./Fonts/Quicksand-Light.ttf') format('truetype');
+  src: url('./Fonts/Unbounded-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'custom2';
-  src: url('./Fonts/Quicksand-Medium.ttf') format('truetype');
+  src: url('./Fonts/Unbounded-Medium.ttf') format('truetype');
+}
+ 
+@font-face {
+  font-family: 'custom3';
+  src: url('./Fonts/Unbounded-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'custom3';
-  src: url('./Fonts/Quicksand-Bold.ttf') format('truetype');
+  font-family: 'custom4';
+  src: url('./Fonts/Unbounded-Black.ttf') format('truetype');
 }
 
 @font-face {
@@ -44,7 +48,7 @@ body{
 
 
 :root{
-  --primary-color : #173c5e81;
+  --primary-color : rgb(0, 4, 255);
   --secondary-color : #146dc009;
   --tertiary-color : #021f3b;
 }
