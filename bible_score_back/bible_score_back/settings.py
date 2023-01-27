@@ -83,7 +83,6 @@ WSGI_APPLICATION = 'bible_score_back.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -94,7 +93,7 @@ DATABASES = {
 
         'PASSWORD': 'MoerKoffie123',
 
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
 
         'PORT': '5432',
     }

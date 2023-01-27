@@ -62,7 +62,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
             <div className='social'>
                 <h2 className='default-label'>Social</h2>
                 <div className='heading'>
-                    <IconContext.Provider value={{ color: 'var(--tertiary-color)' }}><FaUserFriends /></IconContext.Provider>
+                    <IconContext.Provider value={{ color: 'black' }}><FaUserFriends /></IconContext.Provider>
                     <h3 className='default-label'>Brethren</h3>
                 </div>
                 <div>
@@ -77,7 +77,7 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                     }
                 </div>
                 <div className='heading'>
-                    <IconContext.Provider value={{ color: 'var(--tertiary-color)' }}><BsFillPersonPlusFill /></IconContext.Provider>
+                    <IconContext.Provider value={{ color: 'black' }}><BsFillPersonPlusFill /></IconContext.Provider>
                     <h3 className='default-label'>Brethren Requests</h3>
                 </div>
                 <div>
@@ -102,9 +102,9 @@ export default function Dashboard({ user, savedVerses, friendRequests, friends, 
                         <textarea className='default-input' onChange={(event) => setDescription(event.target.value)} />
                     </div>
                     <button onClick={sendPrayerRequest} className='default-btn send-btn'>
-                        <div className='send-icon'>
-                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '14px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
-                        </div>
+                        {/* <div className='send-icon'>
+                            <IconContext.Provider value={{ color: 'white', size: '14px', marginTop: '10px' }}><RiSendPlaneFill /></IconContext.Provider>
+                        </div> */}
                         Send
                     </button>
                 </div>
