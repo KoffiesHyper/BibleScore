@@ -24,8 +24,8 @@ export default function MemorizeResult({ text, finalAttempt, saveVerse }) {
             <ProgressBar barAnim='toFinish' />
             <div>
                 <div className="result-box">
-                    <h1 className="default-label">{`Memorization Review - ${text.heading}`}</h1>
-                    <div className="vertical-line"></div>
+                    {/* <h1 className="default-label">{`Memorization Review - ${text.heading}`}</h1> */}
+                    {/* <div className="vertical-line"></div> */}
                     <h2 className="default-label">Your Answer</h2><p className="default-label">{`Accuracy: ${score}%`}</p>
                     <div className="passage-box">
                         {
@@ -52,19 +52,19 @@ export default function MemorizeResult({ text, finalAttempt, saveVerse }) {
                     <button className='default-btn left-btn' onClick={() => saveVerse(`${text.id}#64cee6`)}>
                         Save Verse
                         <div style={{ marginLeft: '4px', marginTop: '1px' }}>
-                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><RiSendPlaneFill /></IconContext.Provider>
+                            <IconContext.Provider value={{ color: 'white', size: '15px' }}><RiSendPlaneFill /></IconContext.Provider>
                         </div>
                     </button>
                     <button className='default-btn left-btn' onClick={() => window.location.reload()}>
                         Try Again
                         <div style={{ marginLeft: '4px', marginTop: '1px' }}>
-                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BsArrowCounterclockwise /></IconContext.Provider>
+                            <IconContext.Provider value={{ color: 'white', size: '15px' }}><BsArrowCounterclockwise /></IconContext.Provider>
                         </div>
                     </button>
                     <button className='default-btn right-btn' onClick={() => history.push('/memorize')}>
                         Choose Another Verse
                         <div style={{ marginLeft: '4px', marginTop: '1px' }}>
-                            <IconContext.Provider value={{ color: 'var(--tertiary-color)', size: '15px' }}><BiBible /></IconContext.Provider>
+                            <IconContext.Provider value={{ color: 'white', size: '15px' }}><BiBible /></IconContext.Provider>
                         </div>
                     </button>
                 </div>

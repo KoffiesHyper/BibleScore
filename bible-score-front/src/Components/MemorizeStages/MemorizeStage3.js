@@ -40,7 +40,7 @@ export default function MemorizeStage3({ text, nextStage, updateFinalAttempt }) 
             <div className="passage-info">
                 <h2>Step 3: Rewrite the verse</h2>
                 <input className="black default-btn" type="button" value="Mark" onClick={showAccuracy} />
-                <input className="black default-btn" type="button" value="Finish" onClick={markAnswer} />
+                <input className="default-btn" type="button" value="Finish" onClick={markAnswer} />
             </div>
             <div className="passage-box">
                 <h2>{text.heading}</h2>

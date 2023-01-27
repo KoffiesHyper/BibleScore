@@ -1,6 +1,7 @@
 import React from "react";
 import './ReadOptions.css';
 import Options from '../Options/Options';
+import Dropdown from "../Dropdown/Dropdown";
 
 export default function ReadOptions({
     bookOptions, 
@@ -11,20 +12,17 @@ export default function ReadOptions({
     setColumns,
     setVerseSelected
 }) {
+
     return (
         <div className='options-container'>
             <div>
                 <h2>Book</h2>
-                <select className="default-select" onChange={changeBook}>
-                    <Options array={bookOptions} />
-                </select>
+                <Dropdown items={bookOptions} updateVal={changeBook} />
             </div>
 
             <div>
                 <h2>Chapter</h2>
-                <select className="default-select" onChange={changeChapter}>
-                    <Options array={chapterOptions} />
-                </select>
+                <Dropdown items={chapterOptions.slice(1, chapterOptions.length)} updateVal={changeChapter} />
             </div>
 
             <div className="column-options">

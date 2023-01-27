@@ -1,11 +1,10 @@
 .result-box{
     border: 1px solid var(--tertiary-color);
-    width: 42vw;
     border-radius: 2px;
     display: grid;
     justify-items: center;
     padding-bottom: 30px;
-    background-color: rgba(0, 10, 102, 0.1);
+    background-color: transparent;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19);
     margin-top: 30px;
 }
@@ -13,22 +12,22 @@
 .result-box .passage-box{
     width: 80%;
     margin-bottom: 20px;
-    border-radius: 2px;
-    color: white;
-    background-color: var(--tertiary-color);
+    border-radius: 5px;
+    color: black;
+    background-color: transparent;
+    border: 2px solid black
 }
 
 .result-box h1{
-    font-size: 25px;
-    font-family: custom1;
-    color: white;
-    background-color: var(--tertiary-color);
+    font-family: custom3;
+    color: var(--primary-color);
+    background-color: transparent;
     width: 100%;
     text-align: center;
     height: auto;
     margin: 0px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 1rem;
+    font-size: 1.5rem;
 }
 
 .result-box h2{
@@ -66,13 +65,10 @@
 
 .result-buttons .left-btn{
     margin-right: 25px;
-    background-color: rgba(0, 10, 102, 0.1);
 }
 
 .result-buttons button{
-    background-color: rgba(0, 10, 102, 0.1);
-    color: var(--tertiary-color);
+    color: white;
     display: flex;
     justify-content: center;
-    border: 1px solid var(--tertiary-color);
 }

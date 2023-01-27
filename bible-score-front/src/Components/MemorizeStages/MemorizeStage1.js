@@ -25,9 +25,12 @@ export default function MemorizeStage1({ text, nextStage }) {
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = text.content.substring(1, text.content.length);
         const voices = await getVoices();
-        utterance.voice = voices[2];
+        console.log(voices)
+        utterance.voice = voices[51];
         speechSynthesis.speak(utterance);
     }
+
+    if(!text.content) return <div className="loading-indicator"></div>
 
     return (
         <div className="memorize-container-inner">
